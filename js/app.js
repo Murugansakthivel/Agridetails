@@ -11,16 +11,7 @@
       navToggle.addEventListener('click', () => mainNav.classList.toggle('open'));
     }
 
-    // language toggle
-    const langBtn = document.getElementById('langToggle');
-    if (langBtn) {
-      langBtn.addEventListener('click', () => {
-        const next = currentLang() === 'en' ? 'ta' : 'en';
-        localStorage.setItem('agri_lang', next);
-        applyI18n(next);
-        document.dispatchEvent(new CustomEvent('agri:lang', { detail: next }));
-      });
-    }
+    // language switching is handled by #langSwitch buttons bound in i18n.js
 
     // route by page body content
     if (document.getElementById('homeTicker')) initHome();
@@ -58,6 +49,7 @@
       el.innerHTML = '<p class="muted">Could not load prices.</p>';
     }
   }
+  document.addEventListener('agri:lang', initHome);
 
   /* ================= PRICES ================= */
   async function getPrices() {
@@ -179,15 +171,21 @@
     }
 
     function populateCropOptions() {
-      const crops = [...new Set(filtered().map(r => r.en))].sort();
+      const nl = currentLang();
+      const crops = [...new Set(filtered().map(r => r.en))]
+        .map(en => {
+          const row = all.find(r => r.en === en);
+          return { v: en, label: (row && (row[nl] || row.en)) || en };
+        })
+        .sort((x, y) => x.label.localeCompare(y.label, nl === 'hi' ? 'hi' : (nl === 'ta' ? 'ta' : 'en')));
       const cur = cropSel.value;
       cropSel.innerHTML = '<option value="">' + t('filter_crop') + ' —</option>' +
-        crops.map(c => `<option ${c === cur ? 'selected' : ''}>${c}</option>`).join('');
+        crops.map(c => `<option value="${c.v}" ${c.v === cur ? 'selected' : ''}>${c.label}</option>`).join('');
     }
 
     function render() {
       const rows = filtered();
-      const nl = nameSel ? nameSel.value : (currentLang() === 'ta' ? 'ta' : 'en');
+      const nl = currentLang();   // crop names follow the site language
       if (!rows.length) {
         tbody.innerHTML = '<tr><td colspan="9" class="muted">No matching rows</td></tr>';
         return;
@@ -246,7 +244,7 @@
     document.getElementById('resetFilters').addEventListener('click', () => {
       cropSel.value = ''; mktSel.value = ''; catFilter = 'all'; buildTabs(); populateCropOptions(); render();
     });
-    document.addEventListener('agri:lang', () => { buildTabs(); render(); renderTrends(); });
+    document.addEventListener('agri:lang', () => { buildTabs(); populateCropOptions(); render(); renderTrends(); });
   }
 
   /* ================= NEWS ================= */
@@ -318,9 +316,19 @@
 
     // quick-help list
     const quick = document.getElementById('quickList');
-    quick.innerHTML = ADVISORY_KB.slice(0, 8).map(d =>
-      `<li><button type="button" data-id="${d.id}" data-crop="${d.crops[0]}">${d.en.name} · ${d.en.ta_name}</button></li>`
-    ).join('');
+    function kbLabel(d) {
+      const L = currentLang();
+      if (L === 'ta') return d.en.ta_name;
+      if (L === 'hi') return `${d.en.name} · ${d.en.ta_name}`;
+      return d.en.name;
+    }
+    function renderQuick() {
+      quick.innerHTML = ADVISORY_KB.slice(0, 8).map(d =>
+        `<li><button type="button" data-id="${d.id}" data-crop="${d.crops[0]}">${kbLabel(d)}</button></li>`
+      ).join('');
+    }
+    renderQuick();
+    document.addEventListener('agri:lang', renderQuick);
     quick.addEventListener('click', ev => {
       const b = ev.target.closest('button[data-id]');
       if (!b) return;

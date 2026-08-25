@@ -146,6 +146,79 @@ const I18N = {
     advisory_disclaimer: '⚠️ ஆலோசனை TNAU / CIBRC பரிந்துரைகளிலிருந்து தொகுக்கப்பட்டது. பூச்சி மருந்துகள் நச்சுத்தன்மை வாய்ந்தவை — லேபிளைப் படித்து, கையுறை, முகமூடி அணிந்து தெளிக்கவும், அறுவடைக்குள் காத்திருப்பு காலத்தில் தெளிக்க வேண்டாம். அளித்த அளவில் தெளிக்கும் முன் உங்கள் அருகிலுள்ள KVK யை அணுகவும்.',
     need_photo: 'முதலில் ஒரு புகைப்படம் சேர்க்கவும்.',
     no_match: 'பொருத்தமான நோய் கிடைக்கவில்லை. அறிகுறிகளை துல்லியமாக விவரிக்கவும், அல்லது அருகிலுள்ள KVK ஐ தொடர்பு கொள்ளவும்.'
+  },
+
+  hi: {
+    nav_home: 'मुख्य पृष्ठ',
+    nav_prices: 'भाव',
+    nav_news: 'समाचार',
+    nav_advisory: 'फसल डॉक्टर',
+    hero_title: 'आज के बाज़ार भाव, आपकी भाषा में',
+    hero_sub: 'तमिलनाडु मंडियों के दैनिक सब्ज़ी और अनाज भाव, सरल भाषा में कृषि समाचार और मुफ़्त फसल सलाह — अपनी फसल की समस्या की फोटो खींचकर अपलोड करें।',
+    hero_cta_prices: 'आज के भाव देखें',
+    hero_cta_doctor: '📷 फसल डॉक्टर से पूछें',
+    home_ticker_title: 'आज के मुख्य भाव',
+    home_view_all: 'सभी भाव देखें →',
+    home_features_title: 'किसान के लिए ज़रूरी हर चीज़, एक क्लिक पर',
+    feat_price_t: 'दैनिक मंडी भाव',
+    feat_price_d: 'तमिलनाडु मंडियों के दैनिक सब्ज़ी और अनाज भाव, हर सुबह अपडेट।',
+    feat_news_t: 'सरल भाषा में कृषि समाचार',
+    feat_news_d: 'मौसम चेतावनी, MSP अपडेट और बाज़ार समाचार — सरल हिंदी में।',
+    feat_doc_t: 'फसल डॉक्टर',
+    feat_doc_d: 'पत्तियों पर धब्बे? पौधे मुरझा रहे हैं? फोटो अपलोड करें, इलाज पाएं।',
+    feat_trend_t: 'भाव रुझान',
+    feat_trend_d: 'टमाटर का भाव बढ़ा या घटा? बेचने से पहले जानें।',
+    footer_tagline: 'हर किसान के लिए मुफ़्त बाज़ार भाव और फसल ज्ञान।',
+    footer_links_t: 'लिंक',
+    footer_data_t: 'डेटा स्रोत',
+    footer_disclaimer: 'भाव सरकारी बाज़ार फ़ीड से हैं; बेचने से पहले अपने स्थानीय बाज़ार में पुष्टि करें।',
+
+    prices_title: 'दैनिक बाज़ार भाव',
+    prices_updated: 'अपडेट:',
+    filter_crop: 'फसल:',
+    filter_market: 'बाज़ार:',
+    filter_reset: 'रीसेट',
+    cat_all: 'सभी', cat_veg: 'सब्ज़ियाँ', cat_fruit: 'फल', cat_grain: 'अनाज और व्यापारिक फसलें',
+    unit_qtl: 'प्रति क्विंटल (100 किग्रा)', unit_kg: 'प्रति 1 किग्रा',
+    th_crop: 'फसल', th_tamil: 'तमिल नाम', th_hindi: 'हिंदी नाम', th_market: 'बाज़ार',
+    th_min: 'न्यूनतम ₹/क्विंटल', th_modal: 'औसत ₹/क्विंटल', th_max: 'अधिकतम ₹/क्विंटल', th_kg: '₹/किग्रा', th_change: 'बदलाव (7 दिन)',
+    kg_note: '₹/किग्रा = औसत भाव ÷ 100।',
+    names_in: 'नाम:',
+    prices_unit_note: 'सभी भाव ₹ प्रति क्विंटल (100 किग्रा), सरकारी बाज़ार फ़ीड से।',
+    trends_title: '7-दिन का भाव रुझान',
+    demo_banner: 'नमूना डेटा दिख रहा है। js/config.js में मुफ़्त data.gov.in API key जोड़ें, तो सीधे AGMARKNET भाव दिखेंगे।',
+    live_banner: 'AGMARKNET से सीधे भाव (data.gov.in)',
+    trend_now: 'आज:',
+
+    news_title: 'सरल भाषा में कृषि समाचार',
+    news_sub: 'छोटे सारांश, मूल स्रोत लिंक के साथ।',
+    read_source: 'स्रोत पर पढ़ें →',
+
+    doc_title: 'फसल डॉक्टर',
+    doc_sub: 'समस्या वाले पत्ते, फल या पौधे की फोटो लें। सरकारी कृषि सिफ़ारिशों से इलाज का विवरण दिखाते हैं।',
+    upload_t: '1. फोटो अपलोड',
+    details_t: '2. विवरण',
+    upload_hint: 'फोटो लेने / चुनने के लिए टैप करें',
+    upload_hint2: 'प्रभावित हिस्से की एक साफ़ फोटो',
+    remove_photo: 'हटाएँ',
+    your_crop: 'आपकी फसल',
+    symptoms_label: 'क्या दिख रहा है?',
+    symptoms_ph: 'जैसे: पत्तियों पर पीले धब्बे',
+    phone_label: 'मोबाइल नंबर (वैकल्पिक)',
+    phone_note: 'सलाह का सारांश SMS से भेजा जाएगा। आपका नंबर साझा नहीं होता।',
+    analyze_btn: 'सलाह पाएं',
+    analyzing: 'जाँच हो रही है…',
+    empty_advice: 'फोटो अपलोड कर लक्षण बताने के बाद आपकी सलाह यहाँ दिखेगी।',
+    common_problems_t: 'इस समय आम समस्याएँ',
+    match_high: 'संभावित मेल',
+    match_low: 'संभावित मेल — KVK से पुष्टि करें',
+    symptoms_check_t: 'पुष्टि के लिए लक्षण',
+    treatment_t: 'सुझाया गया इलाज',
+    th_pesticide: 'कीटनाशक', th_dose: 'प्रति एकड़ खुराक', th_wait: 'कटाई से पहले प्रतीक्षा',
+    prevention_t: 'बचाव के उपाय',
+    advisory_disclaimer: '⚠️ सलाह TNAU / CIBRC सिफ़ारिशों से संकलित। कीटनाशक ज़हरीले हैं — लेबल पढ़ें, दस्ताने-मास्क पहनें, कटाई से पहले प्रतीक्षा अवधि में छिड़काव न करें। बड़े पैमाने पर छिड़काव से पहले अपने नज़दीकी KVK से पुष्टि करें।',
+    need_photo: 'पहले एक फोटो जोड़ें।',
+    no_match: 'मेल खाता रोग नहीं मिला। लक्षण और सटीक बताएं, या नज़दीकी KVK से संपर्क करें।'
   }
 };
 
@@ -155,13 +228,24 @@ function applyI18n(lang) {
     if (I18N[lang][k]) el.textContent = I18N[lang][k];
   });
   document.body.classList.toggle('ta-active', lang === 'ta');
-  document.documentElement.lang = lang === 'ta' ? 'ta' : 'en';
-  const active = document.querySelector('#langToggle .lang-active');
-  if (active) active.textContent = lang === 'ta' ? 'EN' : 'த';
+  document.body.classList.toggle('hi-active', lang === 'hi');
+  document.documentElement.lang = lang === 'ta' ? 'ta' : (lang === 'hi' ? 'hi' : 'en');
+  document.querySelectorAll('#langSwitch button').forEach(b =>
+    b.classList.toggle('active', b.dataset.lang === lang));
 }
 
-function currentLang() { return localStorage.getItem('agri_lang') || 'en'; }
+function currentLang() {
+  const saved = localStorage.getItem('agri_lang');
+  return (saved && I18N[saved]) ? saved : 'en';
+}
 
 document.addEventListener('DOMContentLoaded', () => {
   applyI18n(currentLang());
+  document.querySelectorAll('#langSwitch button').forEach(b => {
+    b.addEventListener('click', () => {
+      localStorage.setItem('agri_lang', b.dataset.lang);
+      applyI18n(b.dataset.lang);
+      document.dispatchEvent(new CustomEvent('agri:lang', { detail: b.dataset.lang }));
+    });
+  });
 });

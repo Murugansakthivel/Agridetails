@@ -24,6 +24,7 @@ body {
 }
 
 body.ta-active { font-family: 'Noto Sans Tamil', 'Inter', sans-serif; }
+body.hi-active { font-family: 'Noto Sans Devanagari', 'Inter', sans-serif; }
 
 .container { max-width: 1080px; margin: 0 auto; padding: 0 1rem; }
 
@@ -59,6 +60,15 @@ body.ta-active { font-family: 'Noto Sans Tamil', 'Inter', sans-serif; }
 .btn-outline { background: transparent; border: 1.5px solid var(--border); color: var(--text); }
 .btn-sm { padding: .4rem .8rem; font-size: .85rem; }
 .btn-block { width: 100%; margin-top: 1rem; }
+
+/* ---------- Language switcher ---------- */
+.lang-switch { display: inline-flex; border: 1.5px solid var(--border); border-radius: 999px; overflow: hidden; background: var(--card); }
+.lang-switch button {
+  font-family: inherit; font-size: .82rem; font-weight: 700; cursor: pointer;
+  background: transparent; color: var(--muted); border: none; padding: .38rem .68rem;
+}
+.lang-switch button + button { border-left: 1px solid var(--border); }
+.lang-switch button.active { background: var(--green-700); color: #fff; }
 .lang-toggle { font-weight: 700; padding: .35rem .7rem; }
 
 /* ---------- Hero ---------- */

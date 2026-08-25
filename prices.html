@@ -22,7 +22,9 @@
       <a href="advisory.html" class="nav-cta" data-i18n="nav_advisory">Crop Doctor</a>
     </nav>
     <div class="header-actions">
-      <button id="langToggle" class="btn btn-outline lang-toggle"><span class="lang-active">த</span> / EN</button>
+      <div id="langSwitch" class="lang-switch">
+        <button data-lang="en" type="button">EN</button><button data-lang="ta" type="button">த</button><button data-lang="hi" type="button">हिं</button>
+      </div>
       <button id="navToggle" class="nav-toggle-btn" aria-label="Menu">☰</button>
     </div>
   </div>
@@ -45,13 +47,6 @@
 
       <label for="marketFilter" data-i18n="filter_market">Market:</label>
       <select id="marketFilter"></select>
-
-      <label for="nameLangSel" data-i18n="names_in">Names:</label>
-      <select id="nameLangSel">
-        <option value="en">English</option>
-        <option value="ta">தமிழ்</option>
-        <option value="hi">हिंदी</option>
-      </select>
 
       <button id="resetFilters" class="btn btn-outline btn-sm" data-i18n="filter_reset">Reset</button>
       <span class="muted small source-note" id="dataSourceNote"></span>
