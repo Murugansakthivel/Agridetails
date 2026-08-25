@@ -43,14 +43,14 @@
       const featured = ['Tomato', 'Onion', 'Potato', 'Carrot'];
       const picks = [];
       for (const c of featured) {
-        const r = rows.find(x => x.crop === c);
-        if (r && !picks.some(p => p.crop === c)) picks.push(r);
+        const r = rows.find(x => x.en === c);
+        if (r && !picks.some(p => p.en === c)) picks.push(r);
       }
       el.innerHTML = picks.map(r => `
         <div class="price-card">
-          <div class="pc-crop">${r.crop}</div>
-          <div class="pc-tamil">${r.ta || ''}</div>
-          <div class="pc-price">₹${fmt(r.modal)} <span class="pc-unit">/quintal</span></div>
+          <div class="pc-crop">${r[currentLang()] || r.en}</div>
+          <div class="pc-tamil">${r.ta || ''}${r.hi ? ' · ' + r.hi : ''}</div>
+          <div class="pc-price">₹${fmt(r.modal)} <span class="pc-unit">/qtl · ₹${(r.modal / 100).toFixed(2)}/kg</span></div>
           <div class="small muted">${r.market}</div>
         </div>`).join('');
       if (dateEl) dateEl.textContent = t('prices_updated') + ' ' + data.updated;
@@ -73,16 +73,19 @@
   }
 
   function demoAsRows() {
-    return Object.assign({}, PRICE_DATA, {
+    return {
       updated: PRICE_DATA.updated,
       source: 'demo',
-      rows: PRICE_DATA.rows.map(r => Object.assign({ change7d: changeFor(r) }, r))
-    });
+      rows: buildCatalogRows().map(r => Object.assign({ change7d: changeFor(r) }, r))
+    };
   }
 
   function changeFor(row) {
-    const key = row.crop + '|' + row.market;
-    const hist = PRICE_HISTORY[key];
+    let hist = PRICE_HISTORY[row.en + '|' + row.market];
+    if (!hist) {
+      const k = Object.keys(PRICE_HISTORY).find(x => x.startsWith(row.en + '|'));
+      if (k) hist = PRICE_HISTORY[k];
+    }
     if (!hist) return null;
     const prev = hist[0], now = hist[hist.length - 1];
     return Math.round(((now - prev) / prev) * 1000) / 10; // percent
@@ -103,7 +106,8 @@
       const k = r.commodity + '|' + r.market;
       if (!byKey[k]) {
         byKey[k] = {
-          crop: r.commodity, ta: '', market: r.market,
+          en: r.commodity, ta: '', hi: '', cat: '',
+          market: r.market,
           min: +r.min_price || 0, modal: +r.modal_price || 0, max: +r.max_price || 0
         };
       }
@@ -117,31 +121,27 @@
 
   function initPrices() {
     let all = [];
+    let catFilter = 'all';
     const cropSel = document.getElementById('cropFilter');
     const mktSel = document.getElementById('marketFilter');
+    const nameSel = document.getElementById('nameLangSel');
     const tbody = document.getElementById('priceTableBody');
     const note = document.getElementById('dataSourceNote');
-    const bannerId = 'srcBanner';
+    const tabsEl = document.getElementById('catTabs');
 
     getPrices().then(rows => {
       all = rows.rows;
       // source banner
       const head = document.querySelector('.page-head .container');
-      if (head && !document.getElementById(bannerId)) {
+      if (head && !document.getElementById('srcBanner')) {
         const b = document.createElement('p');
-        b.id = bannerId;
+        b.id = 'srcBanner';
         b.className = 'small muted';
         b.textContent = rows.source === 'live' ? t('live_banner') : t('demo_banner');
         head.appendChild(b);
       }
-      // populate filters
-      const crops = [...new Set(all.map(r => r.crop))].sort();
-      const mkts = [...new Set(all.map(r => r.market))].sort();
-      cropSel.innerHTML = '<option value="">— ' + t('filter_crop') + ' —</option>' +
-        crops.map(c => `<option>${c}</option>`).join('');
-      mktSel.innerHTML = '<option value="">— ' + t('filter_market') + ' —</option>' +
-        mkts.map(m => `<option>${m}</option>`).join('');
-
+      buildTabs();
+      populateCropOptions();
       render();
       renderTrends();
 
@@ -150,11 +150,46 @@
       if (note) note.textContent = '';
     });
 
+    /* ---- category tabs ---- */
+    function buildTabs() {
+      const cats = [
+        ['all', t('cat_all')],
+        ['veg', t('cat_veg')],
+        ['fruit', t('cat_fruit')],
+        ['grain', t('cat_grain')]
+      ];
+      tabsEl.innerHTML = cats.map(([k, label]) =>
+        `<button class="cat-tab ${catFilter === k ? 'active' : ''}" data-cat="${k}">${label}</button>`
+      ).join('');
+    }
+    tabsEl.addEventListener('click', ev => {
+      const b = ev.target.closest('.cat-tab');
+      if (!b) return;
+      catFilter = b.dataset.cat;
+      buildTabs();
+      populateCropOptions();
+      render();
+    });
+
+    function filtered() {
+      return all.filter(r =>
+        (catFilter === 'all' || r.cat === catFilter) &&
+        (!cropSel.value || r.en === cropSel.value) &&
+        (!mktSel.value || r.market === mktSel.value));
+    }
+
+    function populateCropOptions() {
+      const crops = [...new Set(filtered().map(r => r.en))].sort();
+      const cur = cropSel.value;
+      cropSel.innerHTML = '<option value="">' + t('filter_crop') + ': —</option>' +
+        crops.map(c => `<option ${c === cur ? 'selected' : ''}>${c}</option>`).join('');
+    }
+
     function render() {
-      const c = cropSel.value, m = mktSel.value;
-      const rows = all.filter(r => (!c || r.crop === c) && (!m || r.market === m));
+      const rows = filtered();
+      const nl = nameSel ? nameSel.value : (currentLang() === 'ta' ? 'ta' : 'en');
       if (!rows.length) {
-        tbody.innerHTML = '<tr><td colspan="7" class="muted">No matching rows</td></tr>';
+        tbody.innerHTML = '<tr><td colspan="9" class="muted">No matching rows</td></tr>';
         return;
       }
       tbody.innerHTML = rows.map(r => {
@@ -165,12 +200,14 @@
           ch = `<span class="${cls}">${arrow} ${Math.abs(r.change7d)}%</span>`;
         }
         return `<tr>
-          <td><strong>${r.crop}</strong></td>
-          <td>${r.ta || '—'}</td>
+          <td><strong>${r[nl] || r.en}</strong><br><span class="small muted">${r.en}</span></td>
+          <td>${r.ta}</td>
+          <td>${r.hi || '—'}</td>
           <td>${r.market}</td>
           <td class="num">${fmt(r.min)}</td>
-          <td class="num"><strong>${fmt(r.modal)}</strong></td>
+          <td class="num"><strong>${fmt(r.modal)}</strong><br><span class="small muted">₹${(r.modal / 100).toFixed(2)}/kg</span></td>
           <td class="num">${fmt(r.max)}</td>
+          <td class="num"><strong>₹${(r.modal / 100).toFixed(2)}</strong></td>
           <td class="num">${ch}</td>
         </tr>`;
       }).join('');
@@ -189,11 +226,13 @@
         ).join('');
         const diff = ((vals[vals.length - 1] - vals[0]) / vals[0] * 100).toFixed(1);
         const dir = diff > 0 ? '▲' : (diff < 0 ? '▼' : '·');
+        const row = all.find(r => r.en === crop);
+        const label = row ? (row[currentLang()] || row.en) : crop;
         return `<div class="trend-card">
-          <h4>${crop} <span class="muted small">· ${mkt}</span></h4>
+          <h4>${label} <span class="muted small">· ${mkt}</span></h4>
           <div class="trend-bars">${bars}</div>
           <div class="trend-labels"><span>−6d</span><span>today</span></div>
-          <div class="trend-now">${t('trend_now')} ₹${fmt(vals[vals.length - 1])}
+          <div class="trend-now">${t('trend_now')} ₹${fmt(vals[vals.length - 1])}/qtl · ₹${(vals[vals.length - 1] / 100).toFixed(2)}/kg
             <span class="${diff > 0 ? 'change-up' : 'change-down'}">${dir} ${Math.abs(diff)}%</span> / 7d</div>
         </div>`;
       }).join('');
@@ -201,9 +240,11 @@
 
     cropSel.addEventListener('change', render);
     mktSel.addEventListener('change', render);
+    if (nameSel) nameSel.addEventListener('change', render);
     document.getElementById('resetFilters').addEventListener('click', () => {
-      cropSel.value = ''; mktSel.value = ''; render();
+      cropSel.value = ''; mktSel.value = ''; catFilter = 'all'; buildTabs(); populateCropOptions(); render();
     });
+    document.addEventListener('agri:lang', () => { buildTabs(); render(); renderTrends(); });
   }
 
   /* ================= NEWS ================= */

@@ -4,10 +4,10 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Today's Prices — Agridetails</title>
-<meta name="description" content="Daily vegetable and grain prices from Tamil Nadu mandis — tomato, onion, carrot, potato, rice and more. Updated every morning in Tamil and English.">
+<meta name="description" content="Daily vegetable, fruit and grain prices from Tamil Nadu mandis in English, தமிழ் and हिंदी — shown per quintal and per kg.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Tamil:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Tamil:wght@400;500;600;700&family=Noto+Sans+Devanagari:wght@400;500;600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
@@ -33,6 +33,7 @@
   <div class="container">
     <h1 data-i18n="prices_title">Daily Market Prices</h1>
     <p class="muted" id="priceDate"></p>
+    <div class="cat-tabs" id="catTabs"></div>
   </div>
 </section>
 
@@ -41,8 +42,17 @@
     <div class="controls-bar">
       <label for="cropFilter" data-i18n="filter_crop">Crop:</label>
       <select id="cropFilter"></select>
+
       <label for="marketFilter" data-i18n="filter_market">Market:</label>
       <select id="marketFilter"></select>
+
+      <label for="nameLangSel" data-i18n="names_in">Names:</label>
+      <select id="nameLangSel">
+        <option value="en">English</option>
+        <option value="ta">தமிழ்</option>
+        <option value="hi">हिंदी</option>
+      </select>
+
       <button id="resetFilters" class="btn btn-outline btn-sm" data-i18n="filter_reset">Reset</button>
       <span class="muted small source-note" id="dataSourceNote"></span>
     </div>
@@ -53,17 +63,19 @@
           <tr>
             <th data-i18n="th_crop">Crop</th>
             <th data-i18n="th_tamil">Tamil Name</th>
+            <th data-i18n="th_hindi">Hindi Name</th>
             <th data-i18n="th_market">Market</th>
-            <th class="num" data-i18n="th_min">Min ₹</th>
-            <th class="num" data-i18n="th_modal">Modal ₹</th>
-            <th class="num" data-i18n="th_max">Max ₹</th>
-            <th class="num" data-i18n="th_change">Change</th>
+            <th class="num" data-i18n="th_min">Min ₹/qtl</th>
+            <th class="num" data-i18n="th_modal">Modal ₹/qtl</th>
+            <th class="num" data-i18n="th_max">Max ₹/qtl</th>
+            <th class="num" data-i18n="th_kg">₹/kg</th>
+            <th class="num" data-i18n="th_change">Change (7d)</th>
           </tr>
         </thead>
         <tbody id="priceTableBody"></tbody>
       </table>
     </div>
-    <p class="small muted" data-i18n="prices_unit_note">All prices in ₹ per quintal (100 kg) from government market feeds.</p>
+    <p class="small muted"><span data-i18n="prices_unit_note">All prices in ₹ per quintal (100 kg) from government market feeds.</span> · <span data-i18n="kg_note">₹/kg column = modal price ÷ 100.</span></p>
 
     <h2 id="trends" class="section-title" style="margin-top:2.5rem" data-i18n="trends_title">7-Day Price Trend</h2>
     <div class="trend-grid" id="trendGrid"></div>
@@ -79,7 +91,7 @@
 
 <script src="js/config.js"></script>
 <script src="js/i18n.js"></script>
-<script src="js/prices-data.js"></script>
+<script src="js/crops-catalog.js"></script>
 <script src="js/app.js"></script>
 </body>
 </html>
