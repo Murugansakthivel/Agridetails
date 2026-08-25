@@ -181,7 +181,7 @@
     function populateCropOptions() {
       const crops = [...new Set(filtered().map(r => r.en))].sort();
       const cur = cropSel.value;
-      cropSel.innerHTML = '<option value="">' + t('filter_crop') + ': —</option>' +
+      cropSel.innerHTML = '<option value="">' + t('filter_crop') + ' —</option>' +
         crops.map(c => `<option ${c === cur ? 'selected' : ''}>${c}</option>`).join('');
     }
 
@@ -199,8 +199,10 @@
           const arrow = r.change7d > 0 ? '▲' : (r.change7d < 0 ? '▼' : '');
           ch = `<span class="${cls}">${arrow} ${Math.abs(r.change7d)}%</span>`;
         }
+        const nameMap = { en: r.en, ta: r.ta, hi: r.hi };
+        const others = Object.keys(nameMap).filter(k => k !== nl && nameMap[k]).join(' · ');
         return `<tr>
-          <td><strong>${r[nl] || r.en}</strong><br><span class="small muted">${r.en}</span></td>
+          <td><strong>${nameMap[nl] || r.en}</strong>${others ? `<br><span class="small muted">${others}</span>` : ''}</td>
           <td>${r.ta}</td>
           <td>${r.hi || '—'}</td>
           <td>${r.market}</td>
