@@ -197,8 +197,11 @@
           const arrow = r.change7d > 0 ? '▲' : (r.change7d < 0 ? '▼' : '');
           ch = `<span class="${cls}">${arrow} ${Math.abs(r.change7d)}%</span>`;
         }
-        const nameMap = { en: r.en, ta: r.ta, hi: r.hi };
-        const others = Object.keys(nameMap).filter(k => k !== nl && nameMap[k]).join(' · ');
+        const nameMap = { ta: r.ta, hi: r.hi, en: r.en };
+        const others = ['ta', 'hi', 'en']
+          .filter(k => k !== nl && nameMap[k])
+          .map(k => nameMap[k])
+          .join(' · ');
         return `<tr>
           <td><strong>${nameMap[nl] || r.en}</strong>${others ? `<br><span class="small muted">${others}</span>` : ''}</td>
           <td>${r.ta}</td>
