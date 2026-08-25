@@ -1,0 +1,157 @@
+/* Agridetails bilingual strings — English + Tamil */
+const I18N = {
+  en: {
+    nav_home: 'Home',
+    nav_prices: 'Prices',
+    nav_news: 'News',
+    nav_advisory: 'Crop Doctor',
+    hero_title: "Today's market prices, in your language",
+    hero_sub: 'Daily vegetable & grain prices from Tamil Nadu mandis, plain-language agri news, and free crop advice — just take a photo of your plant problem.',
+    hero_cta_prices: "Check Today's Prices",
+    hero_cta_doctor: '📷 Ask the Crop Doctor',
+    home_ticker_title: "Today's Key Prices",
+    home_view_all: 'View all prices →',
+    home_features_title: 'Everything a farmer needs, one tap away',
+    feat_price_t: 'Daily Mandi Prices',
+    feat_price_d: 'Vegetable & grain prices from Tamil Nadu markets, updated every morning. Simple tables, no confusion.',
+    feat_news_t: 'Agri News Made Simple',
+    feat_news_d: 'Weather alerts, MSP updates and market news summarised in easy Tamil and English.',
+    feat_doc_t: 'Crop Doctor',
+    feat_doc_d: 'See spots on leaves? Wilting plants? Take a photo, upload it, get recommended treatment.',
+    feat_trend_t: 'Price Trends',
+    feat_trend_d: 'Is tomato up or down this week? Know before you harvest and sell.',
+    footer_tagline: 'Free market prices and crop knowledge for every farmer.',
+    footer_links_t: 'Links',
+    footer_data_t: 'Data Sources',
+    footer_disclaimer: 'Prices are indicative, from government market feeds. Always confirm at your local market before selling.',
+
+    prices_title: 'Daily Market Prices',
+    prices_updated: 'Updated:',
+    filter_crop: 'Crop:',
+    filter_market: 'Market:',
+    filter_reset: 'Reset',
+    th_crop: 'Crop', th_tamil: 'Tamil Name', th_market: 'Market',
+    th_min: 'Min ₹', th_modal: 'Modal ₹', th_max: 'Max ₹', th_change: 'Change (7d)',
+    prices_unit_note: 'All prices in ₹ per quintal (100 kg) from government market feeds.',
+    trends_title: '7-Day Price Trend',
+    demo_banner: 'Showing sample data. Site owner can add a free data.gov.in API key in js/config.js to show live AGMARKNET prices.',
+    live_banner: 'Live prices from AGMARKNET via data.gov.in',
+    trend_now: 'Today:',
+
+    news_title: 'Agri News Made Simple',
+    news_sub: 'Short summaries with links to the original sources.',
+    read_source: 'Read at source →',
+
+    doc_title: 'Crop Doctor',
+    doc_sub: 'Take a photo of the problem leaf, fruit or plant. We help you identify the issue and show recommended treatment from government extension sources.',
+    upload_t: '1. Upload Photo',
+    details_t: '2. Details',
+    upload_hint: 'Tap to take / choose a photo',
+    upload_hint2: 'One clear photo of the affected part',
+    remove_photo: 'Remove',
+    your_crop: 'Your crop',
+    symptoms_label: 'What do you see?',
+    symptoms_ph: 'e.g. yellow spots on leaves / இலைகளில் மஞ்சள் புள்ளிகள்',
+    phone_label: 'Mobile number (optional)',
+    phone_note: "We'll SMS the advice summary. Your number is never shared.",
+    analyze_btn: 'Get Advice',
+    analyzing: 'Checking…',
+    empty_advice: 'Your advice will appear here after you upload a photo and describe the symptoms.',
+    common_problems_t: 'Common problems right now',
+    match_high: 'Likely match',
+    match_low: 'Possible match — please verify with your KVK',
+    symptoms_check_t: 'Symptoms to confirm',
+    treatment_t: 'Recommended treatment',
+    th_pesticide: 'Pesticide', th_dose: 'Dose per acre', th_wait: 'Pre-harvest wait',
+    prevention_t: 'Prevention',
+    advisory_disclaimer: '⚠️ Advice is compiled from TNAU / CIBRC extension recommendations. Pesticides are poisonous — read the label, wear gloves and mask while spraying, and never spray within the waiting period before harvest. Confirm with your local Krishi Vigyan Kendra (KVK) before large-scale spraying.',
+    need_photo: 'Please add a photo first.',
+    no_match: 'No close match found. Please describe symptoms more precisely, or contact your nearest KVK.'
+  },
+
+  ta: {
+    nav_home: 'முகப்பு',
+    nav_prices: 'விலைகள்',
+    nav_news: 'செய்திகள்',
+    nav_advisory: 'பயிர் மருத்துவர்',
+    hero_title: 'இன்றைய சந்தை விலைகள், உங்கள் மொழியில்',
+    hero_sub: 'தமிழ்நாடு சந்தைகளின் தினசரி காய்கறி & தானிய விலைகள், எளிய மொழியில் விவசாய செய்திகள், இலவச பயிர் ஆலோசனை — உங்கள் பயிர் பிரச்சனையை ஒரு புகைப்படம் எடுத்து பதிவேற்றுங்கள்.',
+    hero_cta_prices: 'இன்றைய விலைகளைப் பாருங்கள்',
+    hero_cta_doctor: '📷 பயிர் மருத்துவரிடம் கேளுங்கள்',
+    home_ticker_title: 'இன்றைய முக்கிய விலைகள்',
+    home_view_all: 'அனைத்து விலைகளையும் பார்க்க →',
+    home_features_title: 'விவசாயிகளுக்கு தேவையான அனைத்தும், ஒரே தட்டில்',
+    feat_price_t: 'தினசரி சந்தை விலைகள்',
+    feat_price_d: 'தமிழ்நாடு சந்தைகளில் இருந்து தினசரி காய்கறி & தானிய விலைகள், ஒவ்வொரு காலையும் புதுப்பிக்கப்படும்.',
+    feat_news_t: 'எளிய மொழியில் விவசாய செய்திகள்',
+    feat_news_d: 'வானிலை எச்சரிக்கை, MSP புதுப்பிப்புகள், சந்தை செய்திகள் — எளிய தமிழில்.',
+    feat_doc_t: 'பயிர் மருத்துவர்',
+    feat_doc_d: 'இலைகளில் புள்ளிகள்? செடிகள் வாடுகின்றன? புகைப்படம் எடுத்து பதிவேற்றி, சிகிச்சை பெறுங்கள்.',
+    feat_trend_t: 'விலை போக்கு',
+    feat_trend_d: 'தக்காளி விலை ஏறியதா இறங்கியதா? அறுவடைக்கு முன் தெரிந்துகொள்ளுங்கள்.',
+    footer_tagline: 'ஒவ்வொரு விவசாயிக்கும் இலவச சந்தை விலை மற்றும் பயிர் அறிவு.',
+    footer_links_t: 'இணைப்புகள்',
+    footer_data_t: 'தரவு ஆதாரங்கள்',
+    footer_disclaimer: 'விலைகள் அரசு சந்தை தரவிலிருந்து; விற்பதற்கு முன் உள்ளூர் சந்தையில் உறுதிப்படுத்திக்கொள்ளுங்கள்.',
+
+    prices_title: 'தினசரி சந்தை விலைகள்',
+    prices_updated: 'புதுப்பிக்கப்பட்டது:',
+    filter_crop: 'பயிர்:',
+    filter_market: 'சந்தை:',
+    filter_reset: 'மீட்டமை',
+    th_crop: 'பயிர்', th_tamil: 'தமிழ் பெயர்', th_market: 'சந்தை',
+    th_min: 'குறைந்த ₹', th_modal: 'சராசரி ₹', th_max: 'அதிக ₹', th_change: 'மாற்றம் (7 நாள்)',
+    prices_unit_note: 'அனைத்து விலைகளும் குவின்டல் (100 கிலோ) ஒன்றுக்கு ரூபாயில், அரசு சந்தை தரவிலிருந்து.',
+    trends_title: '7-நாள் விலை போக்கு',
+    demo_banner: 'மாதிரி தரவு காட்டப்படுகிறது. js/config.js இல் இலவச data.gov.in API key சேர்த்தால் நேரடி AGMARKNET விலைகள் தோன்றும்.',
+    live_banner: 'AGMARKNET இலிருந்து நேரடி விலைகள் (data.gov.in)',
+    trend_now: 'இன்று:',
+
+    news_title: 'எளிய மொழியில் விவசாய செய்திகள்',
+    news_sub: 'சுருக்கமான தொகுப்புகள், அசல் ஆதார இணைப்புகளுடன்.',
+    read_source: 'ஆதாரத்தில் படிக்க →',
+
+    doc_title: 'பயிர் மருத்துவர்',
+    doc_sub: 'பிரச்சனை உள்ள இலை, கனி அல்லது செடியின் புகைப்படம் எடுங்கள். அரசு விவசாய பரிந்துரைகளிலிருந்து சிகிச்சை விவரங்களை காட்டுகிறோம்.',
+    upload_t: '1. புகைப்படம் பதிவேற்றம்',
+    details_t: '2. விவரங்கள்',
+    upload_hint: 'புகைப்படம் எடுக்க / தேர்வு செய்ய தட்டவும்',
+    upload_hint2: 'பாதிக்கப்பட்ட பகுதியின் ஒரு தெளிவான புகைப்படம்',
+    remove_photo: 'நீக்கு',
+    your_crop: 'உங்கள் பயிர்',
+    symptoms_label: 'என்ன தெரிகிறது?',
+    symptoms_ph: 'உதா: இலைகளில் மஞ்சள் புள்ளிகள்',
+    phone_label: 'கைபேசி எண் (விரும்பினால்)',
+    phone_note: 'ஆலோசனை சுருக்கம் SMS மூலம் அனுப்பப்படும். உங்கள் எண் பங்கிடப்படாது.',
+    analyze_btn: 'ஆலோசனை பெற',
+    analyzing: 'சரிபார்க்கிறது…',
+    empty_advice: 'புகைப்படம் பதிவேற்றி அறிகுறிகளை விவரித்த பிறகு உங்கள் ஆலோசனை இங்கே தோன்றும்.',
+    common_problems_t: 'தற்போது பொதுவான பிரச்சனைகள்',
+    match_high: 'வாய்ப்புள்ள பொருத்தம்',
+    match_low: 'சாத்தியமான பொருத்தம் — KVK யிடம் உறுதிப்படுத்திக்கொள்ளுங்கள்',
+    symptoms_check_t: 'உறுதிப்படுத்த வேண்டிய அறிகுறிகள்',
+    treatment_t: 'பரிந்துரைக்கப்பட்ட சிகிச்சை',
+    th_pesticide: 'பூச்சி மருந்து', th_dose: 'ஏக்கருக்கு அளவு', th_wait: 'அறுவடைக்கு முன் காத்திருப்பு',
+    prevention_t: 'தடுப்பு முறைகள்',
+    advisory_disclaimer: '⚠️ ஆலோசனை TNAU / CIBRC பரிந்துரைகளிலிருந்து தொகுக்கப்பட்டது. பூச்சி மருந்துகள் நச்சுத்தன்மை வாய்ந்தவை — லேபிளைப் படித்து, கையுறை, முகமூடி அணிந்து தெளிக்கவும், அறுவடைக்குள் காத்திருப்பு காலத்தில் தெளிக்க வேண்டாம். அளித்த அளவில் தெளிக்கும் முன் உங்கள் அருகிலுள்ள KVK யை அணுகவும்.',
+    need_photo: 'முதலில் ஒரு புகைப்படம் சேர்க்கவும்.',
+    no_match: 'பொருத்தமான நோய் கிடைக்கவில்லை. அறிகுறிகளை துல்லியமாக விவரிக்கவும், அல்லது அருகிலுள்ள KVK ஐ தொடர்பு கொள்ளவும்.'
+  }
+};
+
+function applyI18n(lang) {
+  document.querySelectorAll('[data-i18n]').forEach(el => {
+    const k = el.getAttribute('data-i18n');
+    if (I18N[lang][k]) el.textContent = I18N[lang][k];
+  });
+  document.body.classList.toggle('ta-active', lang === 'ta');
+  document.documentElement.lang = lang === 'ta' ? 'ta' : 'en';
+  const active = document.querySelector('#langToggle .lang-active');
+  if (active) active.textContent = lang === 'ta' ? 'EN' : 'த';
+}
+
+function currentLang() { return localStorage.getItem('agri_lang') || 'en'; }
+
+document.addEventListener('DOMContentLoaded', () => {
+  applyI18n(currentLang());
+});

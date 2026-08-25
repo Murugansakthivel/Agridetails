@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Crop Doctor — Photo Pest &amp; Disease Advisory | Agridetails</title>
+<meta name="description" content="Upload a photo of your diseased crop and get recommended pesticide and treatment details. Free crop advisory for Tamil Nadu farmers.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Tamil:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<header class="site-header">
+  <div class="container header-inner">
+    <a href="index.html" class="brand"><span class="brand-icon">🌾</span><span class="brand-text">agridetails<span class="brand-dot">.com</span></span></a>
+    <nav class="main-nav" id="mainNav">
+      <a href="index.html" data-i18n="nav_home">Home</a>
+      <a href="prices.html" data-i18n="nav_prices">Prices</a>
+      <a href="news.html" data-i18n="nav_news">News</a>
+      <a href="advisory.html" class="nav-cta" data-i18n="nav_advisory">Crop Doctor</a>
+    </nav>
+    <div class="header-actions">
+      <button id="langToggle" class="btn btn-outline lang-toggle"><span class="lang-active">த</span> / EN</button>
+      <button id="navToggle" class="nav-toggle-btn" aria-label="Menu">☰</button>
+    </div>
+  </div>
+</header>
+
+<main>
+<section class="page-head">
+  <div class="container">
+    <h1 data-i18n="doc_title">Crop Doctor</h1>
+    <p class="muted" data-i18n="doc_sub">Take a photo of the problem leaf, fruit or plant. We help you identify the issue and show recommended treatment from government extension sources.</p>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container advisory-layout">
+
+    <div class="card upload-card">
+      <h2 data-i18n="upload_t">1. Upload Photo</h2>
+      <div id="dropZone" class="drop-zone">
+        <input type="file" id="photoInput" accept="image/*" capture="environment" hidden>
+        <div class="dz-idle" id="dzIdle">
+          <span class="dz-icon">📷</span>
+          <p data-i18n="upload_hint">Tap to take / choose a photo</p>
+          <p class="small muted" data-i18n="upload_hint2">One clear photo of the affected part</p>
+        </div>
+        <img id="previewImg" alt="" hidden>
+        <button id="clearPhotoBtn" class="btn btn-sm btn-outline dz-clear" hidden>✕ <span data-i18n="remove_photo">Remove</span></button>
+      </div>
+
+      <h2 style="margin-top:1.5rem" data-i18n="details_t">2. Details</h2>
+      <label class="field-label" for="cropSelect" data-i18n="your_crop">Your crop</label>
+      <select id="cropSelect"></select>
+
+      <label class="field-label" for="symptomInput" data-i18n="symptoms_label">What do you see?</label>
+      <textarea id="symptomInput" rows="3" placeholder="e.g. yellow spots on leaves / இலைகளில் மஞ்சள் புள்ளிகள்"></textarea>
+
+      <label class="field-label" for="phoneInput" data-i18n="phone_label">Mobile number (optional)</label>
+      <input type="tel" id="phoneInput" placeholder="+91 ...">
+      <p class="small muted" data-i18n="phone_note">We'll SMS you the advice summary. Number is never shared.</p>
+
+      <button id="analyzeBtn" class="btn btn-primary btn-block" disabled data-i18n="analyze_btn">Get Advice</button>
+    </div>
+
+    <div class="advice-panel" id="advicePanel">
+      <div class="empty-state" id="emptyState">
+        <span class="dz-icon">🌿</span>
+        <p data-i18n="empty_advice">Your advice will appear here after you upload a photo and describe the symptoms.</p>
+        <div class="quick-help">
+          <h3 data-i18n="common_problems_t">Common problems right now</h3>
+          <ul id="quickList"></ul>
+        </div>
+      </div>
+
+      <div class="result-card" id="resultCard" hidden>
+        <div class="match-banner" id="matchBanner"></div>
+        <h2 id="diagnosisTitle"></h2>
+        <p id="diagnosisTa" class="ta-name"></p>
+
+        <h3 data-i18n="symptoms_check_t">Symptoms to confirm</h3>
+        <ul id="symptomList" class="checklist"></ul>
+
+        <h3 data-i18n="treatment_t">Recommended treatment</h3>
+        <table class="pesticide-table">
+          <thead><tr><th data-i18n="th_pesticide">Pesticide</th><th data-i18n="th_dose">Dose per acre</th><th data-i18n="th_wait">Pre-harvest wait</th></tr></thead>
+          <tbody id="pesticideBody"></tbody>
+        </table>
+
+        <h3 data-i18n="prevention_t">Prevention</h3>
+        <ul id="preventionList" class="checklist"></ul>
+
+        <div class="disclaimer-box small" data-i18n="advisory_disclaimer">⚠️ Advice is compiled from TNAU / CIBRC extension recommendations. Pesticides are poisonous — read the label, wear gloves and mask while spraying, and never spray before harvest within the waiting period. Confirm with your local Krishi Vigyan Kendra (KVK) before large-scale spraying.</div>
+      </div>
+    </div>
+
+  </div>
+</section>
+</main>
+
+<footer class="site-footer">
+  <div class="container footer-bottom">
+    <p class="small muted">© 2026 agridetails.com · <span data-i18n="footer_disclaimer">Prices are indicative, from government market feeds. Always confirm at your local market before selling.</span></p>
+  </div>
+</footer>
+
+<script src="js/config.js"></script>
+<script src="js/i18n.js"></script>
+<script src="js/prices-data.js"></script>
+<script src="js/advisory-kb.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>

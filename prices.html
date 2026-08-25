@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Today's Prices — Agridetails</title>
+<meta name="description" content="Daily vegetable and grain prices from Tamil Nadu mandis — tomato, onion, carrot, potato, rice and more. Updated every morning in Tamil and English.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Tamil:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<header class="site-header">
+  <div class="container header-inner">
+    <a href="index.html" class="brand"><span class="brand-icon">🌾</span><span class="brand-text">agridetails<span class="brand-dot">.com</span></span></a>
+    <nav class="main-nav" id="mainNav">
+      <a href="index.html" data-i18n="nav_home">Home</a>
+      <a href="prices.html" data-i18n="nav_prices">Prices</a>
+      <a href="news.html" data-i18n="nav_news">News</a>
+      <a href="advisory.html" class="nav-cta" data-i18n="nav_advisory">Crop Doctor</a>
+    </nav>
+    <div class="header-actions">
+      <button id="langToggle" class="btn btn-outline lang-toggle"><span class="lang-active">த</span> / EN</button>
+      <button id="navToggle" class="nav-toggle-btn" aria-label="Menu">☰</button>
+    </div>
+  </div>
+</header>
+
+<main>
+<section class="page-head">
+  <div class="container">
+    <h1 data-i18n="prices_title">Daily Market Prices</h1>
+    <p class="muted" id="priceDate"></p>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="controls-bar">
+      <label for="cropFilter" data-i18n="filter_crop">Crop:</label>
+      <select id="cropFilter"></select>
+      <label for="marketFilter" data-i18n="filter_market">Market:</label>
+      <select id="marketFilter"></select>
+      <button id="resetFilters" class="btn btn-outline btn-sm" data-i18n="filter_reset">Reset</button>
+      <span class="muted small source-note" id="dataSourceNote"></span>
+    </div>
+
+    <div class="table-wrap">
+      <table class="price-table" id="priceTable">
+        <thead>
+          <tr>
+            <th data-i18n="th_crop">Crop</th>
+            <th data-i18n="th_tamil">Tamil Name</th>
+            <th data-i18n="th_market">Market</th>
+            <th class="num" data-i18n="th_min">Min ₹</th>
+            <th class="num" data-i18n="th_modal">Modal ₹</th>
+            <th class="num" data-i18n="th_max">Max ₹</th>
+            <th class="num" data-i18n="th_change">Change</th>
+          </tr>
+        </thead>
+        <tbody id="priceTableBody"></tbody>
+      </table>
+    </div>
+    <p class="small muted" data-i18n="prices_unit_note">All prices in ₹ per quintal (100 kg) from government market feeds.</p>
+
+    <h2 id="trends" class="section-title" style="margin-top:2.5rem" data-i18n="trends_title">7-Day Price Trend</h2>
+    <div class="trend-grid" id="trendGrid"></div>
+  </div>
+</section>
+</main>
+
+<footer class="site-footer">
+  <div class="container footer-bottom">
+    <p class="small muted">© 2026 agridetails.com · <span data-i18n="footer_disclaimer">Prices are indicative, from government market feeds. Always confirm at your local market before selling.</span></p>
+  </div>
+</footer>
+
+<script src="js/config.js"></script>
+<script src="js/i18n.js"></script>
+<script src="js/prices-data.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>
