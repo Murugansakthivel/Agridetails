@@ -275,7 +275,7 @@
 
     // quick-help list
     const quick = document.getElementById('quickList');
-    quick.innerHTML = ADVISORY_KB.slice(0, 5).map(d =>
+    quick.innerHTML = ADVISORY_KB.slice(0, 8).map(d =>
       `<li><button type="button" data-id="${d.id}" data-crop="${d.crops[0]}">${d.en.name} · ${d.en.ta_name}</button></li>`
     ).join('');
     quick.addEventListener('click', ev => {

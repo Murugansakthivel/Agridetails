@@ -51,7 +51,7 @@ const ADVISORY_KB = [
       ta: ['இலைகளில் கண் வடிவ / வைர வடிவ புள்ளிகள், நடுவில் சாம்பல் நிறம்', 'கதிரின் கழுத்து கருப்பாக மாறும் — "கதிர் நுனி கருக்கட்டு"', 'கதிர்கள் உடைந்து அல்லது முழுமையாக நிரப்பப்படாமல் இருக்கும்', 'அதிக யூரியா மற்றும் மேகமூட்டமான காலநிலையில் அதிகரிக்கும்']
     },
     pesticides: [
-      { en: 'Tricyclazole 75% WP',     ta: 'ட்ரைசைக்ளாசோல் 75% WP',     dose: '120 g/acre',      wait: '21 days' },
+      { en: 'Tricyclazole 75% WP',     ta: 'ட்ரைசைக்ளாசோல் 75% WP',     dose: '200 g/acre',      wait: '21 days' },
       { en: 'Carbendazim + Mancozeb',  ta: 'கார்பென்டாசிம் + மேன்கோசெப்', dose: '300 g/acre',      wait: '14 days' },
       { en: 'Edifenphos 50% EC',       ta: 'எடிஃபென்பாஸ் 50% EC',        dose: '200 ml/acre',     wait: '14 days' }
     ],
@@ -170,6 +170,87 @@ const ADVISORY_KB = [
     prevention: {
       en: ['Deep summer ploughing to bury debris', 'Crop rotation with cereals', 'Timely harvest — do not delay past maturity'],
       ta: ['கோடையில் ஆழமான உழவு செய்து கழிவுகளை புதையுங்கள்', 'தானிய பயிருடன் மாற்று பயிரிடுங்கள்', 'முதிர்ச்சிக்குப் பிறகு அறுவடையை தாமதிக்க வேண்டாம்']
-    }
+    },
+    source: 'TNAU / CIBRC standard extension recommendations'
+  },
+  {
+    id: 'maize_fall_armyworm',
+    crops: ['Maize'],
+    en: { name: 'Fall Armyworm', ta_name: 'மக்காச்சோளம் இராணுவப் புழு (ஃபால் ஆர்மிவர்ம்)' },
+    keywords: ['ragged holes', 'whorl feeding', 'sawdust like frass', 'moist feeding holes', 'window pane leaves', 'armyworm', 'மக்காச்சோளம் புழு', 'கண்ணி இலை'],
+    symptoms: {
+      en: ['Ragged, irregular holes on whorl leaves', 'Sawdust-like moist frass visible in the whorl', '"Window-pane" patches where leaf tissue is scraped', 'Serious damage in 15–40 day old crop'],
+      ta: ['கண்ணி இலைகளில் ஒழுங்கற்ற துளைகள்', 'கண்ணியில் வண்ணப்பட்டை போன்ற ஈர புழு கழிவு', 'இலை திசு கீறப்பட்ட "ஜன்னல் வடிவ" பகுதிகள்', '15–40 நாள் வயது பயிரில் அதிக சேதம்']
+    },
+    pesticides: [
+      { en: 'Chlorantraniliprole 18.5% SC', ta: 'குளோரான்ட்ரானிலிப்ரோல் 18.5% SC', dose: '0.4 ml/litre, whorl-directed', wait: '14 days' },
+      { en: 'Emamectin Benzoate 5% SG',     ta: 'எமாமெக்டின் பென்சோயேட் 5% SG',     dose: '0.4 g/litre, whorl-directed',   wait: '14 days' },
+      { en: 'Flubendiamide 480% SC',        ta: 'ஃப்ளூபென்டியமைடு 480% SC',          dose: '0.5 ml/litre',                  wait: '14 days' }
+    ],
+    prevention: {
+      en: ['Whorl-directed spraying hits the larva better than blanket spray', 'Set up pheromone traps @ 10–15/acre for early warning', 'Spray in evening when larvae feed actively', 'Do not repeat the same insecticide group'],
+      ta: ['கண்ணிப் பகுதியில் நேரடியாக மருந்து தெளித்தால் நன்றாக கட்டுப்படும்', '10–15 பெரோமோன் பொறிகள்/ஏக்கர் அமைத்து ஆரம்ப எச்சரிக்கை பெறுங்கள்', 'மாலை நேரத்தில் புழு உணவு உட்கொள்ளும் நேரத்தில் தெளியுங்கள்', 'அதே மருந்து குழுவை மீண்டும் பயன்படுத்த வேண்டாம்']
+    },
+    source: 'TNAU CPPS Technologies (tnau.ac.in) — FAW schedule verified Aug 2026'
+  },
+  {
+    id: 'rice_bph',
+    crops: ['Rice', 'Paddy'],
+    en: { name: 'Brown Plant Hopper (BPH)', ta_name: 'நெல் பழுப்பு மரப்புழு (BPH)' },
+    keywords: ['hopper burn', 'brown insects at base', 'drying circular patches', 'sooty mould at base', 'plants yellow near water level', 'மரப்புழு', 'கரையான பாதிப்பு'],
+    symptoms: {
+      en: ['Brownish-black insects crowded at stem base near water line', 'Circular dried patches — "hopper burn"', 'Sticky honeydew and black sooty mould near base', 'Field looks scorched in patches, spreads outward'],
+      ta: ['தண்டு அடிப்பகுதி நீர் மட்டத்தில் பழுப்பு-கருப்பு பூச்சிகள் கூட்டமாக', 'வட்டமாக காய்ந்த பகுதிகள் — "ஹாப்பர் பர்ன்"', 'அடிப்பகுதியில் பசை திரவம், கருப்பு பூஞ்சை', 'வயல் பட்டை பட்டையாக காய்ந்து வெளிநோக்கி பரவும்']
+    },
+    pesticides: [
+      { en: 'Buprofezin 25% SC',       ta: 'ப்யூப்ரோஃபெசின் 25% SC',        dose: '320 ml/acre',           wait: '14 days' },
+      { en: 'Imidacloprid 17.8% SL',   ta: 'இமிடாக்ளோப்ரிட் 17.8% SL',        dose: '40–50 ml/acre',         wait: '7 days' },
+      { en: 'Azadirachtin 0.03%',      ta: 'அசாடிராக்டின் 0.03%',             dose: '400 ml/acre',           wait: '—' }
+    ],
+    prevention: {
+      en: ['Drain field water first, then spray at the plant base', 'Alternate wetting and drying instead of continuous flooding', 'Wider spacing (30 cm rogue spacing) reduces build-up', 'Do not exceed recommended nitrogen'],
+      ta: ['முதலில் வயல் நீரை வடிகட்டி, பின் செடி அடிப்பகுதியில் தெளியுங்கள்', 'தொடர் நீர்ப்பாசனம் இல்லாமல் ஈரம்-உலர் முறையில் நீர் நிர்வகியுங்கள்', '30 செ.மீ இடைவெளி நடவு பூச்சி அதிகரிப்பை குறைக்கும்', 'பரிந்துரைக்கப்பட்ட யூரியா அளவை மீறாதீர்கள்']
+    },
+    source: 'TNAU Agritech Portal rice pest guide (agritech.tnau.ac.in) — doses verbatim'
+  },
+  {
+    id: 'rice_stem_borer',
+    crops: ['Rice', 'Paddy'],
+    en: { name: 'Yellow Stem Borer', ta_name: 'நெல் மஞ்சள் தண்டு துளைப்பான்' },
+    keywords: ['dead hearts', 'white ear heads', 'dried central tiller', 'hollow stem', 'stem tunneling', 'செதில் இதழ்', 'வெண்மையான கதிர்'],
+    symptoms: {
+      en: ['Young plants: central shoot dries — "dead heart" (pulls out easily)', 'After flowering: empty white ear-heads ("white ear")', 'Hollow stems with caterpillar frass inside', 'Damage appears in scattered clumps across field'],
+      ta: ['இளம் செடிகளில் நடு முளை காய்ந்து "செதில் இதழ்" (எளிதாக இழுத்து விடும்)', 'பூக்கும் பின் வெறுமையான வெண்ணிற கதிர்கள் ("வெண் கதிர்")', 'தண்டு உள்ளே காலியாக, புழு கழிவு', 'வயலில் இடம்பிடித்த கொத்து கொத்தாக பாதிப்பு']
+    },
+    pesticides: [
+      { en: 'Flubendiamide 20% WG',       ta: 'ஃப்ளூபென்டியமைடு 20% WG',        dose: '50 g/acre',    wait: '14 days' },
+      { en: 'Cartap Hydrochloride 50% SP', ta: 'கார்டாப் ஹைட்ரோகுளோரைடு 50% SP', dose: '400 g/acre',   wait: '14 days' },
+      { en: 'Chlorantraniliprole 0.4% GR', ta: 'குளோரான்ட்ரானிலிப்ரோல் 0.4% GR', dose: '4 kg/acre broadcast', wait: '14 days' }
+    ],
+    prevention: {
+      en: ['Clip seedling tips before transplanting to remove egg masses', 'Collect and destroy egg masses on leaves weekly', 'Harvest close to ground and plough stubbles early', 'Avoid continuous light trapping near light sources only'],
+      ta: ['நடவுக்கு முன் நாற்று நுனிகளை வெட்டி முட்டை கூடுகளை அகற்றுங்கள்', 'வாரம் ஒருமுறை இலை முட்டை கூடுகளை சேகரித்து அழியுங்கள்', 'நில மட்டத்திற்கு அருகில் அறுவடை செய்து கட்டைகளை சீக்கிரம் உழவுங்கள்']
+    },
+    source: 'TNAU Pest Forecast Report, Nov 2024 (agritech.tnau.ac.in PDF)'
+  },
+  {
+    id: 'chilli_thrips',
+    crops: ['Chilli'],
+    en: { name: 'Thrips (leaf curl complex)', ta_name: 'மிளகாய் தத்தும்பூச்சி (இலை சுருக்கம்)' },
+    keywords: ['chilli leaf curl', 'silvery streaks', 'curled brittle leaves', 'tiny pale insects buds', 'flower drop chilli', 'மிளகாய் இலை சுருக்கம்', 'வெள்ளி கோடுகள்'],
+    symptoms: {
+      en: ['Leaves curl upward, become small, brittle and leathery', 'Silvery shiny streaks on leaf surface', 'Tiny pale-yellow insects inside flowers and buds', 'Heavy flower and fruit drop'],
+      ta: ['இலைகள் மேல்நோக்கி சுருண்டு, சிறியதாக, உடையக்கூடியதாக மாறும்', 'இலை மேல் வெள்ளி போன்ற பளபளப்பான கோடுகள்', 'பூக்கள், மொட்டுகளில் சிறிய வெளிர் மஞ்சள் பூச்சிகள்', 'பூ & காய் அதிகம் உதிர்தல்']
+    },
+    pesticides: [
+      { en: 'Spinosad 45% SC',   ta: 'ஸ்பினோசாட் 45% SC',    dose: '42 ml/acre',  wait: '3 days' },
+      { en: 'Fipronil 5% SC',    ta: 'ஃபிப்ரோனில் 5% SC',     dose: '400 ml/acre', wait: '7 days' },
+      { en: 'Blue sticky traps', ta: 'நீல பசை பொறிகள்',       dose: '10 traps/acre', wait: '—' }
+    ],
+    prevention: {
+      en: ['Blue sticky traps attract thrips better than yellow ones', 'Keep nursery covered with fine mesh netting', 'Avoid growing chilli next to old chilli fields', 'Conserve predatory mites by avoiding broad-spectrum sprays'],
+      ta: ['நீல பசை பொறிகள் தத்தும்பூச்சியை நன்றாக ஈர்க்கும்', 'நர்சரியை நுண்கண வலையால் மூடுங்கள்', 'பழைய மிளகாய் வயல் அருகில் புதிய நடவை தவிர்க்கவும்', 'அகன்ற அளவிலான மருந்துகளை தவிர்த்து இயற்கை எதிரிகளை பாதுகாக்கவும்']
+    },
+    source: 'TNAU chilli IPDM capsule / agritech.tnau.ac.in — verify current season dose'
   }
 ];
