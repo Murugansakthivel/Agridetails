@@ -45,11 +45,29 @@
           <div class="small muted">${r.market}</div>
         </div>`).join('');
       if (dateEl) dateEl.textContent = t('prices_updated') + ' ' + data.updated;
+      renderMarquee(rows);
     } catch (e) {
       el.innerHTML = '<p class="muted">Could not load prices.</p>';
     }
   }
   document.addEventListener('agri:lang', initHome);
+
+  function renderMarquee(rows) {
+    const track = document.getElementById('marqueeTrack');
+    if (!track) return;
+    const icons = { Tomato:'🍅', Onion:'🧅', Potato:'🥔', Carrot:'🥕', Mango:'🥭', Banana:'🍌',
+      Brinjal:'🍆', Cabbage:'🥬', Lemon:'🍋', Grapes:'🍇', Rice:'🌾', Groundnut:'🥜',
+      'Green Chilli':'🌶️', Garlic:'🧄', Ginger:'🫚', Coconut:'🥥' };
+    const wanted = Object.keys(icons);
+    const picks = [];
+    for (const w of wanted) {
+      const r = rows.find(x => x.en === w);
+      if (r && !picks.some(p => p.en === w)) picks.push(r);
+    }
+    const item = r => `<span class="mq-item">${icons[r.en] || '🌱'} ${r[currentLang()] || r.en} <b>₹${fmt(r.modal)}/qtl</b> · ₹${(r.modal/100).toFixed(2)}/kg</span>`;
+    const half = picks.map(item).join('');
+    track.innerHTML = half + half;   // duplicated for seamless loop
+  }
 
   /* ================= PRICES ================= */
   async function getPrices() {
@@ -116,7 +134,6 @@
     let catFilter = 'all';
     const cropSel = document.getElementById('cropFilter');
     const mktSel = document.getElementById('marketFilter');
-    const nameSel = document.getElementById('nameLangSel');
     const tbody = document.getElementById('priceTableBody');
     const note = document.getElementById('dataSourceNote');
     const tabsEl = document.getElementById('catTabs');
@@ -243,7 +260,6 @@
 
     cropSel.addEventListener('change', render);
     mktSel.addEventListener('change', render);
-    if (nameSel) nameSel.addEventListener('change', render);
     document.getElementById('resetFilters').addEventListener('click', () => {
       cropSel.value = ''; mktSel.value = ''; catFilter = 'all'; buildTabs(); populateCropOptions(); render();
     });

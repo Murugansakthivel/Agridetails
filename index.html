@@ -7,10 +7,17 @@
 <meta name="description" content="Free daily vegetable and grain prices from Tamil Nadu mandis, simple agri news in Tamil and English, and photo-based pest & disease advisory for farmers.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Tamil:wght@400;500;600;700&family=Noto+Sans+Devanagari:wght@400;500;600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700;800&family=Noto+Sans+Tamil:wght@400;500;600;700&family=Noto+Sans+Devanagari:wght@400;500;600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
+
+<div class="topbar">
+  <div class="container topbar-inner">
+    <span>📞 <span data-i18n="top_call">Farmer helpline</span>: <b>1800-XXX-XXXX</b></span>
+    <span><b>Free</b> · <span data-i18n="top_note">prices updated every morning</span></span>
+  </div>
+</div>
 
 <header class="site-header">
   <div class="container header-inner">
@@ -34,7 +41,20 @@
 </header>
 
 <section class="hero">
+  <svg class="stamp" viewBox="0 0 100 100">
+    <defs><path id="circ" d="M50,50 m-38,0 a38,38 0 1,1 76,0 a38,38 0 1,1 -76,0"/></defs>
+    <text font-size="10.2" letter-spacing="2.5" fill="#4c8c2b" font-weight="700">
+      <textPath href="#circ">FRESH PRICES • FREE ADVICE • FARMER FIRST • </textPath>
+    </text>
+    <text x="50" y="56" text-anchor="middle" font-size="26">🌾</text>
+  </svg>
+
+  <div class="chip-float chip-1">🍅 <span>Tomato</span> <small>₹12/kg</small></div>
+  <div class="chip-float chip-2">🥕 <span>Carrot</span> <small>₹19/kg</small></div>
+  <div class="chip-float chip-3">🧅 <span>Onion</span> <small>₹14.50/kg</small></div>
+
   <div class="container">
+    <span class="hero-kicker">🌱 <span data-i18n="hero_kicker">Tamil Nadu's daily farm market companion</span></span>
     <h1 class="hero-title" data-i18n="hero_title">Today's market prices, in your language</h1>
     <p class="hero-sub" data-i18n="hero_sub">Daily vegetable &amp; grain prices from Tamil Nadu mandis, plain-language agri news, and free crop advice — just take a photo of your plant problem.</p>
     <div class="hero-actions">
@@ -44,20 +64,39 @@
   </div>
 </section>
 
+<!-- price marquee -->
+<div class="marquee" aria-hidden="true"><div class="marquee-track" id="marqueeTrack"></div></div>
+
+<svg class="wave" viewBox="0 0 1440 60" preserveAspectRatio="none" style="background:var(--green-700)">
+  <path d="M0,30 C240,60 480,0 720,25 C960,50 1200,10 1440,35 L1440,60 L0,60 Z" fill="#faf7ee"/>
+</svg>
+
 <main>
+  <section class="stats-band">
+    <div class="container stats-grid">
+      <div><div class="stat-num" id="statCrops">85+</div><div class="stat-label" data-i18n="stat_crops">Crops tracked daily</div></div>
+      <div><div class="stat-num" id="statMarkets">6</div><div class="stat-label" data-i18n="stat_markets">TN markets covered</div></div>
+      <div><div class="stat-num" id="statLangs">3</div><div class="stat-label" data-i18n="stat_langs">Languages</div></div>
+      <div><div class="stat-num" id="statDiseases">13+</div><div class="stat-label" data-i18n="stat_diseases">Pests &amp; diseases in Crop Doctor</div></div>
+      <div><div class="stat-num">₹0</div><div class="stat-label" data-i18n="stat_free">Forever free for farmers</div></div>
+    </div>
+  </section>
+
   <section class="section">
     <div class="container">
+      <span class="kicker" data-i18n="home_ticker_kicker">Live from the mandis</span>
       <h2 class="section-title" data-i18n="home_ticker_title">Today's Key Prices</h2>
-      <p class="muted small" id="tickerDate"></p>
+      <p class="muted small" id="tickerDate" style="text-align:center;margin-top:-1rem"></p>
       <div class="price-grid" id="homeTicker">
         <div class="skeleton"></div><div class="skeleton"></div><div class="skeleton"></div>
       </div>
-      <a href="prices.html" class="link-arrow" data-i18n="home_view_all">View all prices →</a>
+      <div style="text-align:center"><a href="prices.html" class="link-arrow" data-i18n="home_view_all">View all prices →</a></div>
     </div>
   </section>
 
   <section class="section section-alt">
     <div class="container">
+      <span class="kicker" data-i18n="home_features_kicker">Why farmers use us</span>
       <h2 class="section-title" data-i18n="home_features_title">Everything a farmer needs, one tap away</h2>
       <div class="feature-grid">
         <a class="feature-card" href="prices.html">
@@ -83,12 +122,49 @@
       </div>
     </div>
   </section>
+
+  <section class="section">
+    <div class="container split">
+      <div>
+        <span class="kicker" style="text-align:left" data-i18n="doctor_kicker">Photo se salah, free</span>
+        <h2 class="section-title left" data-i18n="doctor_heading">Snap a photo. Know the disease. Get the medicine.</h2>
+        <div class="steps-stack">
+          <div class="step-row"><span class="step-no">1</span><div><h4 data-i18n="doc_step1_t">Take a photo</h4><p data-i18n="doc_step1_d">One clear picture of the affected leaf, fruit or plant.</p></div></div>
+          <div class="step-row"><span class="step-no">2</span><div><h4 data-i18n="doc_step2_t">Tell us your crop</h4><p data-i18n="doc_step2_d">Pick the crop and describe what you see — in your language.</p></div></div>
+          <div class="step-row"><span class="step-no">3</span><div><h4 data-i18n="doc_step3_t">Get treatment + dose</h4><p data-i18n="doc_step3_d">Recommended pesticides with per-acre doses and pre-harvest waiting periods.</p></div></div>
+        </div>
+        <a href="advisory.html" class="btn btn-primary" style="margin-top:1.2rem" data-i18n="doctor_cta">Try the Crop Doctor →</a>
+      </div>
+      <div style="position:relative">
+        <div class="card" style="max-width:380px;margin:0 auto">
+          <div class="drop-zone" style="cursor:default">
+            <span class="dz-icon">🍃</span>
+            <p style="font-weight:700;color:var(--green-900)">Leaf spot detected</p>
+            <p class="small muted">Early blight — <i>Alternaria solani</i></p>
+            <p class="small" style="margin-top:.5rem"><b style="color:var(--green-700)">✓ Mancozeb 75% WP</b> · 600 g/acre</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-alt">
+    <div class="container">
+      <div class="cta-strip">
+        <div>
+          <h2 data-i18n="cta_title">Know today's price before you sell</h2>
+          <p data-i18n="cta_sub">Free forever. No app download needed — works on any phone browser.</p>
+        </div>
+        <a href="prices.html" class="btn btn-secondary" data-i18n="cta_btn">Open Daily Prices</a>
+      </div>
+    </div>
+  </section>
 </main>
 
 <footer class="site-footer">
   <div class="container footer-grid">
     <div>
-      <div class="brand"><span class="brand-icon">🌾</span> <strong>agridetails.com</strong></div>
+      <div class="brand"><span class="brand-icon">🌾</span> <strong>agridetails<span class="brand-dot">.com</span></strong></div>
       <p class="small muted" data-i18n="footer_tagline">Free market prices and crop knowledge for every farmer.</p>
     </div>
     <div>
@@ -109,7 +185,6 @@
   <div class="container footer-bottom">
     <p class="small muted">© 2026 agridetails.com · <span data-i18n="footer_disclaimer">Prices are indicative, from government market feeds. Always confirm at your local market before selling.</span></p>
   </div>
-  <!-- AGMARKNET_API_NOTE: Register at https://data.gov.in for a free API key, then set window.AGRI_API_KEY below or via js/config.js to fetch live daily price data. -->
 </footer>
 
 <script src="js/config.js"></script>
