@@ -1,0 +1,15 @@
+{
+  "name": "Agridetails.com - Mandi Prices, Agri News & Crop Doctor",
+  "short_name": "Agridetails",
+  "description": "Free daily vegetable & grain prices from Tamil Nadu mandis, agri news, and photo-based crop pest/disease advisory.",
+  "start_url": "/Agridetails/index.html",
+  "scope": "/Agridetails/",
+  "display": "standalone",
+  "background_color": "#faf7ee",
+  "theme_color": "#23451e",
+  "lang": "en",
+  "icons": [
+    { "src": "icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" }
+  ]
+}
