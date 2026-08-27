@@ -105,16 +105,53 @@ function agriHash(s) {
   return Math.abs(h);
 }
 
-/* Build the full demo price rows: every catalog crop gets a stable
-   min/modal/max band and one of six Tamil Nadu markets. */
-function buildCatalogRows() {
+/* ---------------- Date-wise pricing ---------------- */
+function pad2(n) { return String(n).padStart(2, '0'); }
+function dateToStr(d) { return d.getFullYear() + '-' + pad2(d.getMonth() + 1) + '-' + pad2(d.getDate()); }
+function todayStr() { return dateToStr(new Date()); }
+function addDays(dateStr, delta) {
+  const [y, m, d] = dateStr.split('-').map(Number);
+  const dt = new Date(y, m - 1, d);
+  dt.setDate(dt.getDate() + delta);
+  return dateToStr(dt);
+}
+/* Newest-first list of the last `days` calendar dates (today, today-1, ...) */
+function buildDateList(days) {
+  days = days || 14;
+  const list = [];
+  for (let i = 0; i < days; i++) list.push(addDays(todayStr(), -i));
+  return list;
+}
+
+/* Deterministic date-aware price for one catalog crop. Blends a fixed
+   per-crop offset, a slow per-crop trend that fades further into the past,
+   and small daily noise — all seeded from crop name + date, so picking the
+   same date always reproduces the same number (no server needed). */
+function priceOnDate(base, cropEn, dateStr) {
+  const WINDOW = 30;
+  const days = buildDateList(WINDOW);
+  let idx = days.indexOf(dateStr);
+  if (idx === -1) idx = Math.min(Math.max(0, Math.round((new Date(days[0]) - new Date(dateStr)) / 86400000)), WINDOW - 1);
+  const agoFraction = Math.min(idx / (WINDOW - 1), 1);
+
+  const hBase = agriHash(cropEn);
+  const offsetPct = ((hBase % 11) - 5) * 1.2;                              // ±6%, fixed per crop
+  const trendPct = ((hBase % 21) - 10) * 0.5;                              // ±5% total drift across the window
+  const noisePct = ((agriHash(cropEn + '|' + dateStr) % 9) - 4) * 0.55;    // ±2.2% daily noise
+
+  const pct = offsetPct + trendPct * (1 - agoFraction) + noisePct;
+  return Math.round((base * (1 + pct / 100)) / 10) * 10;
+}
+
+/* Build the full demo price rows for one date (defaults to today). */
+function buildCatalogRows(dateStr) {
+  dateStr = dateStr || todayStr();
   const MKTS = ['Chennai (Koyambedu)', 'Coimbatore', 'Madurai', 'Salem', 'Erode', 'Vellore'];
   const rows = [];
 
-  const push = (c, cat) => {
+  const push = (c, cat, base) => {
     const h = agriHash(c.en);
-    const jitter = ((h % 11) - 5) * 1.2;                    // ±6% variation
-    const modal = Math.round((c.base * (1 + jitter / 100)) / 10) * 10;
+    const modal = priceOnDate(base, c.en, dateStr);
     rows.push({
       en: c.en, ta: c.ta, hi: c.hi, cat,
       market: MKTS[h % MKTS.length],
@@ -124,16 +161,32 @@ function buildCatalogRows() {
     });
   };
 
-  CROP_CATALOG.vegetables.forEach(c => push(c, 'veg'));
-  CROP_CATALOG.fruits.forEach(c => push(c, 'fruit'));
-  CROP_CATALOG.grains.forEach(c => {
-    const h = agriHash(c.en);
-    rows.push({
-      en: c.en, ta: c.ta, hi: c.hi, cat: 'grain',
-      market: MKTS[h % MKTS.length],
-      min: c.min, modal: c.modal, max: c.max
-    });
-  });
+  CROP_CATALOG.vegetables.forEach(c => push(c, 'veg', c.base));
+  CROP_CATALOG.fruits.forEach(c => push(c, 'fruit', c.base));
+  CROP_CATALOG.grains.forEach(c => push(c, 'grain', c.modal));
 
   return rows;
+}
+
+/* Look up a catalog crop's base price + category by English name.
+   Used for date-wise recompute (e.g. 7-day change, trend series). */
+function catalogEntryFor(en) {
+  const v = CROP_CATALOG.vegetables.find(c => c.en === en);
+  if (v) return { base: v.base, cat: 'veg' };
+  const f = CROP_CATALOG.fruits.find(c => c.en === en);
+  if (f) return { base: f.base, cat: 'fruit' };
+  const g = CROP_CATALOG.grains.find(c => c.en === en);
+  if (g) return { base: g.modal, cat: 'grain' };
+  return null;
+}
+
+/* Deterministic price series for one crop over `days` days, oldest→newest,
+   ending on dateStr. Used to draw date-aware trend charts. */
+function buildTrendSeries(cropEn, dateStr, days) {
+  days = days || 7;
+  const entry = catalogEntryFor(cropEn);
+  if (!entry) return [];
+  const series = [];
+  for (let i = days - 1; i >= 0; i--) series.push(priceOnDate(entry.base, cropEn, addDays(dateStr, -i)));
+  return series;
 }

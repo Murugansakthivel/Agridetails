@@ -70,41 +70,43 @@
   }
 
   /* ================= PRICES ================= */
-  async function getPrices() {
+  async function getPrices(dateStr) {
     const cfg = window.AGRI_CONFIG || {};
     if (cfg.DATA_GOV_API_KEY) {
       try {
-        return await fetchLivePrices(cfg);
+        return await fetchLivePrices(cfg, dateStr);
       } catch (e) {
         console.warn('Live fetch failed, using demo data:', e);
       }
     }
-    return demoAsRows();
+    return demoAsRows(dateStr);
   }
 
-  function demoAsRows() {
+  function demoAsRows(dateStr) {
+    dateStr = dateStr || todayStr();
     return {
-      updated: PRICE_DATA.updated,
+      updated: dateStr,
       source: 'demo',
-      rows: buildCatalogRows().map(r => Object.assign({ change7d: changeFor(r) }, r))
+      rows: buildCatalogRows(dateStr).map(r => Object.assign({ change7d: changeFor(r, dateStr) }, r))
     };
   }
 
-  function changeFor(row) {
-    let hist = PRICE_HISTORY[row.en + '|' + row.market];
-    if (!hist) {
-      const k = Object.keys(PRICE_HISTORY).find(x => x.startsWith(row.en + '|'));
-      if (k) hist = PRICE_HISTORY[k];
-    }
-    if (!hist) return null;
-    const prev = hist[0], now = hist[hist.length - 1];
+  function changeFor(row, dateStr) {
+    const series = buildTrendSeries(row.en, dateStr, 7);
+    if (!series.length) return null;
+    const prev = series[0], now = series[series.length - 1];
+    if (!prev) return null;
     return Math.round(((now - prev) / prev) * 1000) / 10; // percent
   }
 
-  async function fetchLivePrices(cfg) {
+  async function fetchLivePrices(cfg, dateStr) {
+    dateStr = dateStr || todayStr();
+    // AGMARKNET date filter format is DD/MM/YYYY
+    const [y, m, d] = dateStr.split('-');
     const url = cfg.API_URL + '?api-key=' + encodeURIComponent(cfg.DATA_GOV_API_KEY)
       + '&format=json&limit=' + (cfg.LIMIT || 500)
-      + '&filters%5Bstate%5D=Tamil%20Nadu';
+      + '&filters%5Bstate%5D=Tamil%20Nadu'
+      + '&filters%5Barrival_date%5D=' + encodeURIComponent(`${d}/${m}/${y}`);
     const res = await fetch(url);
     if (!res.ok) throw new Error('data.gov.in HTTP ' + res.status);
     const json = await res.json();
@@ -123,7 +125,7 @@
       }
     });
     return {
-      updated: new Date().toISOString().slice(0, 10),
+      updated: dateStr,
       source: 'live',
       rows: Object.values(byKey)
     };
@@ -132,32 +134,51 @@
   function initPrices() {
     let all = [];
     let catFilter = 'all';
+    let selectedDate = todayStr();
     const cropSel = document.getElementById('cropFilter');
     const mktSel = document.getElementById('marketFilter');
+    const dateSel = document.getElementById('dateFilter');
     const tbody = document.getElementById('priceTableBody');
     const note = document.getElementById('dataSourceNote');
     const tabsEl = document.getElementById('catTabs');
 
-    getPrices().then(rows => {
-      all = rows.rows;
-      // source banner
-      const head = document.querySelector('.page-head .container');
-      if (head && !document.getElementById('srcBanner')) {
-        const b = document.createElement('p');
-        b.id = 'srcBanner';
-        b.className = 'small muted';
-        b.textContent = rows.source === 'live' ? t('live_banner') : t('demo_banner');
-        head.appendChild(b);
-      }
-      buildTabs();
-      populateCropOptions();
-      render();
-      renderTrends();
+    if (dateSel) {
+      dateSel.value = selectedDate;
+      dateSel.max = todayStr();
+      dateSel.min = addDays(todayStr(), -29);   // 30-day searchable window
+    }
 
-      const dEl = document.getElementById('priceDate');
-      if (dEl) dEl.textContent = t('prices_updated') + ' ' + rows.updated;
-      if (note) note.textContent = '';
-    });
+    function load() {
+      getPrices(selectedDate).then(rows => {
+        all = rows.rows;
+        buildTabs();
+        populateCropOptions();
+        render();
+        renderTrends();
+
+        const dEl = document.getElementById('priceDate');
+        if (dEl) dEl.textContent = t('prices_updated') + ' ' + rows.updated;
+
+        const head = document.querySelector('.page-head .container');
+        let banner = document.getElementById('srcBanner');
+        if (head && !banner) {
+          banner = document.createElement('p');
+          banner.id = 'srcBanner';
+          banner.className = 'small muted';
+          head.appendChild(banner);
+        }
+        if (banner) banner.textContent = rows.source === 'live' ? t('live_banner') : t('demo_banner');
+        if (note) note.textContent = '';
+      });
+    }
+    load();
+
+    if (dateSel) {
+      dateSel.addEventListener('change', () => {
+        selectedDate = dateSel.value || todayStr();
+        load();
+      });
+    }
 
     /* ---- category tabs ---- */
     function buildTabs() {
@@ -204,7 +225,7 @@
       const rows = filtered();
       const nl = currentLang();   // crop names follow the site language
       if (!rows.length) {
-        tbody.innerHTML = '<tr><td colspan="9" class="muted">No matching rows</td></tr>';
+        tbody.innerHTML = '<tr><td colspan="10" class="muted">No matching rows</td></tr>';
         return;
       }
       tbody.innerHTML = rows.map(r => {
@@ -220,6 +241,7 @@
           .map(k => nameMap[k])
           .join(' · ');
         return `<tr>
+          <td class="small muted">${selectedDate}</td>
           <td><strong>${nameMap[nl] || r.en}</strong>${others ? `<br><span class="small muted">${others}</span>` : ''}</td>
           <td>${r.ta}</td>
           <td>${r.hi || '—'}</td>
@@ -236,22 +258,23 @@
     function renderTrends() {
       const grid = document.getElementById('trendGrid');
       if (!grid) return;
-      const entries = Object.entries(PRICE_HISTORY);
-      grid.innerHTML = entries.map(([key, vals]) => {
-        const [crop, mkt] = key.split('|');
+      const featured = ['Tomato', 'Onion', 'Rice', 'Carrot', 'Brinjal', 'Groundnut'];
+      grid.innerHTML = featured.map(cropEn => {
+        const row = all.find(r => r.en === cropEn);
+        if (!row) return '';
+        const vals = buildTrendSeries(cropEn, selectedDate, 7);
         const min = Math.min(...vals), max = Math.max(...vals);
         const span = (max - min) || 1;
         const bars = vals.map((v, i) =>
           `<div class="trend-bar ${i === vals.length - 1 ? 'today' : ''}" style="height:${8 + ((v - min) / span) * 92}%"></div>`
         ).join('');
-        const diff = ((vals[vals.length - 1] - vals[0]) / vals[0] * 100).toFixed(1);
+        const diff = (((vals[vals.length - 1] - vals[0]) / vals[0]) * 100).toFixed(1);
         const dir = diff > 0 ? '▲' : (diff < 0 ? '▼' : '·');
-        const row = all.find(r => r.en === crop);
-        const label = row ? (row[currentLang()] || row.en) : crop;
+        const label = row[currentLang()] || row.en;
         return `<div class="trend-card">
-          <h4>${label} <span class="muted small">· ${mkt}</span></h4>
+          <h4>${label} <span class="muted small">· ${row.market}</span></h4>
           <div class="trend-bars">${bars}</div>
-          <div class="trend-labels"><span>−6d</span><span>today</span></div>
+          <div class="trend-labels"><span>−6d</span><span>${selectedDate}</span></div>
           <div class="trend-now">${t('trend_now')} ₹${fmt(vals[vals.length - 1])}/qtl · ₹${(vals[vals.length - 1] / 100).toFixed(2)}/kg
             <span class="${diff > 0 ? 'change-up' : 'change-down'}">${dir} ${Math.abs(diff)}%</span> / 7d</div>
         </div>`;
@@ -261,7 +284,10 @@
     cropSel.addEventListener('change', render);
     mktSel.addEventListener('change', render);
     document.getElementById('resetFilters').addEventListener('click', () => {
-      cropSel.value = ''; mktSel.value = ''; catFilter = 'all'; buildTabs(); populateCropOptions(); render();
+      cropSel.value = ''; mktSel.value = ''; catFilter = 'all';
+      selectedDate = todayStr();
+      if (dateSel) dateSel.value = selectedDate;
+      load();
     });
     document.addEventListener('agri:lang', () => { buildTabs(); populateCropOptions(); render(); renderTrends(); });
   }
