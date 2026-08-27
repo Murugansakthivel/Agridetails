@@ -227,6 +227,21 @@ h1, h2, h3, h4 { font-family: var(--font-display); line-height: 1.22; }
 .cta-strip p { opacity: .9; font-size: .95rem; }
 
 /* ---------- Prices page ---------- */
+.prices-layout { display: grid; grid-template-columns: 1fr 300px; gap: 1.6rem; align-items: start; }
+@media (max-width: 980px) { .prices-layout { grid-template-columns: 1fr; } }
+.stocks-panel { position: sticky; top: 82px; }
+.stocks-card h3 { font-size: 1.02rem; color: var(--green-900); margin-bottom: .1rem; }
+.stocks-group-t { font-size: .74rem; font-weight: 800; letter-spacing: .06em; text-transform: uppercase; color: var(--muted); margin: 1rem 0 .4rem; }
+.stock-row { display: flex; justify-content: space-between; align-items: center; gap: .5rem; padding: .5rem 0; border-bottom: 1px solid var(--border); }
+.stock-row:last-child { border-bottom: none; }
+.stock-name { font-size: .85rem; font-weight: 700; color: var(--text); }
+.stock-symbol { font-size: .72rem; color: var(--muted); font-weight: 600; }
+.stock-price { font-size: .88rem; font-weight: 800; text-align: right; }
+.stock-change { font-size: .74rem; font-weight: 700; text-align: right; }
+.stock-change.up { color: var(--green-700); }
+.stock-change.down { color: var(--red-700); }
+.stocks-disclaimer { margin-top: 1rem; font-size: .72rem; line-height: 1.4; }
+
 .controls-bar {
   display: flex; flex-wrap: wrap; gap: .6rem; align-items: center;
   background: var(--card); border: 1px solid var(--border); border-radius: var(--radius);

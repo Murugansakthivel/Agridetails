@@ -16,6 +16,7 @@
     // route by page body content
     if (document.getElementById('homeTicker')) initHome();
     if (document.getElementById('priceTableBody')) initPrices();
+    if (document.getElementById('stocksList')) initStocks();
     if (document.getElementById('newsList')) initNews();
     if (document.getElementById('analyzeBtn')) initAdvisory();
   });
@@ -290,6 +291,41 @@
       load();
     });
     document.addEventListener('agri:lang', () => { buildTabs(); populateCropOptions(); render(); renderTrends(); });
+  }
+
+  /* ================= AGRI & FOOD STOCKS ================= */
+  function initStocks() {
+    const list = document.getElementById('stocksList');
+    const asOfEl = document.getElementById('stocksAsOf');
+    if (!list || typeof AGRI_STOCKS === 'undefined') return;
+
+    function groupLabel(g) {
+      const L = currentLang();
+      return g[L] || g.en;
+    }
+
+    function render() {
+      if (asOfEl) asOfEl.textContent = t('stocks_as_of') + ' ' + AGRI_STOCKS.asOf;
+      list.innerHTML = AGRI_STOCKS.groups.map(g => {
+        const rows = g.stocks.map(s => {
+          const cls = s.change > 0 ? 'up' : (s.change < 0 ? 'down' : '');
+          const arrow = s.change > 0 ? '▲' : (s.change < 0 ? '▼' : '·');
+          return `<div class="stock-row">
+            <div>
+              <div class="stock-name">${s.name}</div>
+              <div class="stock-symbol">${s.symbol}</div>
+            </div>
+            <div>
+              <div class="stock-price">₹${s.price.toLocaleString('en-IN')}</div>
+              <div class="stock-change ${cls}">${arrow} ${Math.abs(s.change)}%</div>
+            </div>
+          </div>`;
+        }).join('');
+        return `<div class="stocks-group-t">${groupLabel(g)}</div>${rows}`;
+      }).join('');
+    }
+    render();
+    document.addEventListener('agri:lang', render);
   }
 
   /* ================= NEWS ================= */
