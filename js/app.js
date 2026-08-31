@@ -19,6 +19,7 @@
     if (document.getElementById('newsList')) initNews();
     if (document.getElementById('analyzeBtn')) initAdvisory();
     if (document.getElementById('stocksGrid')) initStocksPage();
+    if (document.getElementById('climateList')) initClimate();
   });
 
   function t(key) { return I18N[currentLang()][key] || I18N.en[key] || key; }
@@ -508,6 +509,41 @@
           <p>${L.sum}</p>
           <div class="news-meta"><a href="${n.src}" target="_blank" rel="noopener">${t('read_source')}</a>
             <span class="muted"> (${n.srcName})</span></div>
+        </article>`;
+      }).join('');
+    }
+    render();
+    document.addEventListener('agri:lang', render);
+  }
+
+  /* ================= CLIMATE NEWS ================= */
+  function initClimate() {
+    const list = document.getElementById('climateList');
+    const asOfEl = document.getElementById('climateAsOf');
+    if (!list || typeof CLIMATE_NEWS === 'undefined') return;
+
+    function render() {
+      const L = currentLang();
+      if (asOfEl) asOfEl.textContent = t('climate_as_of') + ' ' + CLIMATE_NEWS.asOf;
+      list.innerHTML = CLIMATE_NEWS.items.map(item => {
+        const L2 = item[L] || item.en;
+        const tag = item.tag[L] || item.tag.en;
+        const crops = item.affectedCrops[L] || item.affectedCrops.en;
+        const advice = item.advice[L] || item.advice.en;
+        const cropChips = crops.map(c => `<span class="climate-crop-chip">${c}</span>`).join('');
+        return `<article class="climate-card sev-${item.severity}">
+          <span class="climate-tag">${tag}</span>
+          <h3>${L2.title}</h3>
+          <p class="small muted">${L2.sum}</p>
+          <div class="climate-crops">
+            <strong class="small" style="width:100%;display:block;margin-bottom:.3rem;color:var(--green-900)">${t('climate_affected_crops')}:</strong>
+            ${cropChips}
+          </div>
+          <div class="climate-advice"><strong>${t('climate_advice_label')}:</strong> ${advice}</div>
+          <div class="climate-meta muted">
+            <span>${item.date}</span> · <a href="${item.source}" target="_blank" rel="noopener">${t('climate_source_link')}</a>
+            <span> (${item.srcName})</span>
+          </div>
         </article>`;
       }).join('');
     }
