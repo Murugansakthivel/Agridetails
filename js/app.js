@@ -13,14 +13,12 @@
 
     // language switching is handled by #langSwitch buttons bound in i18n.js
 
-    // Agri & Food Stocks modal (button appears in nav on every page)
-    initStocksModal();
-
     // route by page body content
     if (document.getElementById('homeTicker')) initHome();
     if (document.getElementById('priceTableBody')) initPrices();
     if (document.getElementById('newsList')) initNews();
     if (document.getElementById('analyzeBtn')) initAdvisory();
+    if (document.getElementById('stocksGrid')) initStocksPage();
   });
 
   function t(key) { return I18N[currentLang()][key] || I18N.en[key] || key; }
@@ -318,59 +316,153 @@
     document.addEventListener('agri:lang', () => { buildTabs(); populateCropOptions(); render(); renderTrends(); });
   }
 
-  /* ================= AGRI & FOOD STOCKS (modal, opened from nav button) ================= */
-  function initStocksModal() {
-    const btn = document.getElementById('navStocksBtn');
-    const overlay = document.getElementById('stocksModalOverlay');
-    const closeBtn = document.getElementById('stocksModalClose');
-    const list = document.getElementById('stocksList');
+  /* ================= AGRI & FOOD STOCKS (full page) ================= */
+  function initStocksPage() {
+    const grid = document.getElementById('stocksGrid');
     const asOfEl = document.getElementById('stocksAsOf');
-    if (!btn || !overlay || !list || typeof AGRI_STOCKS === 'undefined') return;
+    const detail = document.getElementById('stockDetail');
+    if (!grid || typeof AGRI_STOCKS === 'undefined') return;
 
-    let rendered = false;
+    let activeSymbol = null;
 
     function groupLabel(g) {
       const L = currentLang();
       return g[L] || g.en;
     }
 
-    function render() {
+    function allStocks() {
+      return AGRI_STOCKS.groups.flatMap(g => g.stocks.map(s => Object.assign({ groupKey: g.key, groupLabel: groupLabel(g) }, s)));
+    }
+
+    function renderGrid() {
       if (asOfEl) asOfEl.textContent = t('stocks_as_of') + ' ' + AGRI_STOCKS.asOf;
-      list.innerHTML = AGRI_STOCKS.groups.map(g => {
-        const rows = g.stocks.map(s => {
+      grid.innerHTML = AGRI_STOCKS.groups.map(g => {
+        const cards = g.stocks.map(s => {
           const cls = s.change > 0 ? 'up' : (s.change < 0 ? 'down' : '');
           const arrow = s.change > 0 ? '▲' : (s.change < 0 ? '▼' : '·');
-          return `<div class="stock-row">
-            <div>
-              <div class="stock-name">${s.name}</div>
-              <div class="stock-symbol">${s.symbol}</div>
+          const active = s.symbol === activeSymbol ? ' active' : '';
+          return `<button type="button" class="stock-card${active}" data-symbol="${s.symbol}">
+            <div class="stock-card-top">
+              <span class="stock-name">${s.name}</span>
+              <span class="stock-symbol">${s.symbol}</span>
             </div>
-            <div>
-              <div class="stock-price">₹${s.price.toLocaleString('en-IN')}</div>
-              <div class="stock-change ${cls}">${arrow} ${Math.abs(s.change)}%</div>
+            <div class="stock-card-bottom">
+              <span class="stock-price">₹${s.price.toLocaleString('en-IN')}</span>
+              <span class="stock-change ${cls}">${arrow} ${Math.abs(s.change)}%</span>
             </div>
-          </div>`;
+          </button>`;
         }).join('');
-        return `<div class="stocks-group-t">${groupLabel(g)}</div>${rows}`;
+        return `<div class="stocks-group-t">${groupLabel(g)}</div><div class="stock-card-grid">${cards}</div>`;
       }).join('');
-      rendered = true;
     }
 
-    function openModal() {
-      if (!rendered) render();
-      overlay.classList.add('open');
-      document.body.classList.add('modal-open');
-    }
-    function closeModal() {
-      overlay.classList.remove('open');
-      document.body.classList.remove('modal-open');
+    function buildSpark(symbol, basePrice) {
+      // Deterministic 15-day series seeded from symbol so it's stable across renders.
+      const h = agriHash(symbol);
+      const days = 15;
+      const vals = [];
+      let v = basePrice * (1 - ((h % 7) - 3) / 100);
+      for (let i = 0; i < days; i++) {
+        const dayHash = agriHash(symbol + '|' + i);
+        const drift = ((dayHash % 9) - 4) / 100;
+        v = Math.max(1, v * (1 + drift));
+        vals.push(Math.round(v * 100) / 100);
+      }
+      vals[vals.length - 1] = basePrice; // end exactly on today's real price
+      return vals;
     }
 
-    btn.addEventListener('click', ev => { ev.preventDefault(); openModal(); });
-    closeBtn.addEventListener('click', closeModal);
-    overlay.addEventListener('click', ev => { if (ev.target === overlay) closeModal(); });
-    document.addEventListener('keydown', ev => { if (ev.key === 'Escape') closeModal(); });
-    document.addEventListener('agri:lang', () => { if (rendered) render(); });
+    function financialRow(label, value) {
+      if (!value) return '';
+      return `<div class="fin-row"><span class="fin-label">${label}</span><span class="fin-value">${value}</span></div>`;
+    }
+
+    function renderDetail(s) {
+      const cls = s.change > 0 ? 'up' : (s.change < 0 ? 'down' : '');
+      const arrow = s.change > 0 ? '▲' : (s.change < 0 ? '▼' : '·');
+      const vals = buildSpark(s.symbol, s.price);
+      const min = Math.min(...vals), max = Math.max(...vals);
+      const span = (max - min) || 1;
+      const bars = vals.map((v, i) =>
+        `<div class="trend-bar ${i === vals.length - 1 ? 'today' : ''}" style="height:${8 + ((v - min) / span) * 92}%" title="₹${v}"></div>`
+      ).join('');
+
+      const news = (s.news || []).map(n => `
+        <div class="stock-news-item">
+          <div class="stock-news-headline">${n.headline}</div>
+          <div class="stock-news-detail small muted">${n.detail || ''}</div>
+          <div class="stock-news-meta small">
+            ${n.date ? `<span class="muted">${n.date}</span> · ` : ''}
+            ${n.source ? `<a href="${n.source}" target="_blank" rel="noopener">${t('stock_source_link')}</a>` : ''}
+          </div>
+        </div>`).join('') || `<p class="small muted">${t('stock_no_news')}</p>`;
+
+      detail.innerHTML = `
+        <div class="stock-detail-head">
+          <div>
+            <h2>${s.name} <span class="stock-symbol">${s.symbol}</span></h2>
+            <p class="small muted">${s.groupLabel}</p>
+          </div>
+          <button type="button" class="stock-detail-close" id="stockDetailClose" aria-label="Close">✕</button>
+        </div>
+
+        <div class="stock-detail-price">
+          <span class="stock-detail-price-num">₹${s.price.toLocaleString('en-IN')}</span>
+          <span class="stock-change ${cls}" style="font-size:1rem">${arrow} ${Math.abs(s.change)}%</span>
+          <span class="small muted">${t('stocks_as_of')} ${AGRI_STOCKS.asOf}</span>
+        </div>
+
+        <h3 class="stock-detail-subhead">${t('stock_15d_trend')}</h3>
+        <div class="trend-bars stock-detail-chart">${bars}</div>
+        <div class="trend-labels"><span>−14d</span><span>${t('stock_today')}</span></div>
+
+        <h3 class="stock-detail-subhead">${t('stock_financials')}</h3>
+        <div class="fin-grid">
+          ${financialRow(t('stock_52w_high'), s.high52w ? '₹' + s.high52w.toLocaleString('en-IN') : '')}
+          ${financialRow(t('stock_52w_low'), s.low52w ? '₹' + s.low52w.toLocaleString('en-IN') : '')}
+          ${financialRow(t('stock_mcap'), s.marketCap || '')}
+          ${financialRow(t('stock_pe'), s.pe || '')}
+        </div>
+
+        <h3 class="stock-detail-subhead">${t('stock_news_title')}</h3>
+        <div class="stock-news-list">${news}</div>
+
+        <p class="small muted stocks-disclaimer">${t('stock_detail_disclaimer')}</p>
+      `;
+      document.getElementById('stockDetailClose').addEventListener('click', closeDetail);
+      detail.hidden = false;
+      detail.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+
+    function openDetail(symbol) {
+      const s = allStocks().find(x => x.symbol === symbol);
+      if (!s) return;
+      activeSymbol = symbol;
+      renderGrid();
+      renderDetail(s);
+    }
+    function closeDetail() {
+      activeSymbol = null;
+      detail.hidden = true;
+      detail.innerHTML = '';
+      renderGrid();
+    }
+
+    grid.addEventListener('click', ev => {
+      const card = ev.target.closest('.stock-card');
+      if (!card) return;
+      if (card.dataset.symbol === activeSymbol) { closeDetail(); return; }
+      openDetail(card.dataset.symbol);
+    });
+
+    renderGrid();
+    document.addEventListener('agri:lang', () => {
+      renderGrid();
+      if (activeSymbol) {
+        const s = allStocks().find(x => x.symbol === activeSymbol);
+        if (s) renderDetail(s);
+      }
+    });
   }
 
   /* ================= NEWS ================= */
