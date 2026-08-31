@@ -3,16 +3,16 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Climate News — Agridetails</title>
-<meta name="description" content="El Niño, monsoon and weather alerts for Tamil Nadu farmers — which crops are affected and how to respond, updated regularly.">
+<title>India Dam Details — Agridetails</title>
+<meta name="description" content="Major India dam &amp; reservoir details — full level, current level in feet, storage, state &amp; district location, live inflow/outflow, in English, தமிழ் and हिंदी.">
 <meta property="og:type" content="website">
-<meta property="og:title" content="Climate News — Agridetails">
-<meta property="og:description" content="El Niño, monsoon and weather alerts for Tamil Nadu farmers — which crops are affected and how to respond, updated regularly.">
+<meta property="og:title" content="India Dam Details — Agridetails">
+<meta property="og:description" content="Major India dam & reservoir details — full level, current level in feet, storage, state & district location, live inflow/outflow.">
 <meta property="og:image" content="https://murugansakthivel.github.io/Agridetails/icon-512.png">
-<meta property="og:url" content="https://murugansakthivel.github.io/Agridetails/climate.html">
+<meta property="og:url" content="https://murugansakthivel.github.io/Agridetails/dams.html">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Climate News — Agridetails">
-<meta name="twitter:description" content="El Niño, monsoon and weather alerts for Tamil Nadu farmers — which crops are affected and how to respond, updated regularly.">
+<meta name="twitter:title" content="India Dam Details — Agridetails">
+<meta name="twitter:description" content="Major India dam & reservoir details — full level, current level in feet, storage, state & district location, live inflow/outflow.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700;800&family=Noto+Sans+Tamil:wght@400;500;600;700&family=Noto+Sans+Devanagari:wght@400;500;600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -33,9 +33,9 @@
       <a href="index.html" data-i18n="nav_home">Home</a>
       <a href="prices.html" data-i18n="nav_prices">Prices</a>
       <a href="news.html" data-i18n="nav_news">News</a>
-      <a href="climate.html" class="nav-climate-btn active" data-i18n="nav_climate">🌦️ Climate News</a>
-      <a href="dams.html" class="nav-dam-btn" data-i18n="nav_dam">🏞️ India Dam Details</a>
-      <a href="stocks.html" class="nav-stocks-btn" data-i18n="nav_stocks">📈 Agri Stocks</a>
+      <a href="climate.html" class="nav-climate-btn" data-i18n="nav_climate">🌦️ Climate News</a>
+      <a href="dams.html" class="nav-dam-btn active" data-i18n="nav_dam">🏞️ India Dam Details</a>
+      <a href="stocks.html" class="nav-stocks-btn" data-i18n="nav_stocks">📈 Stocks</a>
       <a href="advisory.html" class="nav-cta" data-i18n="nav_advisory">Crop Doctor</a>
     </nav>
     <div class="header-actions">
@@ -50,15 +50,15 @@
 <main>
 <section class="page-head">
   <div class="container">
-    <h1 data-i18n="climate_page_title">🌦️ Climate News</h1>
-    <p class="muted" id="climateAsOf"></p>
-    <p class="small muted" data-i18n="climate_disclaimer">Compiled from IMD, USDA and agricultural press reports — not an official weather warning. Always confirm with mausam.imd.gov.in/chennai before acting on any alert.</p>
+    <h1 data-i18n="dam_page_title">🏞️ India Dam Details</h1>
+    <p class="muted" id="damAsOf"></p>
+    <p class="small muted" data-i18n="dam_disclaimer">Compiled from CWC's Reservoir Storage Bulletin and state water resource portals (TN Agrisnet, APWRIMS, Odisha Hydromet, Kerala SDMA). Reading dates vary by dam — always confirm with the live source link before acting.</p>
   </div>
 </section>
 
 <section class="section">
   <div class="container">
-    <div id="climateList" class="climate-list"></div>
+    <div id="damList" class="dam-list"></div>
   </div>
 </section>
 </main>
@@ -71,7 +71,7 @@
 
 <script src="js/config.js"></script>
 <script src="js/i18n.js"></script>
-<script src="js/climate-news.js"></script>
+<script src="js/dam-details.js"></script>
 <script src="js/app.js"></script>
 </body>
 </html>

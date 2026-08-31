@@ -20,6 +20,7 @@
     if (document.getElementById('analyzeBtn')) initAdvisory();
     if (document.getElementById('stocksGrid')) initStocksPage();
     if (document.getElementById('climateList')) initClimate();
+    if (document.getElementById('damList')) initDams();
   });
 
   function t(key) { return I18N[currentLang()][key] || I18N.en[key] || key; }
@@ -543,6 +544,63 @@
           <div class="climate-meta muted">
             <span>${item.date}</span> · <a href="${item.source}" target="_blank" rel="noopener">${t('climate_source_link')}</a>
             <span> (${item.srcName})</span>
+          </div>
+        </article>`;
+      }).join('');
+    }
+    render();
+    document.addEventListener('agri:lang', render);
+  }
+
+  /* ================= INDIA DAM DETAILS ================= */
+  function initDams() {
+    const list = document.getElementById('damList');
+    const asOfEl = document.getElementById('damAsOf');
+    if (!list || typeof DAM_DETAILS === 'undefined') return;
+
+    function fillClass(pct) {
+      if (pct == null || isNaN(pct)) return '';
+      if (pct < 30) return 'dam-critical';
+      if (pct < 50) return 'dam-low';
+      return '';
+    }
+
+    function render() {
+      const L = currentLang();
+      if (asOfEl) asOfEl.textContent = t('dam_as_of') + ' ' + DAM_DETAILS.asOf;
+      list.innerHTML = DAM_DETAILS.items.map(d => {
+        const name = d.name[L] || d.name.en;
+        const river = d.river[L] || d.river.en;
+        const state = d.state[L] || d.state.en;
+        const district = d.district[L] || d.district.en;
+        const pct = d.percentFull;
+        const pctDisplay = (pct != null && !isNaN(pct)) ? Math.round(pct * 10) / 10 + '%' : '—';
+        const fullFtDisplay = d.fullLevelFt != null ? fmt(d.fullLevelFt) + ' ft' : '—';
+        const curFtDisplay = d.currentLevelFt != null ? fmt(d.currentLevelFt) + ' ft' : '—';
+        return `<article class="dam-card">
+          <h3>${name}</h3>
+          <div class="dam-river">${t('dam_river_label')}: ${river}</div>
+          <div class="dam-loc">
+            <span class="dam-loc-chip">📍 ${state}</span>
+            <span class="dam-loc-chip">${district}</span>
+          </div>
+          <div class="dam-fill-wrap">
+            <div class="dam-fill-bar"><div class="dam-fill-bar-inner ${fillClass(pct)}" style="width:${pct != null && !isNaN(pct) ? Math.min(100, Math.max(2, pct)) : 0}%"></div></div>
+            <div class="dam-fill-label"><span>${t('dam_fill_label')}</span><span>${pctDisplay}</span></div>
+          </div>
+          <div class="dam-stats">
+            <div><div class="dam-stat-label">${t('dam_full_level')}</div><div class="dam-stat-value">${fullFtDisplay}</div></div>
+            <div><div class="dam-stat-label">${t('dam_current_level')}</div><div class="dam-stat-value">${curFtDisplay}</div></div>
+            <div><div class="dam-stat-label">${t('dam_full_capacity')}</div><div class="dam-stat-value">${d.fullCapacity}</div></div>
+            <div><div class="dam-stat-label">${t('dam_current_storage')}</div><div class="dam-stat-value">${d.currentStorage}</div></div>
+          </div>
+          <div class="dam-flow">
+            <span>${t('dam_inflow')}: <b>${d.inflow}</b></span>
+            <span>${t('dam_outflow')}: <b>${d.outflow}</b></span>
+          </div>
+          <div class="dam-meta">
+            <span>${d.dateAsOf}</span> · <a href="${d.source}" target="_blank" rel="noopener">${t('dam_source_link')}</a>
+            <span> (${d.srcName})</span>
           </div>
         </article>`;
       }).join('');

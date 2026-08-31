@@ -21,6 +21,11 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://murugansakthivel.github.io/Agridetails/dams.html</loc>
+    <changefreq>daily</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://murugansakthivel.github.io/Agridetails/stocks.html</loc>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
