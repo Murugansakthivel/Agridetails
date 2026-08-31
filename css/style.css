@@ -265,6 +265,14 @@ tbody tr:hover { background: #f6faef; }
 .change-down { color: var(--red-700); font-weight: 700; }
 .change-flat { color: var(--muted); }
 
+.wa-share-btn {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 30px; height: 30px; border-radius: 50%;
+  background: #25D366; color: #fff; text-decoration: none;
+  transition: transform .15s, filter .15s;
+}
+.wa-share-btn:hover { transform: scale(1.08); filter: brightness(1.05); }
+
 .cat-tabs { display: flex; gap: .5rem; flex-wrap: wrap; margin-top: 1rem; }
 .cat-tab {
   font-family: inherit; font-size: .87rem; font-weight: 700; cursor: pointer;

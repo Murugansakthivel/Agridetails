@@ -25,6 +25,25 @@
 
   function fmt(n) { return Number(n).toLocaleString('en-IN'); }
 
+  /* Build a wa.me share link with a pre-filled price message in the
+     current site language. r = price row, lang = 'en'|'ta'|'hi', label =
+     crop name already resolved to that language. */
+  function buildWhatsAppShareUrl(r, lang, label) {
+    const kg = (r.modal / 100).toFixed(2);
+    const siteUrl = 'https://murugansakthivel.github.io/Agridetails/prices.html';
+    const templates = {
+      en: `🌾 ${label} price today (${selectedDateForShare()})\n₹${fmt(r.modal)}/quintal · ₹${kg}/kg\nMarket: ${r.market}\n\nCheck more prices: ${siteUrl}`,
+      ta: `🌾 ${label} இன்றைய விலை (${selectedDateForShare()})\n₹${fmt(r.modal)}/குவின்டல் · ₹${kg}/கிலோ\nசந்தை: ${r.market}\n\nமேலும் விலைகள்: ${siteUrl}`,
+      hi: `🌾 ${label} आज का भाव (${selectedDateForShare()})\n₹${fmt(r.modal)}/क्विंटल · ₹${kg}/किग्रा\nबाज़ार: ${r.market}\n\nऔर भाव देखें: ${siteUrl}`
+    };
+    const text = templates[lang] || templates.en;
+    return 'https://wa.me/?text=' + encodeURIComponent(text);
+  }
+  function selectedDateForShare() {
+    const el = document.getElementById('dateFilter');
+    return (el && el.value) || (typeof todayStr === 'function' ? todayStr() : '');
+  }
+
   /* ================= HOME ================= */
   async function initHome() {
     const el = document.getElementById('homeTicker');
@@ -226,7 +245,7 @@
       const rows = filtered();
       const nl = currentLang();   // crop names follow the site language
       if (!rows.length) {
-        tbody.innerHTML = '<tr><td colspan="10" class="muted">No matching rows</td></tr>';
+        tbody.innerHTML = '<tr><td colspan="11" class="muted">No matching rows</td></tr>';
         return;
       }
       tbody.innerHTML = rows.map(r => {
@@ -241,6 +260,7 @@
           .filter(k => k !== nl && nameMap[k])
           .map(k => nameMap[k])
           .join(' · ');
+        const waHref = buildWhatsAppShareUrl(r, nl, nameMap[nl] || r.en);
         return `<tr>
           <td class="small muted">${selectedDate}</td>
           <td><strong>${nameMap[nl] || r.en}</strong>${others ? `<br><span class="small muted">${others}</span>` : ''}</td>
@@ -252,6 +272,9 @@
           <td class="num">${fmt(r.max)}</td>
           <td class="num"><strong>₹${(r.modal / 100).toFixed(2)}</strong></td>
           <td class="num">${ch}</td>
+          <td class="num"><a class="wa-share-btn" href="${waHref}" target="_blank" rel="noopener" title="${t('share_whatsapp')}" aria-label="${t('share_whatsapp')}">
+            <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M17.5 14.4c-.3-.1-1.7-.9-2-1-.3-.1-.5-.1-.7.1-.2.3-.8 1-.9 1.2-.2.2-.3.2-.6.1-.3-.1-1.2-.5-2.3-1.5-.9-.8-1.4-1.7-1.6-2-.2-.3 0-.5.1-.6.1-.1.3-.3.4-.5.1-.1.2-.3.3-.5.1-.2 0-.4 0-.5C10.1 9 9.6 7.8 9.4 7.3c-.2-.5-.4-.4-.6-.4h-.5c-.2 0-.5.1-.7.3-.2.3-.9.9-.9 2.2s1 2.6 1.1 2.7c.1.2 2 3 4.8 4.2.7.3 1.2.5 1.6.6.7.2 1.3.2 1.8.1.5-.1 1.7-.7 2-1.4.2-.6.2-1.2.2-1.3-.1-.2-.3-.2-.6-.4z"/><path d="M12 2C6.5 2 2 6.5 2 12c0 1.8.5 3.6 1.4 5.1L2 22l5-1.3c1.4.8 3.1 1.2 4.9 1.2 5.5 0 10-4.5 10-10S17.5 2 12 2zm0 18.1c-1.6 0-3.1-.4-4.5-1.2l-.3-.2-3 .8.8-2.9-.2-.3C4 15 3.5 13.5 3.5 12c0-4.7 3.8-8.5 8.5-8.5s8.5 3.8 8.5 8.5-3.8 8.5-8.5 8.5z"/></svg>
+          </a></td>
         </tr>`;
       }).join('');
     }
