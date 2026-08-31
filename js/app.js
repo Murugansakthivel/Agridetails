@@ -558,6 +558,13 @@
     const asOfEl = document.getElementById('damAsOf');
     if (!list || typeof DAM_DETAILS === 'undefined') return;
 
+    const stateSel = document.getElementById('damStateFilter');
+    const districtSel = document.getElementById('damDistrictFilter');
+    const resetBtn = document.getElementById('damResetFilters');
+    const countEl = document.getElementById('damResultCount');
+    let stateFilter = '';
+    let districtFilter = '';
+
     function fillClass(pct) {
       if (pct == null || isNaN(pct)) return '';
       if (pct < 30) return 'dam-critical';
@@ -565,10 +572,42 @@
       return '';
     }
 
+    function districtsForState(sKey) {
+      const items = sKey ? DAM_DETAILS.items.filter(d => d.stateKey === sKey) : DAM_DETAILS.items;
+      return [...new Set(items.map(d => d.districtKey))].sort((a, b) => a.localeCompare(b));
+    }
+
+    function populateStateOptions() {
+      const states = [...new Set(DAM_DETAILS.items.map(d => d.stateKey))].sort((a, b) => a.localeCompare(b));
+      const cur = stateSel.value;
+      stateSel.innerHTML = '<option value="">' + t('dam_filter_state') + ' —</option>' +
+        states.map(s => `<option value="${s}" ${s === cur ? 'selected' : ''}>${s}</option>`).join('');
+    }
+
+    function populateDistrictOptions() {
+      const cur = districtSel.value;
+      const districts = districtsForState(stateFilter);
+      districtSel.innerHTML = '<option value="">' + t('dam_filter_district') + ' —</option>' +
+        districts.map(d => `<option value="${d}" ${d === cur && districts.includes(cur) ? 'selected' : ''}>${d}</option>`).join('');
+      if (!districts.includes(districtFilter)) districtFilter = '';
+    }
+
+    function filtered() {
+      return DAM_DETAILS.items.filter(d =>
+        (!stateFilter || d.stateKey === stateFilter) &&
+        (!districtFilter || d.districtKey === districtFilter));
+    }
+
     function render() {
       const L = currentLang();
       if (asOfEl) asOfEl.textContent = t('dam_as_of') + ' ' + DAM_DETAILS.asOf;
-      list.innerHTML = DAM_DETAILS.items.map(d => {
+      const rows = filtered();
+      if (countEl) countEl.textContent = rows.length + ' / ' + DAM_DETAILS.items.length;
+      if (!rows.length) {
+        list.innerHTML = '<p class="muted">' + t('dam_no_match') + '</p>';
+        return;
+      }
+      list.innerHTML = rows.map(d => {
         const name = d.name[L] || d.name.en;
         const river = d.river[L] || d.river.en;
         const state = d.state[L] || d.state.en;
@@ -605,8 +644,36 @@
         </article>`;
       }).join('');
     }
-    render();
-    document.addEventListener('agri:lang', render);
+
+    function refreshAll() {
+      populateStateOptions();
+      populateDistrictOptions();
+      render();
+    }
+
+    if (stateSel) {
+      stateSel.addEventListener('change', () => {
+        stateFilter = stateSel.value;
+        districtFilter = '';
+        populateDistrictOptions();
+        render();
+      });
+    }
+    if (districtSel) {
+      districtSel.addEventListener('change', () => {
+        districtFilter = districtSel.value;
+        render();
+      });
+    }
+    if (resetBtn) {
+      resetBtn.addEventListener('click', () => {
+        stateFilter = ''; districtFilter = '';
+        refreshAll();
+      });
+    }
+
+    refreshAll();
+    document.addEventListener('agri:lang', refreshAll);
   }
 
   /* ================= ADVISORY ================= */

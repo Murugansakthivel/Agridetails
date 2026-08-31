@@ -58,6 +58,14 @@
 
 <section class="section">
   <div class="container">
+    <div class="controls-bar">
+      <label for="damStateFilter" data-i18n="dam_filter_state">State:</label>
+      <select id="damStateFilter"></select>
+      <label for="damDistrictFilter" data-i18n="dam_filter_district">District:</label>
+      <select id="damDistrictFilter"></select>
+      <button id="damResetFilters" class="cat-tab" type="button" data-i18n="filter_reset">Reset</button>
+      <span class="small muted source-note" id="damResultCount"></span>
+    </div>
     <div id="damList" class="dam-list"></div>
   </div>
 </section>
