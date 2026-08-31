@@ -127,14 +127,28 @@ def parse_dealers(html):
 
 
 def scrape():
+    # The cache only exists to survive a network blip WITHIN a single run
+    # (resume without re-fetching districts already done today). It must
+    # NOT persist across calendar days, or every later run would just see
+    # "already done" for every district and never pick up new stock figures.
     os.makedirs(CACHE_DIR, exist_ok=True)
+    today = datetime.date.today().isoformat()
     result = {}
     if os.path.exists(RAW_CACHE):
         try:
             with open(RAW_CACHE, "r", encoding="utf-8") as f:
-                result = json.load(f)
+                cache_obj = json.load(f)
+            cached_date = cache_obj.get("_scraped_date")
+            if cached_date == today:
+                result = cache_obj.get("data", {})
+            else:
+                print(f"cache is from {cached_date}, not today ({today}) \u2014 starting a fresh scrape")
         except Exception:
             result = {}
+
+    def save_cache():
+        with open(RAW_CACHE, "w", encoding="utf-8") as f:
+            json.dump({"_scraped_date": today, "data": result}, f, ensure_ascii=False)
 
     idx_html = get(f"{BASE}/index/en")
     print("fetched index", len(idx_html) if idx_html else 0)
@@ -165,8 +179,7 @@ def scrape():
             print(dname, "dealers:", len(all_dealers))
         except Exception as e:
             print("ERR district", dname, e, file=sys.stderr)
-        with open(RAW_CACHE, "w", encoding="utf-8") as f:
-            json.dump(result, f, ensure_ascii=False)
+        save_cache()
 
     return result
 
