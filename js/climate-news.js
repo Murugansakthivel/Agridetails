@@ -64,24 +64,24 @@ const CLIMATE_NEWS = {
       severity: 'alert',
       tag: { en: 'Heavy Rain Alert', ta: 'கனமழை எச்சரிக்கை', hi: 'भारी बारिश चेतावनी' },
       en: {
-        title: 'North Coastal Tamil Nadu: heavy rain expected Sept 1-4 from Bay of Bengal system',
-        sum: 'A low-pressure area over the northeast Bay of Bengal is set to bring moderate-to-heavy rain with gusty winds (40-50 kmph) to Chennai, Tiruvallur, Chengalpattu, Kancheepuram, Cuddalore and nearby districts. Western Ghats and Nilgiris districts may see very heavy spells.'
+        title: "Western Tamil Nadu & Ghats: heavy rain, gusty winds likely Sept 1-2",
+        sum: "IMD forecasts heavy rainfall accompanied by gusty winds in Coimbatore, Theni, Tirunelveli districts and hilly areas of Nilgiris on Thursday-Friday (Sept 1-2), driven by weak atmospheric circulation over northern TN coastal areas. Isolated heavy rain may continue in Theni, Tenkasi, Tirunelveli on Saturday. Moderate rain expected across Chennai, northern and interior districts through the weekend."
       },
       ta: {
-        title: 'வட கடலோர தமிழ்நாடு: செப்.1-4 வங்காள விரிகுடா காற்றமுக்கத்தால் கனமழை',
-        sum: 'வடகிழக்கு வங்காள விரிகுடாவில் தாழ்வழுத்த பகுதி காரணமாக சென்னை, திருவள்ளூர், செங்கல்பட்டு, காஞ்சிபுரம், கடலூர் மற்றும் அருகிலுள்ள மாவட்டங்களில் மிதமான முதல் கனமழை மற்றும் பலத்த காற்று (40-50 கிமீ/மணி) எதிர்பார்க்கப்படுகிறது.'
+        title: 'மேற்கு தமிழ்நாடு & மலைப்பகுதிகள்: செப்.1-2 கனமழை, பலத்த காற்று',
+        sum: 'வட தமிழ்நாடு கடலோரப் பகுதிகளில் பலவீனமான வளிமண்டல சுழற்சி காரணமாக கோவை, தேனி, திருநெல்வேலி மாவட்டங்கள் மற்றும் நீலகிரி மலைப்பகுதிகளில் வியாழன்-வெள்ளி (செப்.1-2) கனமழை மற்றும் பலத்த காற்று எதிர்பார்க்கப்படுகிறது. தேனி, தென்காசி, திருநெல்வேலியில் சனிக்கிழமை தனித்தனி இடங்களில் கனமழை தொடரலாம்.'
       },
       hi: {
-        title: 'उत्तर तटीय तमिलनाडु: 1-4 सितंबर बंगाल की खाड़ी तंत्र से भारी बारिश की संभावना',
-        sum: 'उत्तर-पूर्व बंगाल की खाड़ी में निम्न दबाव क्षेत्र के कारण चेन्नई, तिरुवल्लूर, चेंगलपट्टू, कांचीपुरम, कुड्डालोर सहित पड़ोसी ज़िलों में मध्यम से भारी बारिश और तेज़ हवाएं (40-50 किमी/घंटा) होने की संभावना है।'
+        title: 'पश्चिमी तमिलनाडु और घाट: 1-2 सितंबर भारी बारिश, तेज़ हवाएं संभव',
+        sum: 'उत्तरी तमिलनाडु तटीय क्षेत्रों में कमज़ोर वायुमंडलीय परिसंचरण के कारण कोयंबटूर, थेनी, तिरुनेलवेली ज़िलों और नीलगिरि पहाड़ी क्षेत्रों में गुरुवार-शुक्रवार (1-2 सितंबर) भारी बारिश और तेज़ हवाओं का पूर्वानुमान। शनिवार को थेनी, तेनकासी, तिरुनेलवेली में अलग-अलग स्थानों पर भारी बारिश जारी रह सकती है।'
       },
-      affectedCrops: { en: ['Standing paddy (harvest-stage)', 'Vegetables (tomato, beans, brinjal)', 'Banana'], ta: ['அறுவடை நிலையில் நெல்', 'காய்கறிகள் (தக்காளி, பீன்ஸ், கத்தரிக்காய்)', 'வாழை'], hi: ['कटाई-चरण का धान', 'सब्ज़ियां (टमाटर, बीन्स, बैंगन)', 'केला'] },
+      affectedCrops: { en: ['Tea plantations', 'Vegetables (beans, carrot, potato)', 'Banana', 'Turmeric', 'Cardamom'], ta: ['தேயிலை தோட்டங்கள்', 'காய்கறிகள் (பீன்ஸ், கேரட், உருளைக்கிழங்கு)', 'வாழை', 'மஞ்சள்', 'ஏலக்காய்'], hi: ['चाय बागान', 'सब्ज़ियां (बीन्स, गाजर, आलू)', 'केला', 'हल्दी', 'इलायची'] },
       advice: {
-        en: 'If paddy is near harvest, bring the harvest forward where feasible ahead of the rain window to avoid lodging and grain sprouting losses. Ensure field drains are clear to prevent waterlogging in vegetable plots. Delay pesticide/fertilizer spraying until after the rain passes to avoid wash-off and wasted input cost.',
-        ta: 'நெல் அறுவடை நெருங்கியிருந்தால், மழைக்கு முன் முடிந்தால் அறுவடையை முன்கூட்டியே செய்யவும், தானியம் முளைப்பது/சாய்வதை தவிர்க்கவும். காய்கறி தோட்டங்களில் தண்ணீர் தேங்காமல் வடிகால்களை சரி பார்க்கவும். மழைக்குப் பின்பே பூச்சிக்கொல்லி/உரம் தெளிக்கவும்.',
-        hi: 'यदि धान कटाई के करीब है, तो संभव हो तो बारिश से पहले कटाई कर लें ताकि दाना गिरने या अंकुरित होने का नुकसान न हो। सब्ज़ी के खेतों में जलभराव रोकने के लिए नालियां साफ़ रखें। बारिश के बाद ही कीटनाशक/उर्वरक का छिड़काव करें।'
+        en: "In hilly areas, monitor for landslide warnings and avoid steep field work during heavy spells. Ensure proper drainage in tea and cardamom estates to prevent waterlogging. Delay spraying operations until after the rain passes. For vegetable growers in affected districts, harvest ready produce before the rain window to capture current market prices before supply normalizes.",
+        ta: 'மலைப்பகுதிகளில் நிலச்சரிவு எச்சரிக்கைகளை கண்காணித்து, கனமழை பெய்யும் போது செங்குத்தான வயல் வேலைகளை தவிர்க்கவும். தேயிலை மற்றும் ஏலக்காய் தோட்டங்களில் நீர் தேங்காமல் சரியான வடிகால் அமைப்பை உறுதி செய்யவும். மழைக்குப் பிறகு தெளித்தல் நடவடிக்கைகளை செய்யவும். பாதிக்கப்பட்ட மாவட்டங்களில் காய்கறி விவசாயிகள், விநியோகம் இயல்புநிலைக்கு வருவதற்கு முன் தற்போதைய சந்தை விலைகளைப் பெற மழைக்கு முன் தயார் விளைபொருட்களை அறுவடை செய்யவும்.',
+        hi: 'पहाड़ी क्षेत्रों में भूस्खलन चेतावनी की निगरानी करें और भारी बारिश के दौरान खड़ी ढलानों पर खेत का काम टालें। चाय और इलायची बागानों में जलभराव रोकने के लिए उचित जल निकासी सुनिश्चित करें। बारिश बीतने तक छिड़काव कार्य स्थगित करें। प्रभावित ज़िलों में सब्ज़ी उत्पादकों के लिए, आपूर्ति सामान्य होने से पहले वर्तमान बाज़ार मूल्य पाने के लिए बारिश से पहले तैयार उपज की कटाई करें।'
       },
-      date: '30-31 Aug 2026', source: 'https://timesofindia.indiatimes.com/city/chennai/chennai-may-get-moderate-rainfall-and-thunderstorms-next-week/articleshow/133618143.cms', srcName: 'Times of India'
+      date: '31 Aug 2026', source: 'https://ddindia.co.in/2026/08/heavy-rain-gusty-winds-likely-in-parts-of-tamil-nadu-over-next-three-days-imd/', srcName: 'IMD via DD India'
     },
     {
       id: 'koyambedu-price-disruption-2026',
