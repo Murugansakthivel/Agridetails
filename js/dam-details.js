@@ -141,6 +141,20 @@ const DAM_DETAILS = {
       source: 'https://tnagriculture.in/ARS/home/reservoir', srcName: 'tnagriculture.in — WRD'
     },
     {
+      id: 'servalar',
+      name: { en: 'Servalar Dam', ta: 'செர்வலார் அணை', hi: 'सेर्वलार बांध' },
+      river: { en: 'Servalar (Thamirabarani tributary, joins above Papanasam)', ta: 'செர்வலார் (தாமிரபரணி துணை ஆறு, பாபநாசத்திற்கு மேல் இணைகிறது)', hi: 'सेर्वलार (तामिरपरणी सहायक नदी, पापनासम से पहले मिलती है)' },
+      stateKey: 'Tamil Nadu', districtKey: 'Tirunelveli',
+      state: { en: 'Tamil Nadu', ta: 'தமிழ்நாடு', hi: 'तमिलनाडु' },
+      district: { en: 'Tirunelveli (Papanasam)', ta: 'திருநெல்வேலி (பாபநாசம்)', hi: 'तिरुनेलवेली (पापनासम)' },
+      fullLevelFt: 156, currentLevelFt: 102.03,
+      fullCapacity: '1,225 Mcft', currentStorage: '~940 Mcft (est. at 102 ft)',
+      percentFull: 65.4,
+      inflow: '—', outflow: '—',
+      dateAsOf: '1 Aug 2026',
+      source: 'https://thehindu.com/news/cities/Madurai/good-rainfall-in-catchment-areas-of-papanasam-dam/article71295080.ece', srcName: 'The Hindu (Tirunelveli)'
+    },
+    {
       id: 'pechiparai',
       name: { en: 'Pechiparai Dam', ta: 'பேச்சிப்பாறை அணை', hi: 'पेचिपराई बांध' },
       river: { en: 'Kodayar', ta: 'கொடையாறு', hi: 'कोडयार' },
