@@ -21,6 +21,7 @@
     if (document.getElementById('stocksGrid')) initStocksPage();
     if (document.getElementById('climateList')) initClimate();
     if (document.getElementById('damList')) initDams();
+    if (document.getElementById('fertList')) initFertilizer();
   });
 
   function t(key) { return I18N[currentLang()][key] || I18N.en[key] || key; }
@@ -674,6 +675,179 @@
 
     refreshAll();
     document.addEventListener('agri:lang', refreshAll);
+  }
+
+  /* ================= FERTILIZER SHOP DETAILS (TN) ================= */
+  function initFertilizer() {
+    const list = document.getElementById('fertList');
+    const asOfEl = document.getElementById('fertAsOf');
+    const detail = document.getElementById('fertDetail');
+    if (!list || typeof FERTILIZER_SHOPS === 'undefined') return;
+
+    const stateSel = document.getElementById('fertStateFilter');
+    const districtSel = document.getElementById('fertDistrictFilter');
+    const searchBox = document.getElementById('fertSearchBox');
+    const resetBtn = document.getElementById('fertResetFilters');
+    const countEl = document.getElementById('fertResultCount');
+    let districtFilter = '';
+    let searchTerm = '';
+    let activeShopId = null;
+
+    const overrides = (typeof FERTILIZER_SHOP_OVERRIDES !== 'undefined') ? FERTILIZER_SHOP_OVERRIDES : {};
+
+    function allDistrictNames() {
+      return FERTILIZER_SHOPS.districts.map(d => d.district).sort((a, b) => a.localeCompare(b));
+    }
+
+    function populateStateOptions() {
+      // Single-state dataset today (Tamil Nadu) — kept as a real dropdown so
+      // more states can be added later without changing the markup/JS.
+      stateSel.innerHTML = `<option value="${FERTILIZER_SHOPS.state}">${FERTILIZER_SHOPS.state}</option>`;
+      stateSel.value = FERTILIZER_SHOPS.state;
+      stateSel.disabled = true;
+    }
+
+    function populateDistrictOptions() {
+      const cur = districtSel.value;
+      const districts = allDistrictNames();
+      districtSel.innerHTML = '<option value="">' + t('fert_filter_district') + ' —</option>' +
+        districts.map(d => `<option value="${d}" ${d === cur ? 'selected' : ''}>${d}</option>`).join('');
+      if (!districts.includes(districtFilter)) districtFilter = '';
+    }
+
+    function allShopsFlat() {
+      return FERTILIZER_SHOPS.districts.flatMap(d => d.shops.map(s => Object.assign({ district: d.district }, s)));
+    }
+
+    function filtered() {
+      const term = searchTerm.trim().toLowerCase();
+      return allShopsFlat().filter(s =>
+        (!districtFilter || s.district === districtFilter) &&
+        (!term || s.name.toLowerCase().includes(term) || s.phone.includes(term) || s.district.toLowerCase().includes(term)));
+    }
+
+    function shopOverride(id) { return overrides[id] || {}; }
+
+    function renderCard(s) {
+      const ov = shopOverride(s.id);
+      const topProducts = s.products.slice(0, 3)
+        .map(p => `<span class="fert-chip">${p.name.split(' (')[0]} · ${p.stockMT} ${t('fert_stock_mt')}</span>`).join('');
+      const active = s.id === activeShopId ? ' active' : '';
+      return `<article class="fert-card${active}" data-id="${s.id}">
+        <h3>${s.name}</h3>
+        <div class="fert-loc">
+          <span class="dam-loc-chip">📍 ${s.district}</span>
+          ${s.taluk ? `<span class="dam-loc-chip">${s.taluk}</span>` : ''}
+        </div>
+        <div class="fert-phone"><a href="tel:+91${s.phone}">${t('fert_call_btn')} ${s.phone}</a></div>
+        <div class="fert-address small muted">${ov.address ? '📍 ' + ov.address : t('fert_address_unavailable')}</div>
+        <div class="fert-chips">${topProducts || `<span class="small muted">${t('fert_no_stock')}</span>`}</div>
+        <button type="button" class="fert-view-btn" data-id="${s.id}">${t('fert_view_btn')}</button>
+      </article>`;
+    }
+
+    function render() {
+      const L = currentLang();
+      if (asOfEl) asOfEl.textContent = t('fert_as_of') + ' ' + FERTILIZER_SHOPS.asOf;
+      const rows = filtered();
+      if (countEl) countEl.textContent = rows.length + ' / ' + allShopsFlat().length;
+      if (!rows.length) {
+        list.innerHTML = '<p class="muted">' + t('fert_no_match') + '</p>';
+        return;
+      }
+      list.innerHTML = rows.map(renderCard).join('');
+    }
+
+    function renderDetail(s, districtName) {
+      const ov = shopOverride(s.id);
+      const rows = s.products.map(p =>
+        `<div class="fin-row"><span class="fin-label">${p.name}</span><span class="fin-value">${p.stockMT} ${t('fert_stock_mt')}</span></div>`
+      ).join('') || `<p class="small muted">${t('fert_no_stock')}</p>`;
+
+      const pestRows = (ov.pesticides && ov.pesticides.length)
+        ? ov.pesticides.map(p => `<div class="fin-row"><span class="fin-label">${p.name}</span><span class="fin-value">${p.stock}</span></div>`).join('')
+        : `<p class="small muted">${t('fert_pesticide_unavailable')}</p>`;
+
+      detail.innerHTML = `
+        <div class="stock-detail-head">
+          <div>
+            <h2>${s.name}</h2>
+            <p class="small muted">📍 ${districtName}${s.taluk ? ' · ' + s.taluk : ''}</p>
+          </div>
+          <button type="button" class="stock-detail-close" id="fertDetailClose" aria-label="Close">✕</button>
+        </div>
+
+        <div class="fert-detail-meta">
+          <div><span class="dam-stat-label">${t('fert_phone_label')}</span><div class="dam-stat-value"><a href="tel:+91${s.phone}">${s.phone}</a></div></div>
+          <div><span class="dam-stat-label">${t('fert_address_label')}</span><div class="dam-stat-value">${ov.address || t('fert_address_unavailable')}</div></div>
+        </div>
+
+        <h3 class="stock-detail-subhead">${t('fert_stock_label')} (${s.totalStockMT} ${t('fert_stock_mt')})</h3>
+        <div class="fin-grid">${rows}</div>
+
+        <h3 class="stock-detail-subhead">${t('fert_pesticide_label')}</h3>
+        <div class="fin-grid">${pestRows}</div>
+
+        <p class="small muted stocks-disclaimer">${t('fert_updated_daily')}</p>
+        <p class="small muted"><a href="${FERTILIZER_SHOPS.source}" target="_blank" rel="noopener">${t('fert_source_link')}</a> (${FERTILIZER_SHOPS.srcName})</p>
+      `;
+      document.getElementById('fertDetailClose').addEventListener('click', closeDetail);
+      detail.hidden = false;
+      detail.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+
+    function openDetail(id) {
+      const found = FERTILIZER_SHOPS.districts.flatMap(d => d.shops.map(s => ({ s, d: d.district }))).find(x => x.s.id === id);
+      if (!found) return;
+      activeShopId = id;
+      render();
+      renderDetail(found.s, found.d);
+    }
+    function closeDetail() {
+      activeShopId = null;
+      detail.hidden = true;
+      detail.innerHTML = '';
+      render();
+    }
+
+    list.addEventListener('click', ev => {
+      const btn = ev.target.closest('.fert-view-btn');
+      const card = ev.target.closest('.fert-card');
+      if (btn) { openDetail(btn.dataset.id); return; }
+      if (card && !ev.target.closest('a')) openDetail(card.dataset.id);
+    });
+
+    if (districtSel) {
+      districtSel.addEventListener('change', () => {
+        districtFilter = districtSel.value;
+        render();
+      });
+    }
+    if (searchBox) {
+      searchBox.addEventListener('input', () => {
+        searchTerm = searchBox.value;
+        render();
+      });
+    }
+    if (resetBtn) {
+      resetBtn.addEventListener('click', () => {
+        districtFilter = ''; searchTerm = '';
+        if (districtSel) districtSel.value = '';
+        if (searchBox) searchBox.value = '';
+        closeDetail();
+        populateDistrictOptions();
+        render();
+      });
+    }
+
+    populateStateOptions();
+    populateDistrictOptions();
+    render();
+    document.addEventListener('agri:lang', () => {
+      populateDistrictOptions();
+      render();
+      if (activeShopId) openDetail(activeShopId);
+    });
   }
 
   /* ================= ADVISORY ================= */

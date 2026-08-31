@@ -305,6 +305,35 @@ h1, h2, h3, h4 { font-family: var(--font-display); line-height: 1.22; }
 .dam-meta { font-size: .76rem; color: var(--muted); }
 .dam-meta a { color: var(--green-700); font-weight: 700; text-decoration: none; }
 
+/* ---------- Fertilizer Shop Details page ---------- */
+.fert-list { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 1.2rem; }
+.fert-card {
+  background: var(--card); border: 1px solid var(--border); border-top: 5px solid var(--gold-600);
+  border-radius: var(--radius); padding: 1.2rem 1.3rem; box-shadow: var(--shadow); cursor: pointer;
+  transition: transform .15s, box-shadow .15s, border-color .15s;
+}
+.fert-card:hover { transform: translateY(-2px); }
+.fert-card.active { border-color: var(--green-700); background: var(--green-100); }
+.fert-card h3 { font-size: 1.02rem; color: var(--green-900); margin-bottom: .3rem; line-height: 1.3; }
+.fert-loc { display: flex; flex-wrap: wrap; gap: .4rem; margin-bottom: .6rem; }
+.fert-phone { font-size: .88rem; font-weight: 700; margin-bottom: .3rem; }
+.fert-phone a { color: var(--green-700); text-decoration: none; }
+.fert-phone a:hover { text-decoration: underline; }
+.fert-address { margin-bottom: .7rem; }
+.fert-chips { display: flex; flex-wrap: wrap; gap: .35rem; margin-bottom: .9rem; }
+.fert-chip {
+  font-size: .74rem; font-weight: 700; background: var(--gold-soft); border: 1px solid var(--border);
+  border-radius: 999px; padding: .2rem .62rem; color: var(--green-900);
+}
+.fert-view-btn {
+  font-family: inherit; font-size: .84rem; font-weight: 700; cursor: pointer;
+  background: var(--green-700); color: #fff; border: none; border-radius: 10px;
+  padding: .5rem .9rem; width: 100%;
+}
+.fert-view-btn:hover { background: var(--green-900); }
+.fert-detail { margin-top: 1.6rem; padding: 1.6rem; }
+.fert-detail-meta { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: .8rem; margin: .8rem 0 1.2rem; }
+
 /* ---------- Stocks page ---------- */
 .stocks-group-t { font-size: .74rem; font-weight: 800; letter-spacing: .06em; text-transform: uppercase; color: var(--muted); margin: 1.4rem 0 .6rem; }
 .stocks-group-t:first-child { margin-top: .5rem; }

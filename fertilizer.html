@@ -3,16 +3,16 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>India Dam Details — Agridetails</title>
-<meta name="description" content="Major India dam &amp; reservoir details — full level, current level in feet, storage, state &amp; district location, live inflow/outflow, in English, தமிழ் and हिंदी.">
+<title>Tamil Nadu Fertilizer Shop Details — Agridetails</title>
+<meta name="description" content="Tamil Nadu fertilizer shop details by district — dealer name, phone number and live fertilizer stock, sourced daily from the TN Department of Agriculture.">
 <meta property="og:type" content="website">
-<meta property="og:title" content="India Dam Details — Agridetails">
-<meta property="og:description" content="Major India dam & reservoir details — full level, current level in feet, storage, state & district location, live inflow/outflow.">
+<meta property="og:title" content="Tamil Nadu Fertilizer Shop Details — Agridetails">
+<meta property="og:description" content="Fertilizer shop details by district — dealer name, phone number, live stock and address (where confirmed).">
 <meta property="og:image" content="https://murugansakthivel.github.io/Agridetails/icon-512.png">
-<meta property="og:url" content="https://murugansakthivel.github.io/Agridetails/dams.html">
+<meta property="og:url" content="https://murugansakthivel.github.io/Agridetails/fertilizer.html">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="India Dam Details — Agridetails">
-<meta name="twitter:description" content="Major India dam & reservoir details — full level, current level in feet, storage, state & district location, live inflow/outflow.">
+<meta name="twitter:title" content="Tamil Nadu Fertilizer Shop Details — Agridetails">
+<meta name="twitter:description" content="Fertilizer shop details by district — dealer name, phone number, live stock and address (where confirmed).">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700;800&family=Noto+Sans+Tamil:wght@400;500;600;700&family=Noto+Sans+Devanagari:wght@400;500;600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -34,8 +34,8 @@
       <a href="prices.html" data-i18n="nav_prices">Prices</a>
       <a href="news.html" data-i18n="nav_news">News</a>
       <a href="climate.html" class="nav-climate-btn" data-i18n="nav_climate">🌦️ Climate News</a>
-      <a href="dams.html" class="nav-dam-btn active" data-i18n="nav_dam">🏞️ India Dam Details</a>
-      <a href="fertilizer.html" class="nav-fert-btn" data-i18n="nav_Fertilizer">🧪 Fertilizer Details</a>
+      <a href="dams.html" class="nav-dam-btn" data-i18n="nav_dam">🏞️ India Dam Details</a>
+      <a href="fertilizer.html" class="nav-fert-btn active" data-i18n="nav_Fertilizer">🧪 Fertilizer Details</a>
       <a href="stocks.html" class="nav-stocks-btn" data-i18n="nav_stocks">📈 Stocks</a>
       <a href="advisory.html" class="nav-cta" data-i18n="nav_advisory">Crop Doctor</a>
     </nav>
@@ -51,25 +51,28 @@
 <main>
 <section class="page-head">
   <div class="container">
-    <h1 data-i18n="dam_page_title">🏞️ India Dam Details</h1>
-    <p class="muted" id="damAsOf"></p>
-    <p class="small muted" data-i18n="dam_disclaimer">Compiled from CWC's Reservoir Storage Bulletin and state water resource portals (TN Agrisnet, APWRIMS, Odisha Hydromet, Kerala SDMA). Reading dates vary by dam — always confirm with the live source link before acting.</p>
+    <h1 data-i18n="fert_page_title">🧪 Tamil Nadu Fertilizer Shop Details</h1>
+    <p class="muted" id="fertAsOf"></p>
+    <p class="small muted" data-i18n="fert_disclaimer">Dealer name, phone number and live fertilizer stock (tonnes) are pulled daily from the Tamil Nadu Department of Agriculture's Fertilizer Stock Availability portal. That government source does not publish shop addresses or pesticide stock — those show as "Not available" until confirmed by phone and added manually. Always call ahead to confirm current stock before travelling.</p>
   </div>
 </section>
 
 <section class="section">
   <div class="container">
     <div class="controls-bar">
-      <label for="damStateFilter" data-i18n="dam_filter_state">State:</label>
-      <select id="damStateFilter"></select>
-      <label for="damDistrictFilter" data-i18n="dam_filter_district">District:</label>
-      <select id="damDistrictFilter"></select>
-      <button id="damResetFilters" class="cat-tab" type="button" data-i18n="filter_reset">Reset</button>
-      <span class="small muted source-note" id="damResultCount"></span>
+      <label for="fertStateFilter" data-i18n="fert_filter_state">State:</label>
+      <select id="fertStateFilter"></select>
+      <label for="fertDistrictFilter" data-i18n="fert_filter_district">District:</label>
+      <select id="fertDistrictFilter"></select>
+      <input type="search" id="fertSearchBox" placeholder="Search shop / phone…" data-i18n-ph="fert_search_ph">
+      <button id="fertResetFilters" class="cat-tab" type="button" data-i18n="filter_reset">Reset</button>
+      <span class="small muted source-note" id="fertResultCount"></span>
     </div>
-    <div id="damList" class="dam-list"></div>
+    <div id="fertList" class="fert-list"></div>
   </div>
 </section>
+
+<div id="fertDetail" class="fert-detail card" hidden></div>
 </main>
 
 <footer class="site-footer">
@@ -80,7 +83,8 @@
 
 <script src="js/config.js"></script>
 <script src="js/i18n.js"></script>
-<script src="js/dam-details.js"></script>
+<script src="js/fertilizer-shops.js"></script>
+<script src="js/fertilizer-shops-overrides.js"></script>
 <script src="js/app.js"></script>
 </body>
 </html>
