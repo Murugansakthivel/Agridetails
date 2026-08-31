@@ -64,6 +64,12 @@ h1, h2, h3, h4 { font-family: var(--font-display); line-height: 1.22; }
   padding: .5rem 1.05rem; border-radius: 999px; box-shadow: 0 3px 10px rgba(242,174,1,.35);
 }
 .main-nav a.nav-cta:hover { filter: brightness(1.04); color: #3d2e00; }
+.main-nav a.nav-stocks-btn {
+  display: inline-flex; align-items: center; gap: .3rem;
+  background: var(--green-100); color: var(--green-900) !important; font-weight: 700;
+  padding: .4rem .85rem; border-radius: 999px; border: 1.5px solid var(--green-600);
+}
+.main-nav a.nav-stocks-btn:hover { background: var(--green-600); color: #fff !important; }
 .header-actions { display: flex; align-items: center; gap: .55rem; }
 .nav-toggle-btn { display: none; background: none; border: none; font-size: 1.45rem; cursor: pointer; color: var(--green-900); }
 
@@ -226,11 +232,26 @@ h1, h2, h3, h4 { font-family: var(--font-display); line-height: 1.22; }
 .cta-strip h2 { font-size: 1.5rem; margin-bottom: .3rem; }
 .cta-strip p { opacity: .9; font-size: .95rem; }
 
-/* ---------- Prices page ---------- */
-.prices-layout { display: grid; grid-template-columns: 1fr 300px; gap: 1.6rem; align-items: start; }
-@media (max-width: 980px) { .prices-layout { grid-template-columns: 1fr; } }
-.stocks-panel { position: sticky; top: 82px; }
-.stocks-card h3 { font-size: 1.02rem; color: var(--green-900); margin-bottom: .1rem; }
+/* ---------- Agri & Food Stocks modal ---------- */
+body.modal-open { overflow: hidden; }
+.stocks-modal-overlay {
+  display: none; position: fixed; inset: 0; background: rgba(20, 30, 15, .55);
+  z-index: 200; align-items: flex-start; justify-content: center;
+  padding: 6vh 1rem; overflow-y: auto;
+}
+.stocks-modal-overlay.open { display: flex; }
+.stocks-modal {
+  background: var(--card); border-radius: var(--radius); box-shadow: 0 24px 60px rgba(0,0,0,.35);
+  width: 100%; max-width: 420px; padding: 1.5rem; animation: modalIn .18s ease;
+}
+@keyframes modalIn { from { opacity: 0; transform: translateY(-8px) scale(.98); } to { opacity: 1; transform: none; } }
+.stocks-modal-head { display: flex; justify-content: space-between; align-items: flex-start; gap: 1rem; }
+.stocks-modal-head h3 { font-size: 1.08rem; color: var(--green-900); margin: 0; }
+.stocks-modal-close {
+  flex: none; width: 32px; height: 32px; border-radius: 50%; border: none;
+  background: var(--green-100); color: var(--green-900); font-size: 1rem; cursor: pointer;
+}
+.stocks-modal-close:hover { background: var(--green-600); color: #fff; }
 .stocks-group-t { font-size: .74rem; font-weight: 800; letter-spacing: .06em; text-transform: uppercase; color: var(--muted); margin: 1rem 0 .4rem; }
 .stock-row { display: flex; justify-content: space-between; align-items: center; gap: .5rem; padding: .5rem 0; border-bottom: 1px solid var(--border); }
 .stock-row:last-child { border-bottom: none; }

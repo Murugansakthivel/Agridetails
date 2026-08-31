@@ -13,10 +13,12 @@
 
     // language switching is handled by #langSwitch buttons bound in i18n.js
 
+    // Agri & Food Stocks modal (button appears in nav on every page)
+    initStocksModal();
+
     // route by page body content
     if (document.getElementById('homeTicker')) initHome();
     if (document.getElementById('priceTableBody')) initPrices();
-    if (document.getElementById('stocksList')) initStocks();
     if (document.getElementById('newsList')) initNews();
     if (document.getElementById('analyzeBtn')) initAdvisory();
   });
@@ -316,11 +318,16 @@
     document.addEventListener('agri:lang', () => { buildTabs(); populateCropOptions(); render(); renderTrends(); });
   }
 
-  /* ================= AGRI & FOOD STOCKS ================= */
-  function initStocks() {
+  /* ================= AGRI & FOOD STOCKS (modal, opened from nav button) ================= */
+  function initStocksModal() {
+    const btn = document.getElementById('navStocksBtn');
+    const overlay = document.getElementById('stocksModalOverlay');
+    const closeBtn = document.getElementById('stocksModalClose');
     const list = document.getElementById('stocksList');
     const asOfEl = document.getElementById('stocksAsOf');
-    if (!list || typeof AGRI_STOCKS === 'undefined') return;
+    if (!btn || !overlay || !list || typeof AGRI_STOCKS === 'undefined') return;
+
+    let rendered = false;
 
     function groupLabel(g) {
       const L = currentLang();
@@ -346,9 +353,24 @@
         }).join('');
         return `<div class="stocks-group-t">${groupLabel(g)}</div>${rows}`;
       }).join('');
+      rendered = true;
     }
-    render();
-    document.addEventListener('agri:lang', render);
+
+    function openModal() {
+      if (!rendered) render();
+      overlay.classList.add('open');
+      document.body.classList.add('modal-open');
+    }
+    function closeModal() {
+      overlay.classList.remove('open');
+      document.body.classList.remove('modal-open');
+    }
+
+    btn.addEventListener('click', ev => { ev.preventDefault(); openModal(); });
+    closeBtn.addEventListener('click', closeModal);
+    overlay.addEventListener('click', ev => { if (ev.target === overlay) closeModal(); });
+    document.addEventListener('keydown', ev => { if (ev.key === 'Escape') closeModal(); });
+    document.addEventListener('agri:lang', () => { if (rendered) render(); });
   }
 
   /* ================= NEWS ================= */
