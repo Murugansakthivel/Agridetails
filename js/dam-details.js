@@ -377,6 +377,48 @@ const DAM_DETAILS = {
       inflow: '—', outflow: '8 of 98 gates open',
       dateAsOf: '31 Aug 2026',
       source: 'https://jalasoochana-wr.odisha.gov.in/Report/riverMap?mapType=mahanadi', srcName: 'Odisha Hydromet (DoWR)'
+    },
+    {
+      id: 'tungabhadra',
+      name: { en: 'Tungabhadra Dam (Pampa Sagar)', ta: 'துங்கபத்ரா அணை (பம்பா சாகர்)', hi: 'तुंगभद्रा बांध (पम्पा सागर)' },
+      river: { en: 'Tungabhadra (Krishna tributary)', ta: 'துங்கபத்ரா (கிருஷ்ணா துணை ஆறு)', hi: 'तुंगभद्रा (कृष्णा सहायक नदी)' },
+      stateKey: 'Karnataka', districtKey: 'Vijayanagara',
+      state: { en: 'Karnataka', ta: 'கர்நாடகா', hi: 'कर्नाटक' },
+      district: { en: 'Vijayanagara (Hosapete)', ta: 'விஜயநகரா (ஹொசபேட்டை)', hi: 'विजयनगर (होसपेटे)' },
+      fullLevelFt: 1633, currentLevelFt: 1623.68,
+      fullCapacity: '105.788 TMC ft', currentStorage: '72.264 TMC ft',
+      percentFull: 68,
+      inflow: '42,114 cusecs', outflow: '0 cusecs',
+      dateAsOf: '8 Aug 2026',
+      source: 'https://tbboard.gov.in/daily_000/daily_level_list.php', srcName: 'Tungabhadra Board'
+    },
+    {
+      id: 'almatti',
+      name: { en: 'Almatti Dam (Lal Bahadur Shastri Dam)', ta: 'ஆலமட்டி அணை (லால் பகதூர் சாஸ்திரி அணை)', hi: 'आलमट्टी बांध (लाल बहादुर शास्त्री बांध)' },
+      river: { en: 'Krishna', ta: 'கிருஷ்ணா', hi: 'कृष्णा' },
+      stateKey: 'Karnataka', districtKey: 'Vijayapura',
+      state: { en: 'Karnataka', ta: 'கர்நாடகா', hi: 'कर्नाटक' },
+      district: { en: 'Vijayapura / Bagalkote', ta: 'விஜயபுரா / பாகல்கோட்', hi: 'विजयपुरा / बागलकोट' },
+      fullLevelFt: 1702, currentLevelFt: null,
+      fullCapacity: '123.08 TMC ft', currentStorage: '—',
+      percentFull: 86,
+      inflow: '—', outflow: '—',
+      dateAsOf: '8 Aug 2026',
+      source: 'https://kannadatopnews.com/karnataka-dam-water-levels-today', srcName: 'Kannada Top News (Karnataka WRD data)'
+    },
+    {
+      id: 'rihand',
+      name: { en: 'Rihand Dam (Govind Ballabh Pant Sagar)', ta: 'ரிஹண்ட் அணை (கோவிந்த் பல்லப் பந்த் சாகர்)', hi: 'रिहंद बांध (गोविंद बल्लभ पंत सागर)' },
+      river: { en: 'Rihand (Son tributary)', ta: 'ரிஹண்ட் (சோன் துணை ஆறு)', hi: 'रिहंद (सोन सहायक नदी)' },
+      stateKey: 'Uttar Pradesh', districtKey: 'Sonbhadra',
+      state: { en: 'Uttar Pradesh', ta: 'உத்தரப் பிரதேசம்', hi: 'उत्तर प्रदेश' },
+      district: { en: 'Sonbhadra', ta: 'சோன்பத்ரா', hi: 'सोनभद्र' },
+      fullLevelFt: 880, currentLevelFt: 862.3,
+      fullCapacity: '374.3 TMC (10,600 Mcm) gross', currentStorage: '146.6 TMC (4,152 Mcm)',
+      percentFull: 73.5,
+      inflow: '—', outflow: '—',
+      dateAsOf: '27 Aug 2026',
+      source: 'https://reservoirs.earth/india/reservoirs/rihand-govind-ballabh-pant-sagar-in', srcName: 'reservoirs.earth (CWC/NTPC data)'
     }
   ]
 };
