@@ -10,7 +10,7 @@
    js/fertilizer-shops-overrides.js instead — it is never auto-overwritten. */
 const FERTILIZER_SHOPS = {
   "state": "Tamil Nadu",
-  "asOf": "31 Aug 2026",
+  "asOf": "01 Sep 2026",
   "source": "https://tnagriculture.in/ARS/fert_stock_position/index/en",
   "srcName": "Department of Agriculture, Tamil Nadu — Fertilizer Stock Availability Reports",
   "note": "Dealer name, phone number and fertilizer stock (in tonnes) are pulled from the government portal above. The portal does not publish shop addresses or pesticide stock, so those fields are blank until manually confirmed — call the dealer to confirm current stock before travelling.",
