@@ -79,10 +79,6 @@
       <label class="field-label" for="symptomInput" data-i18n="symptoms_label">What do you see?</label>
       <textarea id="symptomInput" rows="3" placeholder="e.g. yellow spots on leaves / இலைகளில் மஞ்சள் புள்ளிகள்"></textarea>
 
-      <label class="field-label" for="phoneInput" data-i18n="phone_label">Mobile number (optional)</label>
-      <input type="tel" id="phoneInput" placeholder="+91 ...">
-      <p class="small muted" data-i18n="phone_note">We'll SMS you the advice summary. Number is never shared.</p>
-
       <button id="analyzeBtn" class="btn btn-primary btn-block" disabled data-i18n="analyze_btn">Get Advice</button>
     </div>
 
@@ -113,7 +109,10 @@
         <h3 data-i18n="prevention_t">Prevention</h3>
         <ul id="preventionList" class="checklist"></ul>
 
+        <a id="advisoryWaShareBtn" class="btn btn-outline btn-sm" href="#" target="_blank" rel="noopener" style="margin-top:.8rem;display:inline-flex" data-i18n="share_whatsapp">📤 Share on WhatsApp</a>
+
         <div class="disclaimer-box small" data-i18n="advisory_disclaimer">⚠️ Advice is compiled from TNAU / CIBRC extension recommendations. Pesticides are poisonous — read the label, wear gloves and mask while spraying, and never spray before harvest within the waiting period. Confirm with your local Krishi Vigyan Kendra (KVK) before large-scale spraying.</div>
+        <p class="small muted" style="margin-top:.5rem">📞 <span data-i18n="doc_kcc_note">Need to talk to someone? Call the Kisan Call Centre (free):</span> <a href="tel:18001801551"><b>1800-180-1551</b></a></p>
       </div>
     </div>
 

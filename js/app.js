@@ -47,6 +47,21 @@
     return (el && el.value) || (typeof todayStr === 'function' ? todayStr() : '');
   }
 
+  /* Build a wa.me share link summarising a Crop Doctor diagnosis, in the
+     current site language. d = ADVISORY_KB entry, lang = 'en'|'ta'|'hi',
+     name = disease name already resolved to that language. */
+  function buildAdvisoryWhatsAppShareUrl(d, lang, name) {
+    const siteUrl = 'https://murugansakthivel.github.io/Agridetails/advisory.html';
+    const pests = d.pesticides.map(p => (lang === 'ta' ? p.ta : p.en) + ' (' + p.dose + ')').join(', ');
+    const templates = {
+      en: `🌿 Crop Doctor diagnosis\n${name}\n\nRecommended: ${pests}\n\n⚠️ Read the label, confirm with your local KVK before spraying.\n\nTry it yourself: ${siteUrl}`,
+      ta: `🌿 பயிர் மருத்துவர் கண்டறிதல்\n${name}\n\nபரிந்துரை: ${pests}\n\n⚠️ லேபிளைப் படிக்கவும், தெளிப்பதற்கு முன் உங்கள் KVK-வுடன் உறுதிப்படுத்தவும்.\n\nநீங்களும் முயற்சிக்க: ${siteUrl}`,
+      hi: `🌿 क्रॉप डॉक्टर निदान\n${name}\n\nसिफ़ारिश: ${pests}\n\n⚠️ लेबल पढ़ें, छिड़काव से पहले अपने KVK से पुष्टि करें।\n\nखुद आज़माएं: ${siteUrl}`
+    };
+    const text = templates[lang] || templates.en;
+    return 'https://wa.me/?text=' + encodeURIComponent(text);
+  }
+
   /* ================= HOME ================= */
   async function initHome() {
     const el = document.getElementById('homeTicker');
@@ -1015,6 +1030,9 @@
 
       document.getElementById('preventionList').innerHTML =
         prevention.map(s => `<li>${s}</li>`).join('');
+
+      const waBtn = document.getElementById('advisoryWaShareBtn');
+      if (waBtn) waBtn.href = buildAdvisoryWhatsAppShareUrl(d, lang, name);
     }
 
     // re-render result on language switch
