@@ -598,18 +598,16 @@
     document.addEventListener('agri:lang', () => { populateDates(); render(); });
   }
 
-  /* ================= INDIA DAM DETAILS ================= */
+  /* ================= TAMIL NADU DAM DETAILS ================= */
   function initDams() {
     const list = document.getElementById('damList');
     const asOfEl = document.getElementById('damAsOf');
 
     if (!list || typeof DAM_DETAILS === 'undefined') return;
 
-    const stateSel = document.getElementById('damStateFilter');
     const districtSel = document.getElementById('damDistrictFilter');
     const resetBtn = document.getElementById('damResetFilters');
     const countEl = document.getElementById('damResultCount');
-    let stateFilter = '';
     let districtFilter = '';
 
     function fillClass(pct) {
@@ -619,30 +617,16 @@
       return '';
     }
 
-    function districtsForState(sKey) {
-      const items = sKey ? DAM_DETAILS.items.filter(d => d.stateKey === sKey) : DAM_DETAILS.items;
-      return [...new Set(items.map(d => d.districtKey))].sort((a, b) => a.localeCompare(b));
-    }
-
-    function populateStateOptions() {
-      const states = [...new Set(DAM_DETAILS.items.map(d => d.stateKey))].sort((a, b) => a.localeCompare(b));
-      const cur = stateSel.value;
-      stateSel.innerHTML = '<option value="">' + t('dam_filter_state') + ' —</option>' +
-        states.map(s => `<option value="${s}" ${s === cur ? 'selected' : ''}>${s}</option>`).join('');
-    }
-
     function populateDistrictOptions() {
       const cur = districtSel.value;
-      const districts = districtsForState(stateFilter);
+      const districts = [...new Set(DAM_DETAILS.items.map(d => d.districtKey))].sort((a, b) => a.localeCompare(b));
       districtSel.innerHTML = '<option value="">' + t('dam_filter_district') + ' —</option>' +
         districts.map(d => `<option value="${d}" ${d === cur && districts.includes(cur) ? 'selected' : ''}>${d}</option>`).join('');
       if (!districts.includes(districtFilter)) districtFilter = '';
     }
 
     function filtered() {
-      return DAM_DETAILS.items.filter(d =>
-        (!stateFilter || d.stateKey === stateFilter) &&
-        (!districtFilter || d.districtKey === districtFilter));
+      return DAM_DETAILS.items.filter(d => !districtFilter || d.districtKey === districtFilter);
     }
 
     function render() {
@@ -693,19 +677,10 @@
     }
 
     function refreshAll() {
-      populateStateOptions();
       populateDistrictOptions();
       render();
     }
 
-    if (stateSel) {
-      stateSel.addEventListener('change', () => {
-        stateFilter = stateSel.value;
-        districtFilter = '';
-        populateDistrictOptions();
-        render();
-      });
-    }
     if (districtSel) {
       districtSel.addEventListener('change', () => {
         districtFilter = districtSel.value;
@@ -714,7 +689,7 @@
     }
     if (resetBtn) {
       resetBtn.addEventListener('click', () => {
-        stateFilter = ''; districtFilter = '';
+        districtFilter = '';
         refreshAll();
       });
     }

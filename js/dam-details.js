@@ -1,16 +1,22 @@
-/* Agridetails — India Dam Details: major reservoirs with full/current level,
-   state & district location, live storage and current inflow/outflow, in
-   English, Tamil and Hindi. Compiled from Central Water Commission (CWC)
-   weekly Reservoir Storage Bulletin, state water resource portals (TN
-   Agrisnet/tnagriculture.in, Odisha Hydromet, Kerala SDMA, AP WRIMS) and
-   reservoirs.earth aggregation. Each entry carries its own "as of" reading
-   date because states report on different cycles — always confirm with the
-   live source link before acting on a flood/irrigation decision.
+/* Agridetails — Tamil Nadu Dam Details: major reservoirs located within
+   Tamil Nadu, with full/current level, district location, live storage and
+   current inflow/outflow, in English, Tamil and Hindi. Compiled from
+   Central Water Commission (CWC) weekly Reservoir Storage Bulletin and
+   Tamil Nadu Water Resources Department portals (TN Agrisnet /
+   tnagriculture.in). Each entry carries its own "as of" reading date since
+   readings are taken on different cycles — always confirm with the live
+   source link before acting on a flood/irrigation decision.
+
+   Scope: Tamil Nadu dams only (site is TN-focused). Dams outside TN,
+   including ones that feed TN river basins from neighbouring states
+   (e.g. Periyar, Parambikulam in Kerala; Krishna Raja Sagar/Kabini in
+   Karnataka), are intentionally excluded — see agridetails-data-pages
+   skill / project decision log.
 
    stateKey/districtKey are plain English canonical values used ONLY for the
-   state/district filter dropdowns on the Dam Details page — the visible
-   state/district text (which may include descriptive/bilingual notes) lives
-   in state{}/district{} as before. */
+   district filter dropdown on the Dam Details page — the visible district
+   text (which may include descriptive/bilingual notes) lives in district{}
+   as before. */
 const DAM_DETAILS = {
   asOf: '1 Sep 2026',
   items: [
@@ -53,20 +59,6 @@ const DAM_DETAILS = {
       fullCapacity: '4,047 Mcft', currentStorage: '1,756 Mcft',
       percentFull: 43.4,
       inflow: '471 cusecs', outflow: '—',
-      dateAsOf: '28 Aug 2026',
-      source: 'https://www.tnagrisnet.tn.gov.in/ARS/home/reservoir', srcName: 'TN Agrisnet — WRD'
-    },
-    {
-      id: 'periyar',
-      name: { en: 'Periyar Dam', ta: 'பெரியார் அணை', hi: 'पेरियार बांध' },
-      river: { en: 'Periyar', ta: 'பெரியார்', hi: 'पेरियार' },
-      stateKey: 'Kerala', districtKey: 'Idukki',
-      state: { en: 'Kerala (feeds Tamil Nadu\u2019s Vaigai basin)', ta: 'கேரளா (தமிழ்நாடு வைகை படுகைக்கு நீர் வழங்குகிறது)', hi: 'केरल (तमिलनाडु के वैगई बेसिन को जल आपूर्ति)' },
-      district: { en: 'Idukki', ta: 'இடுக்கி', hi: 'इडुक्की' },
-      fullLevelFt: 152, currentLevelFt: 122.6,
-      fullCapacity: '10,570 Mcft', currentStorage: '3,143 Mcft',
-      percentFull: 29.7,
-      inflow: '1,151 cusecs', outflow: '800 cusecs',
       dateAsOf: '28 Aug 2026',
       source: 'https://www.tnagrisnet.tn.gov.in/ARS/home/reservoir', srcName: 'TN Agrisnet — WRD'
     },
@@ -197,20 +189,6 @@ const DAM_DETAILS = {
       source: 'https://tnagriculture.in/ARS/home/reservoir', srcName: 'tnagriculture.in — WRD'
     },
     {
-      id: 'parambikulam',
-      name: { en: 'Parambikulam Dam', ta: 'பரம்பிக்குளம் அணை', hi: 'परम्बिकुलम बांध' },
-      river: { en: 'Parambikulam', ta: 'பரம்பிக்குளம்', hi: 'परम्बिकुलम' },
-      stateKey: 'Kerala', districtKey: 'Palakkad',
-      state: { en: 'Kerala (operated by Tamil Nadu — Parambikulam-Aliyar Project)', ta: 'கேரளா (பரம்பிக்குளம்-ஆலியாறு திட்டம் — தமிழ்நாடு நிர்வகிக்கிறது)', hi: 'केरल (परम्बिकुलम-अलियार परियोजना — तमिलनाडु द्वारा संचालित)' },
-      district: { en: 'Palakkad', ta: 'பாலக்காடு', hi: 'पालक्काड' },
-      fullLevelFt: 72, currentLevelFt: 46.02,
-      fullCapacity: '13,454 Mcft', currentStorage: '7,874 Mcft',
-      percentFull: 58.5,
-      inflow: '1,203 cusecs', outflow: '39 cusecs',
-      dateAsOf: '31 Aug 2026',
-      source: 'https://tnagriculture.in/ARS/home/reservoir', srcName: 'tnagriculture.in — WRD'
-    },
-    {
       id: 'aliyar',
       name: { en: 'Aliyar Dam', ta: 'ஆலியாறு அணை', hi: 'अलियार बांध' },
       river: { en: 'Aliyar', ta: 'ஆலியாறு', hi: 'अलियार' },
@@ -237,356 +215,6 @@ const DAM_DETAILS = {
       inflow: '21 cusecs', outflow: '—',
       dateAsOf: '31 Aug 2026',
       source: 'https://tnagriculture.in/ARS/home/reservoir', srcName: 'tnagriculture.in — WRD'
-    },
-    {
-      id: 'idukki',
-      name: { en: 'Idukki Dam', ta: 'இடுக்கி அணை', hi: 'इडुक्की बांध' },
-      river: { en: 'Periyar', ta: 'பெரியார்', hi: 'पेरियार' },
-      stateKey: 'Kerala', districtKey: 'Idukki',
-      state: { en: 'Kerala', ta: 'கேரளா', hi: 'केरल' },
-      district: { en: 'Idukki', ta: 'இடுக்கி', hi: 'इडुक्की' },
-      fullLevelFt: 2403, currentLevelFt: null,
-      fullCapacity: '70.5 TMC ft (1,996 Mcm)', currentStorage: '43.5 TMC ft (1,231 Mcm)',
-      percentFull: 61.7,
-      inflow: '—', outflow: '—',
-      dateAsOf: '28 Aug 2026',
-      source: 'https://reservoirs.earth/india/reservoirs/idukki-in', srcName: 'reservoirs.earth (CWC data)'
-    },
-    {
-      id: 'krs',
-      name: { en: 'Krishna Raja Sagar (KRS) Dam', ta: 'கிருஷ்ணராஜ சாகர் (KRS) அணை', hi: 'कृष्ण राजा सागर (केआरएस) बांध' },
-      river: { en: 'Cauvery', ta: 'காவேரி', hi: 'कावेरी' },
-      stateKey: 'Karnataka', districtKey: 'Mandya',
-      state: { en: 'Karnataka', ta: 'கர்நாடகா', hi: 'कर्नाटक' },
-      district: { en: 'Mandya', ta: 'மாண்டியா', hi: 'मांड्या' },
-      fullLevelFt: 124.8, currentLevelFt: 108.63,
-      fullCapacity: '49,452 Mcft', currentStorage: '30,366 Mcft',
-      percentFull: 61.4,
-      inflow: '9,438 cusecs', outflow: '4,478 cusecs',
-      dateAsOf: '28 Aug 2026',
-      source: 'https://www.tnagrisnet.tn.gov.in/ARS/home/reservoir', srcName: 'TN Agrisnet (cross-border Cauvery data)'
-    },
-    {
-      id: 'kabini',
-      name: { en: 'Kabini Dam', ta: 'காபினி அணை', hi: 'कबिनी बांध' },
-      river: { en: 'Kabini', ta: 'காபினி', hi: 'कबिनी' },
-      stateKey: 'Karnataka', districtKey: 'Mysuru',
-      state: { en: 'Karnataka', ta: 'கர்நாடகா', hi: 'कर्नाटक' },
-      district: { en: 'Mysuru', ta: 'மைசூர்', hi: 'मैसूर' },
-      fullLevelFt: 65, currentLevelFt: 53.79,
-      fullCapacity: '19,516 Mcft', currentStorage: '13,092 Mcft',
-      percentFull: 67.1,
-      inflow: '9,487 cusecs', outflow: '7,760 cusecs',
-      dateAsOf: '28 Aug 2026',
-      source: 'https://www.tnagrisnet.tn.gov.in/ARS/home/reservoir', srcName: 'TN Agrisnet (cross-border Cauvery data)'
-    },
-    {
-      id: 'harangi',
-      name: { en: 'Harangi Dam', ta: 'ஹரங்கி அணை', hi: 'हरंगी बांध' },
-      river: { en: 'Harangi (Cauvery tributary)', ta: 'ஹரங்கி (காவேரி துணை ஆறு)', hi: 'हरंगी (कावेरी सहायक नदी)' },
-      stateKey: 'Karnataka', districtKey: 'Kodagu',
-      state: { en: 'Karnataka', ta: 'கர்நாடகா', hi: 'कर्नाटक' },
-      district: { en: 'Kodagu', ta: 'கொடகு', hi: 'कोडगु' },
-      fullLevelFt: 129, currentLevelFt: 128.33,
-      fullCapacity: '8,500 Mcft', currentStorage: '8,273 Mcft',
-      percentFull: 97.3,
-      inflow: '5,947 cusecs', outflow: '6,383 cusecs',
-      dateAsOf: '28 Aug 2026',
-      source: 'https://www.tnagrisnet.tn.gov.in/ARS/home/reservoir', srcName: 'TN Agrisnet (cross-border Cauvery data)'
-    },
-    {
-      id: 'hemavathy',
-      name: { en: 'Hemavathy Dam', ta: 'ஹேமாவதி அணை', hi: 'हेमावती बांध' },
-      river: { en: 'Hemavathi (Cauvery tributary)', ta: 'ஹேமாவதி (காவேரி துணை ஆறு)', hi: 'हेमावती (कावेरी सहायक नदी)' },
-      stateKey: 'Karnataka', districtKey: 'Hassan',
-      state: { en: 'Karnataka', ta: 'கர்நாடகா', hi: 'कर्नाटक' },
-      district: { en: 'Hassan', ta: 'ஹாசன்', hi: 'हासन' },
-      fullLevelFt: 117, currentLevelFt: 109.64,
-      fullCapacity: '37,103 Mcft', currentStorage: '30,381 Mcft',
-      percentFull: 81.9,
-      inflow: '3,588 cusecs', outflow: '5,500 cusecs',
-      dateAsOf: '28 Aug 2026',
-      source: 'https://www.tnagrisnet.tn.gov.in/ARS/home/reservoir', srcName: 'TN Agrisnet (cross-border Cauvery data)'
-    },
-    {
-      id: 'srisailam',
-      name: { en: 'Srisailam Dam', ta: 'ஸ்ரீசைலம் அணை', hi: 'श्रीशैलम बांध' },
-      river: { en: 'Krishna', ta: 'கிருஷ்ணா', hi: 'कृष्णा' },
-      stateKey: 'Andhra Pradesh', districtKey: 'Nandyal',
-      state: { en: 'Andhra Pradesh / Telangana border', ta: 'ஆந்திரப் பிரதேசம் / தெலங்கானா எல்லை', hi: 'आंध्र प्रदेश / तेलंगाना सीमा' },
-      district: { en: 'Nandyal (AP) / Nagarkurnool (Telangana)', ta: 'நந்தியால் (ஆ.பி.) / நாகர்கர்னூல் (தெலங்கானா)', hi: 'नंद्याल (आं.प्र.) / नागरकुरनूल (तेलंगाना)' },
-      fullLevelFt: 885, currentLevelFt: 863.9,
-      fullCapacity: '~215.8 TMC ft (live)', currentStorage: '118.62 TMC ft',
-      percentFull: 55,
-      inflow: '2,45,183 cusecs (from Jurala)', outflow: '—',
-      dateAsOf: '5 Aug 2026',
-      source: 'https://apwrims.ap.gov.in/mis/reservoir/summary', srcName: 'APWRIMS'
-    },
-    {
-      id: 'nagarjunasagar',
-      name: { en: 'Nagarjuna Sagar Dam', ta: 'நாகார்ஜுன சாகர் அணை', hi: 'नागार्जुन सागर बांध' },
-      river: { en: 'Krishna', ta: 'கிருஷ்ணா', hi: 'कृष्णा' },
-      stateKey: 'Telangana', districtKey: 'Nalgonda',
-      state: { en: 'Telangana / Andhra Pradesh border', ta: 'தெலங்கானா / ஆந்திரப் பிரதேசம் எல்லை', hi: 'तेलंगाना / आंध्र प्रदेश सीमा' },
-      district: { en: 'Nalgonda (Telangana) / Palnadu (AP)', ta: 'நல்கொண்டா (தெலங்கானா) / பால்நாடு (ஆ.பி.)', hi: 'नलगोंडा (तेलंगाना) / पालनाडु (आं.प्र.)' },
-      fullLevelFt: null, currentLevelFt: null,
-      fullCapacity: '537.60 TMC ft', currentStorage: '312.05 TMC ft',
-      percentFull: 58.76,
-      inflow: '—', outflow: '—',
-      dateAsOf: '29 Aug 2026',
-      source: 'https://apwrims.ap.gov.in/mis/reservoir/summary', srcName: 'APWRIMS'
-    },
-    {
-      id: 'bhakra',
-      name: { en: 'Bhakra Dam (Gobind Sagar)', ta: 'பாக்ரா அணை (கோவிந்த் சாகர்)', hi: 'भाखड़ा बांध (गोविंद सागर)' },
-      river: { en: 'Sutlej', ta: 'சட்லெஜ்', hi: 'सतलुज' },
-      stateKey: 'Himachal Pradesh', districtKey: 'Bilaspur',
-      state: { en: 'Himachal Pradesh', ta: 'இமாசலப் பிரதேசம்', hi: 'हिमाचल प्रदेश' },
-      district: { en: 'Bilaspur', ta: 'பிலாஸ்பூர்', hi: 'बिलासपुर' },
-      fullLevelFt: null, currentLevelFt: null,
-      fullCapacity: '9,868 Mcm (gross)', currentStorage: '3,356 Mcm (~118.5 TMC)',
-      percentFull: 53.9,
-      inflow: '—', outflow: '—',
-      dateAsOf: '20 Aug 2026',
-      source: 'https://reservoirs.earth/the-reservoir/bhakra-dam-water-level-august-2026', srcName: 'reservoirs.earth (BBMB/CWC data)'
-    },
-    {
-      id: 'indirasagar',
-      name: { en: 'Indira Sagar Dam', ta: 'இந்திரா சாகர் அணை', hi: 'इंदिरा सागर बांध' },
-      river: { en: 'Narmada', ta: 'நர்மதை', hi: 'नर्मदा' },
-      stateKey: 'Madhya Pradesh', districtKey: 'Khandwa',
-      state: { en: 'Madhya Pradesh', ta: 'மத்தியப் பிரதேசம்', hi: 'मध्य प्रदेश' },
-      district: { en: 'Khandwa', ta: 'காண்ட்வா', hi: 'खंडवा' },
-      fullLevelFt: null, currentLevelFt: null,
-      fullCapacity: 'India\u2019s largest reservoir by capacity', currentStorage: '—',
-      percentFull: 31.5,
-      inflow: '—', outflow: '—',
-      dateAsOf: '6 Aug 2026',
-      source: 'https://reservoirs.earth/the-reservoir/madhya-pradesh-reservoir-levels-august-2026', srcName: 'reservoirs.earth (CWC data)'
-    },
-    {
-      id: 'hirakud',
-      name: { en: 'Hirakud Dam', ta: 'ஹிராகுட் அணை', hi: 'हीराकुंड बांध' },
-      river: { en: 'Mahanadi', ta: 'மகாநதி', hi: 'महानदी' },
-      stateKey: 'Odisha', districtKey: 'Sambalpur',
-      state: { en: 'Odisha', ta: 'ஒடிசா', hi: 'ओडिशा' },
-      district: { en: 'Sambalpur', ta: 'சம்பல்பூர்', hi: 'सम्बलपुर' },
-      fullLevelFt: 630, currentLevelFt: 625,
-      fullCapacity: '8.136 Mcm live storage', currentStorage: '79.87% of live storage',
-      percentFull: 79.87,
-      inflow: '—', outflow: '8 of 98 gates open',
-      dateAsOf: '31 Aug 2026',
-      source: 'https://jalasoochana-wr.odisha.gov.in/Report/riverMap?mapType=mahanadi', srcName: 'Odisha Hydromet (DoWR)'
-    },
-    {
-      id: 'tungabhadra',
-      name: { en: 'Tungabhadra Dam (Pampa Sagar)', ta: 'துங்கபத்ரா அணை (பம்பா சாகர்)', hi: 'तुंगभद्रा बांध (पम्पा सागर)' },
-      river: { en: 'Tungabhadra (Krishna tributary)', ta: 'துங்கபத்ரா (கிருஷ்ணா துணை ஆறு)', hi: 'तुंगभद्रा (कृष्णा सहायक नदी)' },
-      stateKey: 'Karnataka', districtKey: 'Vijayanagara',
-      state: { en: 'Karnataka', ta: 'கர்நாடகா', hi: 'कर्नाटक' },
-      district: { en: 'Vijayanagara (Hosapete)', ta: 'விஜயநகரா (ஹொசபேட்டை)', hi: 'विजयनगर (होसपेटे)' },
-      fullLevelFt: 1633, currentLevelFt: 1623.68,
-      fullCapacity: '105.788 TMC ft', currentStorage: '72.264 TMC ft',
-      percentFull: 68,
-      inflow: '42,114 cusecs', outflow: '0 cusecs',
-      dateAsOf: '8 Aug 2026',
-      source: 'https://tbboard.gov.in/daily_000/daily_level_list.php', srcName: 'Tungabhadra Board'
-    },
-    {
-      id: 'almatti',
-      name: { en: 'Almatti Dam (Lal Bahadur Shastri Dam)', ta: 'ஆலமட்டி அணை (லால் பகதூர் சாஸ்திரி அணை)', hi: 'आलमट्टी बांध (लाल बहादुर शास्त्री बांध)' },
-      river: { en: 'Krishna', ta: 'கிருஷ்ணா', hi: 'कृष्णा' },
-      stateKey: 'Karnataka', districtKey: 'Vijayapura',
-      state: { en: 'Karnataka', ta: 'கர்நாடகா', hi: 'कर्नाटक' },
-      district: { en: 'Vijayapura / Bagalkote', ta: 'விஜயபுரா / பாகல்கோட்', hi: 'विजयपुरा / बागलकोट' },
-      fullLevelFt: 1702, currentLevelFt: null,
-      fullCapacity: '123.08 TMC ft', currentStorage: '—',
-      percentFull: 86,
-      inflow: '—', outflow: '—',
-      dateAsOf: '8 Aug 2026',
-      source: 'https://kannadatopnews.com/karnataka-dam-water-levels-today', srcName: 'Kannada Top News (Karnataka WRD data)'
-    },
-    {
-      id: 'rihand',
-      name: { en: 'Rihand Dam (Govind Ballabh Pant Sagar)', ta: 'ரிஹண்ட் அணை (கோவிந்த் பல்லப் பந்த் சாகர்)', hi: 'रिहंद बांध (गोविंद बल्लभ पंत सागर)' },
-      river: { en: 'Rihand (Son tributary)', ta: 'ரிஹண்ட் (சோன் துணை ஆறு)', hi: 'रिहंद (सोन सहायक नदी)' },
-      stateKey: 'Uttar Pradesh', districtKey: 'Sonbhadra',
-      state: { en: 'Uttar Pradesh', ta: 'உத்தரப் பிரதேசம்', hi: 'उत्तर प्रदेश' },
-      district: { en: 'Sonbhadra', ta: 'சோன்பத்ரா', hi: 'सोनभद्र' },
-      fullLevelFt: 880, currentLevelFt: 862.3,
-      fullCapacity: '374.3 TMC (10,600 Mcm) gross', currentStorage: '146.6 TMC (4,152 Mcm)',
-      percentFull: 73.5,
-      inflow: '—', outflow: '—',
-      dateAsOf: '27 Aug 2026',
-      source: 'https://reservoirs.earth/india/reservoirs/rihand-govind-ballabh-pant-sagar-in', srcName: 'reservoirs.earth (CWC/NTPC data)'
-    },
-    {
-      id: 'sardarsarovar',
-      name: { en: 'Sardar Sarovar Dam', ta: 'சர்தார் சரோவர் அணை', hi: 'सरदार सरोवर बांध' },
-      river: { en: 'Narmada', ta: 'நர்மதை', hi: 'नर्मदा' },
-      stateKey: 'Gujarat', districtKey: 'Narmada',
-      state: { en: 'Gujarat', ta: 'குஜராத்', hi: 'गुजरात' },
-      district: { en: 'Narmada', ta: 'நர்மதா', hi: 'नर्मदा' },
-      fullLevelFt: 455.0, currentLevelFt: 440.72,
-      fullCapacity: '334.12 TMC gross (9,460 Mcm); live 206.9 TMC (5,860 Mcm)', currentStorage: '~155.4 TMC (4,403.3 Mcm live)',
-      percentFull: 75.1,
-      inflow: '30,453 cusecs (11 Aug reading)', outflow: '622 cusecs (11 Aug reading)',
-      dateAsOf: '27 Aug 2026',
-      source: 'https://ssnnl.gujarat.gov.in/', srcName: 'SSNNL official portal'
-    },
-    {
-      id: 'ukai',
-      name: { en: 'Ukai Dam', ta: 'உக்காய் அணை', hi: 'उकाई बांध' },
-      river: { en: 'Tapi', ta: 'தபி', hi: 'तापी' },
-      stateKey: 'Gujarat', districtKey: 'Tapi',
-      state: { en: 'Gujarat', ta: 'குஜராத்', hi: 'गुजरात' },
-      district: { en: 'Tapi', ta: 'தபி', hi: 'तापी' },
-      fullLevelFt: 345.0, currentLevelFt: 335.36,
-      fullCapacity: '261.8 TMC gross (7,414.29 Mcm); live 237.6 TMC (6,729.9 Mcm)', currentStorage: '~177 TMC (5,015.76 Mcm)',
-      percentFull: 74,
-      inflow: '37,540 cusecs', outflow: '23,120 cusecs',
-      dateAsOf: '14 Aug 2026',
-      source: 'https://timesofindia.indiatimes.com/city/surat/water-in-ukai-nearing-operational-threshold-level/articleshow/133250784.cms', srcName: 'Times of India (Surat)'
-    },
-    {
-      id: 'koyna',
-      name: { en: 'Koyna Dam', ta: 'கோய்னா அணை', hi: 'कोयना बांध' },
-      river: { en: 'Koyna', ta: 'கோய்னா', hi: 'कोयना' },
-      stateKey: 'Maharashtra', districtKey: 'Satara',
-      state: { en: 'Maharashtra', ta: 'மகாராஷ்டிரா', hi: 'महाराष्ट्र' },
-      district: { en: 'Satara', ta: 'சதாரா', hi: 'सातारा' },
-      fullLevelFt: 2163.5, currentLevelFt: 2153.75,
-      fullCapacity: '105.25 TMC gross', currentStorage: '92.70 TMC (88.08% gross); 87.58 TMC live (87.47%)',
-      percentFull: 88.08,
-      inflow: '16,468 cusecs', outflow: '13,894 cusecs (1,050 hydro + 12,844 radial gates)',
-      dateAsOf: '8 Aug 2026',
-      source: 'https://www.esakal.com/satara/koyna-dam-water-storage-92-70-tmc-water-level-inflow-discharge-rainfall-august-8-2026-bam92', srcName: 'eSakal (Satara)'
-    },
-    {
-      id: 'ujjani',
-      name: { en: 'Ujjani Dam (Bhima Dam)', ta: 'உஜ்ஜனி அணை (பீமா அணை)', hi: 'उजनी बांध (भीमा बांध)' },
-      river: { en: 'Bhima', ta: 'பீமா', hi: 'भीमा' },
-      stateKey: 'Maharashtra', districtKey: 'Solapur',
-      state: { en: 'Maharashtra', ta: 'மகாராஷ்டிரா', hi: 'महाराष्ट्र' },
-      district: { en: 'Solapur (Madha; backwater reaches Pune/Ahmednagar)', ta: 'சோலாபூர் (மாதா; பின்நீர் புனே/அகமத்நகர் வரை)', hi: 'सोलापुर (माधा; बैकवाटर पुणे/अहमदनगर तक)' },
-      fullLevelFt: 1630, currentLevelFt: null,
-      fullCapacity: '123.28 TMC gross (3,491.21 Mcm)', currentStorage: '~122.4 TMC (3,466.84 Mcm)',
-      percentFull: 99.3,
-      inflow: '2,725 cusecs', outflow: '0 cusecs spillway (canal releases: ~2,358 + ~913 cusecs)',
-      dateAsOf: '31 Aug 2026',
-      source: 'https://ujjaniscada.com/', srcName: 'Ujjani Dam SCADA official portal'
-    },
-    {
-      id: 'bisalpur',
-      name: { en: 'Bisalpur Dam', ta: 'பிசல்பூர் அணை', hi: 'बीसलपुर बांध' },
-      river: { en: 'Banas', ta: 'பானாஸ்', hi: 'बनास' },
-      stateKey: 'Rajasthan', districtKey: 'Tonk',
-      state: { en: 'Rajasthan', ta: 'ராஜஸ்தான்', hi: 'राजस्थान' },
-      district: { en: 'Tonk', ta: 'டோங்க்', hi: 'टोंक' },
-      fullLevelFt: 1035.1, currentLevelFt: 1030.2,
-      fullCapacity: '38.6 TMC gross (~1,094 Mcm); live ~36.0 TMC', currentStorage: '~28.3–29.0 TMC',
-      percentFull: 76.3,
-      inflow: '~3,800 cusecs (approx, live estimate)', outflow: '~2,400 cusecs (approx, live estimate)',
-      dateAsOf: '29 Aug 2026',
-      source: 'https://www.bhaskar.com/local/rajasthan/tonk/news/bisalpur-dam-water-level-update-rajasthan-news-138733316.html', srcName: 'Dainik Bhaskar'
-    },
-    {
-      id: 'ranapratapsagar',
-      name: { en: 'Rana Pratap Sagar Dam', ta: 'ராணா பிரதாப் சாகர் அணை', hi: 'राणा प्रताप सागर बांध' },
-      river: { en: 'Chambal', ta: 'சாம்பல்', hi: 'चंबल' },
-      stateKey: 'Rajasthan', districtKey: 'Chittorgarh',
-      state: { en: 'Rajasthan', ta: 'ராஜஸ்தான்', hi: 'राजस्थान' },
-      district: { en: 'Chittorgarh (Rawatbhata)', ta: 'சித்தூர்கர் (ராவத்பாட்டா)', hi: 'चित्तौड़गढ़ (रावतभाटा)' },
-      fullLevelFt: 1157.5, currentLevelFt: 1139.36,
-      fullCapacity: '102.5 TMC (2,904.85 Mcm)', currentStorage: '~1,939.9 Mcm (66.76%)',
-      percentFull: 66.76,
-      inflow: '877 cusecs (24 Aug dept reading; later ~9,400 cusecs per live estimate)', outflow: '0 cusecs (24 Aug; later ~7,800 cusecs per live estimate)',
-      dateAsOf: '24 Aug 2026',
-      source: 'https://www.bhaskar.com/local/rajasthan/chittorgarh/rawatbhata/news/rajasthan-rain-catchment-area-rana-pratap-sagar-dam-water-inflow-138390170.html', srcName: 'Dainik Bhaskar (Chittorgarh)'
-    },
-    {
-      id: 'maithon',
-      name: { en: 'Maithon Dam', ta: 'மைத்தான் அணை', hi: 'मैथन बांध' },
-      river: { en: 'Barakar', ta: 'பராகர்', hi: 'बराकर' },
-      stateKey: 'Jharkhand', districtKey: 'Dhanbad',
-      state: { en: 'Jharkhand (dam sits on Jharkhand–West Bengal border)', ta: 'ஜார்க்கண்ட் (ஜார்க்கண்ட்-மேற்கு வங்காள எல்லை)', hi: 'झारखंड (झारखंड–पश्चिम बंगाल सीमा पर)' },
-      district: { en: 'Dhanbad', ta: 'தான்பாத்', hi: 'धनबाद' },
-      fullLevelFt: 495, currentLevelFt: null,
-      fullCapacity: '51.6 TMC gross (1,461 Mcm); live 48.0 TMC (1,359 Mcm)', currentStorage: '13.6 TMC (384 Mcm)',
-      percentFull: 81.5,
-      inflow: '—', outflow: '—',
-      dateAsOf: '27 Aug 2026',
-      source: 'https://reservoirs.earth/india/reservoirs/maithon-in', srcName: 'reservoirs.earth (CWC Weekly Storage Bulletin)'
-    },
-    {
-      id: 'pong',
-      name: { en: 'Pong Dam (Maharana Pratap Sagar)', ta: 'பாங் அணை (மகாராணா பிரதாப் சாகர்)', hi: 'पौंग बांध (महाराणा प्रताप सागर)' },
-      river: { en: 'Beas', ta: 'பியாஸ்', hi: 'ब्यास' },
-      stateKey: 'Himachal Pradesh', districtKey: 'Kangra',
-      state: { en: 'Himachal Pradesh', ta: 'இமாசலப் பிரதேசம்', hi: 'हिमाचल प्रदेश' },
-      district: { en: 'Kangra', ta: 'காங்க்ரா', hi: 'कांगड़ा' },
-      fullLevelFt: 1390, currentLevelFt: 1365.67,
-      fullCapacity: '~203.7 TMC live (inferred from 5.77 BCM)', currentStorage: '4.10 BCM (71% full)',
-      percentFull: 71,
-      inflow: '22,202 cusecs', outflow: '16,500 cusecs',
-      dateAsOf: '27 Aug 2026',
-      source: 'https://www.tribuneindia.com/news/punjab/key-dams-below-2025-levels-as-monsoon-nears-end/', srcName: 'The Tribune (BBMB data)'
-    },
-    {
-      id: 'tehri',
-      name: { en: 'Tehri Dam', ta: 'தேரி அணை', hi: 'टिहरी बांध' },
-      river: { en: 'Bhagirathi', ta: 'பாகீரதி', hi: 'भागीरथी' },
-      stateKey: 'Uttarakhand', districtKey: 'Tehri Garhwal',
-      state: { en: 'Uttarakhand', ta: 'உத்தராகண்ட்', hi: 'उत्तराखंड' },
-      district: { en: 'Tehri Garhwal (New Tehri)', ta: 'தேரி கர்வால் (புது தேரி)', hi: 'टिहरी गढ़वाल (न्यू टिहरी)' },
-      fullLevelFt: 2723.1, currentLevelFt: 2686.1,
-      fullCapacity: '125.0 TMC gross (3,540 Mcm)', currentStorage: '~73.2 TMC (2,073 Mcm)',
-      percentFull: 79.3,
-      inflow: '—', outflow: '19,495 cusecs (via spillway)',
-      dateAsOf: '27 Aug 2026',
-      source: 'https://reservoirs.earth/india/reservoirs/tehri-in', srcName: 'reservoirs.earth (CWC) / Hindustan Times'
-    },
-    {
-      id: 'gangrel',
-      name: { en: 'Gangrel Dam (Ravishankar Sagar)', ta: 'கங்ரெல் அணை (ரவிசங்கர் சாகர்)', hi: 'गंगरेल बांध (रविशंकर सागर)' },
-      river: { en: 'Mahanadi', ta: 'மகாநதி', hi: 'महानदी' },
-      stateKey: 'Chhattisgarh', districtKey: 'Dhamtari',
-      state: { en: 'Chhattisgarh', ta: 'சத்தீஸ்கர்', hi: 'छत्तीसगढ़' },
-      district: { en: 'Dhamtari', ta: 'தம்தாரி', hi: 'धमतरी' },
-      fullLevelFt: 1144.0, currentLevelFt: null,
-      fullCapacity: '32.15 TMC (910.5 Mcm)', currentStorage: '28.917 TMC (~819 Mcm)',
-      percentFull: 89,
-      inflow: '—', outflow: '—',
-      dateAsOf: '23 Aug 2026',
-      source: 'https://www.amarujala.com/chhattisgarh/dhamtari/an-average-rainfall-of-7835-mm-has-been-recorded-in-the-district-gangrel-dam-is-filled-to-nearly-90-percent-of-its-capacity-dhamtari-news-c-1-1-noi1490-4641771-2026-08-23', srcName: 'Amar Ujala (Dhamtari)'
-    },
-    {
-      id: 'bango',
-      name: { en: 'Bango Dam (Minimata Hasdeo Bango)', ta: 'பாங்கோ அணை (மினிமாதா ஹஸ்தேவ் பாங்கோ)', hi: 'बांगो बांध (मिनीमाता हसदेव बांगो)' },
-      river: { en: 'Hasdeo', ta: 'ஹஸ்தேவ்', hi: 'हसदेव' },
-      stateKey: 'Chhattisgarh', districtKey: 'Korba',
-      state: { en: 'Chhattisgarh', ta: 'சத்தீஸ்கர்', hi: 'छत्तीसगढ़' },
-      district: { en: 'Korba', ta: 'கோர்பா', hi: 'कोरबा' },
-      fullLevelFt: 1180.0, currentLevelFt: 1176.8,
-      fullCapacity: '102.2 TMC (2,894 Mcm)', currentStorage: '~96.2 TMC (2,724 Mcm)',
-      percentFull: 94.12,
-      inflow: '— (described only as "heavy" after 174.6mm rainfall)', outflow: '49,828 cusecs (40,828 via 9 radial gates + 9,000 via hydel powerhouse)',
-      dateAsOf: '18 Aug 2026',
-      source: 'https://timesofindia.indiatimes.com/city/raipur/bango-dam-nears-94-capacity-9-gates-opened-amid-heavy-rain/articleshow/133305431.cms', srcName: 'Times of India (Raipur)'
-    },
-    {
-      id: 'doyang',
-      name: { en: 'Doyang Dam', ta: 'டோயாங் அணை', hi: 'डोयांग बांध' },
-      river: { en: 'Doyang', ta: 'டோயாங்', hi: 'डोयांग' },
-      stateKey: 'Nagaland', districtKey: 'Wokha',
-      state: { en: 'Nagaland', ta: 'நாகாலாந்து', hi: 'नागालैंड' },
-      district: { en: 'Wokha', ta: 'வோக்கா', hi: 'वोखा' },
-      fullLevelFt: 1063.0, currentLevelFt: 1057.7,
-      fullCapacity: '18.89 TMC (535 Mcm)', currentStorage: '~12.47 TMC (353 Mcm)',
-      percentFull: 66.0,
-      inflow: '— (68.02 Mcm inflow over 48hrs in earlier July episode)', outflow: '~7,522 cusecs (213 cumecs via 4 spillway gates)',
-      dateAsOf: '5 Aug 2026',
-      source: 'https://newire.in/articles/neepco-regulates-doyang-reservoir-following-heavy-rainfall', srcName: 'NEEPCO via newire.in'
     }
   ]
 };
