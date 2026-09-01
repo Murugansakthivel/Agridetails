@@ -518,16 +518,43 @@
     document.addEventListener('agri:lang', render);
   }
 
-  /* ================= CLIMATE NEWS ================= */
+  /* ================= CLIMATE NEWS (day-wise history) ================= */
   function initClimate() {
     const list = document.getElementById('climateList');
     const asOfEl = document.getElementById('climateAsOf');
+    const dateSel = document.getElementById('climateDateFilter');
+    const dateNote = document.getElementById('climateDateNote');
     if (!list || typeof CLIMATE_NEWS === 'undefined') return;
+
+    // Support both the new { asOf, history:[{date,items}] } shape and the
+    // older { asOf, items:[...] } shape (single implicit snapshot), so a
+    // stale cached file or a cron job mid-migration doesn't break the page.
+    const history = Array.isArray(CLIMATE_NEWS.history) && CLIMATE_NEWS.history.length
+      ? CLIMATE_NEWS.history
+      : [{ date: CLIMATE_NEWS.asOf, items: CLIMATE_NEWS.items || [] }];
+
+    let selectedDate = history[0].date;
+
+    function populateDates() {
+      const cur = dateSel.value;
+      dateSel.innerHTML = history.map(h => `<option value="${h.date}">${h.date}</option>`).join('');
+      dateSel.value = history.some(h => h.date === cur) ? cur : selectedDate;
+    }
 
     function render() {
       const L = currentLang();
       if (asOfEl) asOfEl.textContent = t('climate_as_of') + ' ' + CLIMATE_NEWS.asOf;
-      list.innerHTML = CLIMATE_NEWS.items.map(item => {
+      const snapshot = history.find(h => h.date === selectedDate) || history[0];
+      if (dateNote) {
+        const isLatest = snapshot.date === history[0].date;
+        dateNote.textContent = isLatest ? t('climate_latest_badge') : '';
+      }
+      const items = snapshot.items || [];
+      if (!items.length) {
+        list.innerHTML = `<p class="small muted">${t('climate_no_items')}</p>`;
+        return;
+      }
+      list.innerHTML = items.map(item => {
         const L2 = item[L] || item.en;
         const tag = item.tag[L] || item.tag.en;
         const crops = item.affectedCrops[L] || item.affectedCrops.en;
@@ -549,14 +576,18 @@
         </article>`;
       }).join('');
     }
+
+    populateDates();
     render();
-    document.addEventListener('agri:lang', render);
+    dateSel.addEventListener('change', () => { selectedDate = dateSel.value; render(); });
+    document.addEventListener('agri:lang', () => { populateDates(); render(); });
   }
 
   /* ================= INDIA DAM DETAILS ================= */
   function initDams() {
     const list = document.getElementById('damList');
     const asOfEl = document.getElementById('damAsOf');
+
     if (!list || typeof DAM_DETAILS === 'undefined') return;
 
     const stateSel = document.getElementById('damStateFilter');
