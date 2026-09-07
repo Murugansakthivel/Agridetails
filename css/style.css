@@ -473,6 +473,52 @@ textarea, input[type="tel"] { width: 100%; resize: vertical; }
   padding: .8rem 1rem; border-radius: 8px;
 }
 
+/* ---------- Crop Doctor — structured result sections (advisory.html) ---------- */
+.adv-demo-banner {
+  margin-top: 1rem; background: var(--gold-soft); border: 1.5px solid var(--gold-600);
+  border-radius: 12px; padding: .7rem 1rem; font-size: .84rem; font-weight: 600; color: #6b4d00;
+}
+.adv-section-h {
+  font-size: 1rem; color: var(--green-900); margin: 1.3rem 0 .5rem; padding-top: .9rem;
+  border-top: 1px solid var(--border);
+}
+.result-card > .adv-section-h:first-child { margin-top: 0; padding-top: 0; border-top: none; }
+.adv-health-status {
+  display: inline-block; font-weight: 700; padding: .35rem .85rem; border-radius: 999px;
+  background: var(--green-100); color: var(--green-900);
+}
+.adv-health-status.severe { background: #fbeae7; color: #922b21; }
+.adv-health-status.moderate { background: var(--gold-soft); color: #8a5200; }
+.adv-severity-chip {
+  display: inline-block; font-weight: 700; font-size: .82rem; padding: .3rem .75rem; border-radius: 999px;
+  background: var(--green-100); color: var(--green-900);
+}
+.adv-severity-chip.severe { background: #fbeae7; color: #922b21; }
+.adv-severity-chip.moderate { background: var(--gold-soft); color: #8a5200; }
+.adv-severity-chip.mild { background: var(--lime-soft); color: var(--green-700); }
+.adv-confidence-bar { height: 10px; border-radius: 999px; background: var(--bg); border: 1px solid var(--border); overflow: hidden; margin-top: .3rem; }
+.adv-confidence-bar-inner { height: 100%; border-radius: 999px; background: linear-gradient(90deg, var(--green-600), var(--green-700)); }
+.adv-confidence-bar-inner.low { background: linear-gradient(90deg, #d68910, var(--gold-600)); }
+.adv-treatment-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: .9rem; margin-top: .5rem; }
+.adv-treatment-card {
+  background: var(--bg); border: 1px solid var(--border); border-radius: 12px; padding: .9rem 1rem; font-size: .86rem;
+}
+.adv-treatment-card.organic { border-left: 4px solid var(--green-600); }
+.adv-treatment-card.chemical { border-left: 4px solid var(--gold-600); }
+.adv-treatment-card h4 { font-size: .92rem; color: var(--green-900); margin-bottom: .4rem; }
+.adv-treatment-card p { margin-top: .25rem; line-height: 1.45; }
+.adv-lowconf-box {
+  display: flex; gap: .7rem; align-items: flex-start; background: var(--gold-soft);
+  border: 1.5px solid var(--gold-600); border-radius: 12px; padding: .9rem 1rem; margin: .6rem 0 1rem;
+}
+.adv-lowconf-icon { font-size: 1.3rem; flex: none; }
+.adv-expert-box { background: var(--bg); border: 1px solid var(--border); border-radius: 12px; padding: .9rem 1rem; }
+.adv-expert-actions { display: flex; gap: .6rem; flex-wrap: wrap; margin-top: .6rem; }
+.adv-feedback-box { margin-top: 1.4rem; background: var(--green-100); border-radius: 12px; padding: .9rem 1rem; }
+.adv-feedback-btns { display: flex; gap: .5rem; flex-wrap: wrap; margin-top: .5rem; }
+.adv-feedback-thanks { font-weight: 700; color: var(--green-900); margin: 0; }
+
+
 /* ---------- News ---------- */
 .news-list { display: grid; gap: 1.1rem; }
 .news-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(290px, 1fr)); gap: 1.1rem; }

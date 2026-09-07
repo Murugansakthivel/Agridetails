@@ -53,6 +53,7 @@
   <div class="container">
     <h1 data-i18n="doc_title">Crop Doctor</h1>
     <p class="muted" data-i18n="doc_sub">Take a photo of the problem leaf, fruit or plant. We help you identify the issue and show recommended treatment from government extension sources.</p>
+    <div class="adv-demo-banner" role="note" data-i18n="adv_engine_note">🤖 How this works: Crop Doctor matches your description against a reference pest &amp; disease knowledge base using a simple rule-based keyword match — it does not use a live AI vision model and does not analyse your photo's pixels. Always confirm with your local KVK before acting.</div>
   </div>
 </section>
 
@@ -92,28 +93,7 @@
         </div>
       </div>
 
-      <div class="result-card" id="resultCard" hidden>
-        <div class="match-banner" id="matchBanner"></div>
-        <h2 id="diagnosisTitle"></h2>
-        <p id="diagnosisTa" class="ta-name"></p>
-
-        <h3 data-i18n="symptoms_check_t">Symptoms to confirm</h3>
-        <ul id="symptomList" class="checklist"></ul>
-
-        <h3 data-i18n="treatment_t">Recommended treatment</h3>
-        <table class="pesticide-table">
-          <thead><tr><th data-i18n="th_pesticide">Pesticide</th><th data-i18n="th_dose">Dose per acre</th><th data-i18n="th_wait">Pre-harvest wait</th></tr></thead>
-          <tbody id="pesticideBody"></tbody>
-        </table>
-
-        <h3 data-i18n="prevention_t">Prevention</h3>
-        <ul id="preventionList" class="checklist"></ul>
-
-        <a id="advisoryWaShareBtn" class="btn btn-outline btn-sm" href="#" target="_blank" rel="noopener" style="margin-top:.8rem;display:inline-flex" data-i18n="share_whatsapp">📤 Share on WhatsApp</a>
-
-        <div class="disclaimer-box small" data-i18n="advisory_disclaimer">⚠️ Advice is compiled from TNAU / CIBRC extension recommendations. Pesticides are poisonous — read the label, wear gloves and mask while spraying, and never spray before harvest within the waiting period. Confirm with your local Krishi Vigyan Kendra (KVK) before large-scale spraying.</div>
-        <p class="small muted" style="margin-top:.5rem">📞 <span data-i18n="doc_kcc_note">Need to talk to someone? Call the Kisan Call Centre (free):</span> <a href="tel:18001801551"><b>1800-180-1551</b></a></p>
-      </div>
+      <div class="result-card" id="resultCard" hidden></div>
     </div>
 
   </div>

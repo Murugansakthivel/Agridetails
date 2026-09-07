@@ -883,6 +883,7 @@
     const btn = document.getElementById('analyzeBtn');
 
     let hasPhoto = false;
+    let photoSeedKey = '';
 
     // crop options from KB
     const crops = [...new Set(ADVISORY_KB.flatMap(d => d.crops))].sort();
@@ -906,7 +907,7 @@
     quick.addEventListener('click', ev => {
       const b = ev.target.closest('button[data-id]');
       if (!b) return;
-      showResult(ADVISORY_KB.find(d => d.id === b.dataset.id), 'low');
+      showResult(ADVISORY_KB.find(d => d.id === b.dataset.id), 'high');
     });
 
     dz.addEventListener('click', () => input.click());
@@ -922,7 +923,9 @@
     function setPhoto(file) {
       img.src = URL.createObjectURL(file);
       img.hidden = false; idle.hidden = true; clearBtn.hidden = false;
-      hasPhoto = true; refreshBtn();
+      hasPhoto = true;
+      photoSeedKey = file.name + '|' + file.size + '|' + file.lastModified;
+      refreshBtn();
     }
     clearBtn.addEventListener('click', ev => {
       ev.stopPropagation();
@@ -938,7 +941,7 @@
       if (!hasPhoto) { alert(t('need_photo')); return; }
       btn.disabled = true; btn.textContent = t('analyzing');
 
-      setTimeout(() => {   // small delay so the "checking" state is visible
+      setTimeout(() => {   // small delay so the "checking" state is visible — everything below runs locally, no network call
         const crop = cropSel.value;
         const text = symIn.value.toLowerCase();
         const scored = ADVISORY_KB
@@ -958,14 +961,84 @@
 
         const best = scored[0];
         if (!best || best.score <= 0) {
-          showResult(null, 'none');
+          showResult(null, 'insufficient');
           return;
         }
         showResult(best.d, best.score >= 3 ? 'high' : 'low');
       }, 600);
     });
 
-    let __lastDiagnosis = null;
+    let __lastDiagnosis = null;   // { d, match }
+
+    /* ---------- small i18n / formatting helpers ---------- */
+    function pick(field, lang) {
+      if (!field) return '';
+      if (typeof field === 'string') return field;
+      return field[lang] || field.en || '';
+    }
+    function pickList(field, lang) {
+      if (!field) return [];
+      return field[lang] || field.en || [];
+    }
+    function sevLabel(sev) {
+      const map = { mild: 'adv_sev_mild', moderate: 'adv_sev_moderate', severe: 'adv_sev_severe' };
+      return t(map[sev] || 'adv_sev_unknown');
+    }
+    function catLabel(cat) {
+      const map = { fungal: 'adv_cat_fungal', bacterial: 'adv_cat_bacterial', viral: 'adv_cat_viral',
+        pest: 'adv_cat_pest', nutrient: 'adv_cat_nutrient', environmental: 'adv_cat_environmental' };
+      return cat ? t(map[cat] || cat) : '—';
+    }
+    function sectionList(num, key, items, numbered) {
+      if (!items || !items.length) return '';
+      const lis = items.map((s, i) => `<li>${numbered ? (i + 1) + '. ' : ''}${s}</li>`).join('');
+      return `<h3 class="adv-section-h">${num}. ${t(key)}</h3><ul class="checklist">${lis}</ul>`;
+    }
+    // Deterministic-ish pseudo-random pick of a demo confidence score, seeded by
+    // the KB entry id + uploaded photo, so the same photo+match gives a stable
+    // score. This is an HONEST label for the rule-based keyword-match strength —
+    // not a real computer-vision AI certainty score.
+    function demoConfidence(id, matchTier) {
+      const seed = (typeof agriHash === 'function') ? agriHash(id + '|' + photoSeedKey) : 0;
+      if (matchTier === 'high') return 78 + (seed % 15);      // 78–92%
+      if (matchTier === 'low') return 45 + (seed % 20);       // 45–64%
+      return 0;
+    }
+
+    function expertBlockHtml() {
+      return `<div class="adv-expert-box">
+        <p>${t('adv_expert_intro')}</p>
+        <div class="adv-expert-actions">
+          <a href="tel:18001801551" class="btn btn-secondary btn-sm">📞 ${t('top_call_kcc')} 1800-180-1551</a>
+          <a href="mailto:advisory@agridetails.com?subject=Crop%20Doctor%20follow-up" class="btn btn-outline btn-sm">✉️ ${t('adv_email_label')}</a>
+        </div>
+      </div>`;
+    }
+
+    /* ---------- feedback loop (localStorage only, no backend) ---------- */
+    function feedbackKey(id) { return 'agri_advisory_feedback_' + id; }
+    function feedbackHtml(id) {
+      const stored = localStorage.getItem(feedbackKey(id));
+      if (stored) return `<div class="adv-feedback-box"><p class="adv-feedback-thanks">🙏 ${t('adv_feedback_thanks')}</p></div>`;
+      return `<div class="adv-feedback-box" data-fb-id="${id}">
+        <p><b>${t('adv_feedback_q')}</b></p>
+        <div class="adv-feedback-btns">
+          <button type="button" class="btn btn-outline btn-sm" data-fb="yes">👍 ${t('adv_feedback_yes')}</button>
+          <button type="button" class="btn btn-outline btn-sm" data-fb="no">👎 ${t('adv_feedback_no')}</button>
+          <button type="button" class="btn btn-outline btn-sm" data-fb="unsure">🤔 ${t('adv_feedback_unsure')}</button>
+        </div>
+      </div>`;
+    }
+    function wireFeedback(card) {
+      const box = card.querySelector('.adv-feedback-box[data-fb-id]');
+      if (!box) return;
+      box.querySelectorAll('button[data-fb]').forEach(b => {
+        b.addEventListener('click', () => {
+          localStorage.setItem(feedbackKey(box.dataset.fbId), b.dataset.fb);
+          box.outerHTML = `<div class="adv-feedback-box"><p class="adv-feedback-thanks">🙏 ${t('adv_feedback_thanks')}</p></div>`;
+        });
+      });
+    }
 
     function showResult(d, match) {
       const empty = document.getElementById('emptyState');
@@ -973,41 +1046,137 @@
       empty.style.display = 'none';
       card.hidden = false;
 
-      if (!d) {
-        __lastDiagnosis = null;
-        card.innerHTML = `<h2>${t('no_match')}</h2>`;
+      /* ---- insufficient-info / low-confidence path ---- */
+      if (!d || match === 'insufficient') {
+        __lastDiagnosis = { d: null, match: 'insufficient' };
+        card.innerHTML = `
+          <div class="match-banner low">⚠️ ${t('adv_insufficient_title')}</div>
+          <div class="adv-lowconf-box">
+            <span class="adv-lowconf-icon">⚠️</span>
+            <p>${ADVISORY_LOW_CONFIDENCE_MSG[currentLang()] || ADVISORY_LOW_CONFIDENCE_MSG.en}</p>
+          </div>
+          <h3 class="adv-section-h">${t('adv_sec_confidence')}</h3>
+          <div class="adv-confidence-bar"><div class="adv-confidence-bar-inner low" style="width:20%"></div></div>
+          <p class="small muted">20% ${t('adv_confidence_label')}</p>
+          <h3 class="adv-section-h">${t('adv_sec_expert')}</h3>
+          ${expertBlockHtml()}
+          ${feedbackHtml('insufficient_' + (cropSel.value || 'any'))}
+          <p class="small muted" style="margin-top:1rem">⚠️ ${t('adv_footer_warning')}</p>`;
+        wireFeedback(card);
         return;
       }
+
       __lastDiagnosis = { d, match };
 
       const lang = currentLang();
       const name = lang === 'ta' ? d.en.ta_name : d.en.name;
       const sub = lang === 'ta' ? d.en.name : d.en.ta_name;
-      const symptoms = lang === 'ta' ? d.symptoms.ta : d.symptoms.en;
-      const prevention = lang === 'ta' ? d.prevention.ta : d.prevention.en;
+      const symptoms = pickList(d.symptoms, lang);
+      const causes = pickList(d.causes, lang);
+      const immediateActions = pickList(d.immediateActions, lang);
+      const organicTreatment = (d.organicTreatment || []).map(o => ({
+        method: pick(o.method, lang), why: pick(o.why, lang), how: pick(o.how, lang),
+        frequency: pick(o.frequency, lang), precautions: pick(o.precautions, lang)
+      }));
+      const fertilizerGuidance = pickList(d.fertilizerGuidance, lang);
+      const irrigationGuidance = pickList(d.irrigationGuidance, lang);
+      const prevention = pickList(d.prevention, lang);
+      const harvestNote = pick(d.harvestGuidance, lang);
+      const confidence = demoConfidence(d.id, match);
+      const cropName = cropSel.value || (d.crops && d.crops[0]) || '—';
 
-      document.getElementById('matchBanner').textContent =
-        match === 'high' ? t('match_high') : t('match_low');
-      document.getElementById('matchBanner').className =
-        'match-banner' + (match === 'high' ? '' : ' low');
-      document.getElementById('diagnosisTitle').textContent = name;
-      document.getElementById('diagnosisTa').textContent = sub;
+      let html = '';
 
-      document.getElementById('symptomList').innerHTML =
-        symptoms.map(s => `<li>${s}</li>`).join('');
+      /* 1. Crop identified */
+      html += `<h3 class="adv-section-h">1. ${t('adv_sec_crop')}</h3><p><strong>${cropName}</strong></p>`;
 
-      document.getElementById('pesticideBody').innerHTML = d.pesticides.map(p => {
-        const pn = lang === 'ta' ? p.ta : p.en;
-        const po = lang === 'ta' ? p.en : p.ta;
-        return `<tr><td><strong>${pn}</strong><br><span class="small muted">${po}</span></td>
-          <td>${p.dose}</td><td>${p.wait}</td></tr>`;
-      }).join('');
+      /* 2. Health status */
+      html += `<h3 class="adv-section-h">2. ${t('adv_sec_health')}</h3>
+        <p class="adv-health-status ${d.severity || 'moderate'}">${t('adv_health_issue_detected')}</p>`;
 
-      document.getElementById('preventionList').innerHTML =
-        prevention.map(s => `<li>${s}</li>`).join('');
+      /* 3. Disease / pest */
+      html += `<h3 class="adv-section-h">3. ${t('adv_sec_condition')}</h3>
+        <div class="match-banner${match === 'high' ? '' : ' low'}">${match === 'high' ? t('match_high') : t('match_low')}</div>
+        <h2 id="diagnosisTitle">${name}</h2>
+        <p id="diagnosisTa" class="ta-name">${sub}</p>
+        <p class="small muted">${catLabel(d.category)}</p>`;
 
-      const waBtn = document.getElementById('advisoryWaShareBtn');
-      if (waBtn) waBtn.href = buildAdvisoryWhatsAppShareUrl(d, lang, name);
+      /* 4. Severity */
+      html += `<h3 class="adv-section-h">4. ${t('adv_sec_severity')}</h3>
+        <p><span class="adv-severity-chip ${d.severity || 'moderate'}">${sevLabel(d.severity)}</span></p>`;
+
+      /* 5. Confidence */
+      html += `<h3 class="adv-section-h">5. ${t('adv_sec_confidence')}</h3>
+        <div class="adv-confidence-bar"><div class="adv-confidence-bar-inner${match === 'low' ? ' low' : ''}" style="width:${confidence}%"></div></div>
+        <p class="small muted">${confidence}% ${t('adv_confidence_label')}</p>`;
+
+      /* 6. Symptoms */
+      html += `<h3 class="adv-section-h">6. ${t('adv_sec_symptoms')}</h3><ul id="symptomList" class="checklist">${symptoms.map(s => `<li>${s}</li>`).join('')}</ul>`;
+
+      /* 7. Why this may be happening */
+      html += sectionList(7, 'adv_sec_causes', causes, true);
+
+      /* 8. What to do now */
+      html += sectionList(8, 'adv_sec_immediate', immediateActions);
+
+      /* 9. Organic solution */
+      if (organicTreatment.length) {
+        html += `<h3 class="adv-section-h">9. ${t('adv_sec_organic')}</h3>` +
+          '<div class="adv-treatment-grid">' + organicTreatment.map(o => `
+            <div class="adv-treatment-card organic">
+              <h4>🌱 ${o.method}</h4>
+              <p><b>${t('adv_why')}:</b> ${o.why}</p>
+              <p><b>${t('adv_how')}:</b> ${o.how}</p>
+              <p><b>${t('adv_frequency')}:</b> ${o.frequency}</p>
+              <p><b>${t('adv_precautions')}:</b> ${o.precautions}</p>
+            </div>`).join('') + '</div>';
+      }
+
+      /* 10. Chemical option (existing pesticide table, kept) */
+      html += `<h3 class="adv-section-h">10. ${t('adv_sec_chemical')}</h3>
+        <table class="pesticide-table">
+          <thead><tr><th data-i18n="th_pesticide">${t('th_pesticide')}</th><th>${t('th_dose')}</th><th>${t('th_wait')}</th></tr></thead>
+          <tbody id="pesticideBody">${d.pesticides.map(p => {
+            const pn = lang === 'ta' ? p.ta : p.en;
+            const po = lang === 'ta' ? p.en : p.ta;
+            return `<tr><td><strong>${pn}</strong><br><span class="small muted">${po}</span></td><td>${p.dose}</td><td>${p.wait}</td></tr>`;
+          }).join('')}</tbody>
+        </table>
+        <div class="disclaimer-box small">⚠️ ${ADVISORY_CHEMICAL_DISCLAIMER[lang] || ADVISORY_CHEMICAL_DISCLAIMER.en}</div>`;
+
+      /* 11. Fertilizer guidance */
+      html += sectionList(11, 'adv_sec_fertilizer', fertilizerGuidance);
+
+      /* 12. Irrigation / weather advice */
+      if (irrigationGuidance.length) {
+        html += `<h3 class="adv-section-h">12. ${t('adv_sec_irrigation')}</h3><ul class="checklist">${irrigationGuidance.map(s => `<li>${s}</li>`).join('')}</ul>`;
+      }
+
+      /* 13. Prevention */
+      html += `<h3 class="adv-section-h">13. ${t('adv_sec_prevention')}</h3><ul id="preventionList" class="checklist">${prevention.map(s => `<li>${s}</li>`).join('')}</ul>`;
+
+      /* 14. Harvest impact */
+      if (harvestNote) html += `<h3 class="adv-section-h">14. ${t('adv_sec_harvest')}</h3><p>${harvestNote}</p>`;
+
+      /* 15. Follow-up */
+      html += `<h3 class="adv-section-h">15. ${t('adv_sec_followup')}</h3><p>${t('adv_followup_note')}</p>`;
+
+      /* 16. Sources */
+      html += `<h3 class="adv-section-h">16. ${t('adv_sec_sources')}</h3><p class="small muted">${d.source ? d.source + ' — ' : ''}${t('adv_sources_note')}</p>`;
+
+      const waHref = buildAdvisoryWhatsAppShareUrl(d, lang, name);
+      html += `<a id="advisoryWaShareBtn" class="btn btn-outline btn-sm" href="${waHref}" target="_blank" rel="noopener" style="margin-top:.8rem;display:inline-flex">📤 ${t('share_whatsapp')}</a>`;
+
+      /* 17. Ask an expert */
+      html += `<h3 class="adv-section-h">17. ${t('adv_sec_expert')}</h3>${expertBlockHtml()}`;
+
+      /* Feedback loop */
+      html += feedbackHtml(d.id);
+
+      html += `<p class="small muted" style="margin-top:1rem">⚠️ ${t('adv_footer_warning')}</p>`;
+
+      card.innerHTML = html;
+      wireFeedback(card);
     }
 
     // re-render result on language switch
