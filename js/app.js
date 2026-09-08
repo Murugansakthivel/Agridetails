@@ -15,6 +15,7 @@
 
     // route by page body content
     if (document.getElementById('homeTicker')) initHome();
+    if (document.getElementById('todayDashboard') && typeof window.initHomeDashboard === 'function') window.initHomeDashboard();
     if (document.getElementById('priceTableBody')) initPrices();
     if (document.getElementById('newsList')) initNews();
     if (document.getElementById('analyzeBtn')) initAdvisory();

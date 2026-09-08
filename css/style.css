@@ -49,14 +49,14 @@ h1, h2, h3, h4 { font-family: var(--font-display); line-height: 1.22; }
   border-bottom: 1px solid var(--border);
   position: sticky; top: 0; z-index: 50;
 }
-.header-inner { display: flex; align-items: center; justify-content: space-between; height: 66px; gap: 1rem; }
+.header-inner { display: flex; align-items: center; justify-content: space-between; min-height: 66px; gap: 1rem; flex-wrap: wrap; padding: .5rem 0; }
 .brand { display: flex; align-items: center; gap: .5rem; text-decoration: none; font-family: var(--font-display); font-weight: 700; font-size: 1.28rem; color: var(--green-900); }
 .brand-icon {
   width: 38px; height: 38px; display: inline-flex; align-items: center; justify-content: center;
   background: var(--green-100); border-radius: 12px; font-size: 1.15rem;
 }
 .brand-dot { color: var(--green-600); }
-.main-nav { display: flex; align-items: center; gap: 1.4rem; }
+.main-nav { display: flex; align-items: center; gap: .5rem 1rem; flex-wrap: wrap; row-gap: .6rem; }
 .main-nav a { text-decoration: none; color: var(--text); font-weight: 600; font-size: .93rem; transition: color .15s; }
 .main-nav a:hover { color: var(--green-600); }
 .main-nav a.nav-cta {
@@ -627,6 +627,19 @@ textarea, input[type="tel"] { width: 100%; resize: vertical; }
 .cal-task-date { margin-top: .1rem; }
 .cal-task-delete { background: none; border: none; color: var(--muted); font-size: 1.1rem; cursor: pointer; flex: none; padding: .2rem .5rem; }
 .cal-task-delete:hover { color: #c0392b; }
+
+/* ---------- Home "Today" Dashboard (index.html) ---------- */
+.today-setup-card { padding: 1.4rem; text-align: center; }
+.today-setup-card p { margin: .5rem 0 1rem; }
+.today-card { padding: 1.4rem; }
+.today-card h3 { color: var(--green-900); margin-bottom: 1rem; }
+.today-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1.2rem; }
+.today-block { background: var(--bg); border: 1px solid var(--border); border-radius: 12px; padding: 1rem; }
+.today-block h4 { font-size: .95rem; color: var(--green-900); margin-bottom: .5rem; }
+.today-weather-mini { display: flex; align-items: baseline; gap: .5rem; margin-bottom: .5rem; }
+.today-weather-temp { font-size: 1.6rem; font-weight: 800; color: var(--green-900); }
+.today-task-list { list-style: none; margin-bottom: .5rem; }
+.today-task-list li { padding: .25rem 0; font-size: .9rem; }
 
 
 /* ---------- News ---------- */

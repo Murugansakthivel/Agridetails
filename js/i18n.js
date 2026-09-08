@@ -290,7 +290,22 @@ const I18N = {
     cal_type_sowing: 'Sowing', cal_type_irrigation: 'Irrigation check', cal_type_fertilizer_basal: 'Basal fertilizer application',
     cal_type_weed_control: 'Weed control', cal_type_inspection: 'Crop inspection', cal_type_fertilizer_top: 'Top-dressing fertilizer',
     cal_type_pest_check: 'Pest & disease check', cal_type_irrigation2: 'Irrigation check', cal_type_pre_harvest_check: 'Pre-harvest inspection',
-    cal_type_harvest_window: 'Expected harvest window'
+    cal_type_harvest_window: 'Expected harvest window',
+
+    /* ---------- Home "Today" Dashboard ---------- */
+    today_welcome_t: 'Welcome',
+    today_setup_sub: 'Save your Farm Profile to see a personalized daily view — weather, today\u2019s tasks, and quick Crop Doctor access, all in one place.',
+    today_setup_btn: 'Set up My Farm',
+    today_weather_t: 'Weather',
+    today_weather_unavailable: 'Visit the Weather page to load your local forecast.',
+    today_view_weather: 'View full forecast',
+    today_tasks_t: "Today's Tasks",
+    today_no_tasks: 'No tasks scheduled for today.',
+    today_overdue_suffix: 'overdue task(s)',
+    today_view_calendar: 'View farm calendar',
+    today_doctor_t: 'Crop Doctor',
+    today_doctor_sub: 'Notice a problem on your crop? Get a quick reference diagnosis.',
+    today_doctor_btn: '📷 Start Crop Doctor'
   },
 
   ta: {
@@ -583,7 +598,22 @@ const I18N = {
     cal_type_sowing: 'விதைப்பு', cal_type_irrigation: 'நீர்ப்பாசன சரிபார்ப்பு', cal_type_fertilizer_basal: 'அடிப்படை உரம் இடுதல்',
     cal_type_weed_control: 'களை கட்டுப்பாடு', cal_type_inspection: 'பயிர் ஆய்வு', cal_type_fertilizer_top: 'மேல் உரம் இடுதல்',
     cal_type_pest_check: 'பூச்சி & நோய் சரிபார்ப்பு', cal_type_irrigation2: 'நீர்ப்பாசன சரிபார்ப்பு', cal_type_pre_harvest_check: 'அறுவடைக்கு முந்தைய ஆய்வு',
-    cal_type_harvest_window: 'எதிர்பார்க்கப்படும் அறுவடை காலம்'
+    cal_type_harvest_window: 'எதிர்பார்க்கப்படும் அறுவடை காலம்',
+
+    /* ---------- Home "Today" Dashboard ---------- */
+    today_welcome_t: 'வரவேற்கிறோம்',
+    today_setup_sub: 'வானிலை, இன்றைய பணிகள் மற்றும் விரைவு பயிர் மருத்துவர் அணுகல் அனைத்தையும் ஒரே இடத்தில் தனிப்பயனாக்கப்பட்ட தினசரி காட்சியில் பார்க்க உங்கள் பண்ணை சுயவிவரத்தை சேமிக்கவும்.',
+    today_setup_btn: 'என் பண்ணையை அமைக்கவும்',
+    today_weather_t: 'வானிலை',
+    today_weather_unavailable: 'உங்கள் உள்ளூர் முன்னறிவிப்பை ஏற்ற வானிலை பக்கத்தைப் பார்வையிடவும்.',
+    today_view_weather: 'முழு முன்னறிவிப்பைப் பார்க்கவும்',
+    today_tasks_t: 'இன்றைய பணிகள்',
+    today_no_tasks: 'இன்று திட்டமிடப்பட்ட பணிகள் இல்லை.',
+    today_overdue_suffix: 'தாமதமான பணி(கள்)',
+    today_view_calendar: 'பண்ணை நாள்காட்டியைப் பார்க்கவும்',
+    today_doctor_t: 'பயிர் மருத்துவர்',
+    today_doctor_sub: 'உங்கள் பயிரில் பிரச்சனை உள்ளதா? விரைவு குறிப்பு கண்டறிதலைப் பெறுங்கள்.',
+    today_doctor_btn: '📷 பயிர் மருத்துவரைத் தொடங்கு'
   },
 
   hi: {
@@ -875,7 +905,22 @@ const I18N = {
     cal_type_sowing: 'बुवाई', cal_type_irrigation: 'सिंचाई जांच', cal_type_fertilizer_basal: 'आधार उर्वरक अनुप्रयोग',
     cal_type_weed_control: 'खरपतवार नियंत्रण', cal_type_inspection: 'फसल निरीक्षण', cal_type_fertilizer_top: 'टॉप-ड्रेसिंग उर्वरक',
     cal_type_pest_check: 'कीट और रोग जांच', cal_type_irrigation2: 'सिंचाई जांच', cal_type_pre_harvest_check: 'कटाई-पूर्व निरीक्षण',
-    cal_type_harvest_window: 'अपेक्षित कटाई अवधि'
+    cal_type_harvest_window: 'अपेक्षित कटाई अवधि',
+
+    /* ---------- Home "Today" Dashboard ---------- */
+    today_welcome_t: 'स्वागत है',
+    today_setup_sub: 'मौसम, आज के कार्य और त्वरित फसल डॉक्टर पहुंच को एक ही जगह पर व्यक्तिगत दैनिक दृश्य में देखने के लिए अपनी खेत प्रोफ़ाइल सहेजें।',
+    today_setup_btn: 'मेरा खेत सेट करें',
+    today_weather_t: 'मौसम',
+    today_weather_unavailable: 'अपना स्थानीय पूर्वानुमान लोड करने के लिए मौसम पृष्ठ पर जाएं।',
+    today_view_weather: 'पूर्ण पूर्वानुमान देखें',
+    today_tasks_t: 'आज के कार्य',
+    today_no_tasks: 'आज के लिए कोई कार्य निर्धारित नहीं है।',
+    today_overdue_suffix: 'विलंबित कार्य',
+    today_view_calendar: 'खेत कैलेंडर देखें',
+    today_doctor_t: 'फसल डॉक्टर',
+    today_doctor_sub: 'अपनी फसल में समस्या दिखी? त्वरित संदर्भ निदान प्राप्त करें।',
+    today_doctor_btn: '📷 फसल डॉक्टर शुरू करें'
   }
 };
 
