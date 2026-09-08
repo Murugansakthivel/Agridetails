@@ -3,16 +3,14 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Agri &amp; Food Stocks — Agridetails</title>
-<meta name="description" content="NSE-listed agriculture, food and farm-equipment stocks — prices, 15-day trend, financials and news, in English, தமிழ் and हिंदी.">
+<title>Farm Calendar — Agridetails</title>
+<meta name="description" content="Track sowing, irrigation, fertilizer, pest checks and harvest tasks for your farm. Auto-suggests a task schedule from your Farm Profile.">
 <meta property="og:type" content="website">
-<meta property="og:title" content="Agri & Food Stocks — Agridetails">
-<meta property="og:description" content="NSE-listed agriculture, food and farm-equipment stocks — prices, 15-day trend, financials and news.">
+<meta property="og:title" content="Farm Calendar — Agridetails">
+<meta property="og:description" content="Track sowing, irrigation, fertilizer, pest checks and harvest tasks for your farm.">
 <meta property="og:image" content="https://murugansakthivel.github.io/Agridetails/icon-512.png">
-<meta property="og:url" content="https://murugansakthivel.github.io/Agridetails/stocks.html">
+<meta property="og:url" content="https://murugansakthivel.github.io/Agridetails/calendar.html">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Agri & Food Stocks — Agridetails">
-<meta name="twitter:description" content="NSE-listed agriculture, food and farm-equipment stocks — prices, 15-day trend, financials and news.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700;800&family=Noto+Sans+Tamil:wght@400;500;600;700&family=Noto+Sans+Devanagari:wght@400;500;600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -35,12 +33,12 @@
       <a href="news.html" data-i18n="nav_news">News</a>
       <a href="weather.html" class="nav-weather-btn" data-i18n="nav_weather">⛅ Weather</a>
       <a href="farm.html" class="nav-farm-btn" data-i18n="nav_farm">🚜 My Farm</a>
-      <a href="calendar.html" class="nav-calendar-btn" data-i18n="nav_calendar">🗓️ Farm Calendar</a>
+      <a href="calendar.html" class="nav-calendar-btn active" data-i18n="nav_calendar">🗓️ Farm Calendar</a>
       <a href="schemes.html" class="nav-schemes-btn" data-i18n="nav_schemes">🏛️ Govt Schemes</a>
       <a href="climate.html" class="nav-climate-btn" data-i18n="nav_climate">🌦️ Climate News</a>
       <a href="dams.html" class="nav-dam-btn" data-i18n="nav_dam">🏞️ Tamil Nadu Dam Details</a>
       <a href="fertilizer.html" class="nav-fert-btn" data-i18n="nav_Fertilizer">🧪 Fertilizer Details</a>
-      <a href="stocks.html" class="nav-stocks-btn active" data-i18n="nav_stocks">📈 Stocks</a>
+      <a href="stocks.html" class="nav-stocks-btn" data-i18n="nav_stocks">📈 Agri Stocks</a>
       <a href="advisory.html" class="nav-cta" data-i18n="nav_advisory">Crop Doctor</a>
     </nav>
     <div class="header-actions">
@@ -55,22 +53,44 @@
 <main>
 <section class="page-head">
   <div class="container">
-    <h1 data-i18n="stocks_page_title">🌾 Agri &amp; Food Stocks</h1>
-    <p class="muted" id="stocksAsOf"></p>
-    <p class="small muted stocks-disclaimer" data-i18n="stocks_disclaimer">Snapshot from public NSE/BSE market reports — not a live feed. For live quotes use the NSE India app.</p>
+    <h1 data-i18n="cal_page_title">🗓️ Farm Calendar</h1>
+    <p class="muted" data-i18n="cal_page_sub">Track your farm tasks — sowing, irrigation, fertilizer, pest checks, harvest. Saved only on this device.</p>
   </div>
 </section>
 
 <section class="section">
-  <div class="container">
-    <p class="small muted" data-i18n="stocks_tap_hint">Tap any stock to see its 15-day trend, financials and recent news.</p>
-    <div id="stocksGrid"></div>
+  <div class="container" style="max-width:760px">
 
-    <div class="stock-detail card" id="stockDetail" hidden></div>
+    <div id="calNoProfileNote" class="disclaimer-box" hidden>
+      <span data-i18n="cal_no_profile_note">Save a Farm Profile with crops and a sowing date to auto-generate a suggested task schedule.</span>
+      <a href="farm.html" class="btn btn-sm btn-outline" style="margin-left:.6rem" data-i18n="cal_go_to_farm">Go to My Farm →</a>
+    </div>
 
-    <p class="small muted" style="margin-top:1.5rem">
-      <a href="https://www.nseindia.com" target="_blank" rel="noopener" class="link-arrow" data-i18n="stocks_nse_link">Open NSE India →</a>
-    </p>
+    <div class="controls-bar">
+      <button id="calGenerateBtn" type="button" class="btn btn-sm btn-primary" hidden data-i18n="cal_generate_btn">✨ Suggest tasks from my farm profile</button>
+      <label for="calFilter" data-i18n="cal_filter_label">Show:</label>
+      <select id="calFilter">
+        <option value="upcoming" data-i18n="cal_filter_upcoming">Upcoming</option>
+        <option value="overdue" data-i18n="cal_filter_overdue">Overdue</option>
+        <option value="done" data-i18n="cal_filter_done">Completed</option>
+        <option value="all" data-i18n="cal_filter_all">All</option>
+      </select>
+    </div>
+
+    <form id="calAddForm" class="card cal-add-form">
+      <input type="text" id="calTaskTitle" name="calTaskTitle" placeholder="e.g. Inspect tomato leaves" data-i18n-placeholder="cal_add_placeholder" required>
+      <input type="date" id="calTaskDate" name="calTaskDate" required>
+      <button type="submit" class="btn btn-sm btn-primary" data-i18n="cal_add_btn">+ Add task</button>
+    </form>
+
+    <div id="calEmptyState" class="empty-state" hidden>
+      <span class="dz-icon">🗓️</span>
+      <p data-i18n="cal_empty">No tasks here yet.</p>
+    </div>
+
+    <div id="calTaskList" class="cal-task-list"></div>
+
+    <p class="small muted" style="margin-top:1.5rem" data-i18n="cal_disclaimer">Suggested task timing is a general guide based on common practice, not variety- or field-specific agronomy advice. Always adjust for your crop variety, weather and local Krishi Vigyan Kendra (KVK) guidance.</p>
   </div>
 </section>
 </main>
@@ -83,8 +103,7 @@
 
 <script src="js/config.js"></script>
 <script src="js/i18n.js"></script>
-<script src="js/crops-catalog.js"></script>
-<script src="js/agri-stocks.js"></script>
+<script src="js/farm-calendar.js"></script>
 <script src="js/app.js"></script>
 </body>
 </html>

@@ -540,6 +540,13 @@ textarea, input[type="tel"] { width: 100%; resize: vertical; }
 }
 .main-nav a.nav-schemes-btn:hover { background: #7c5cd6; color: #fff !important; }
 .main-nav a.nav-schemes-btn.active { background: #4b2e91; color: #fff !important; }
+.main-nav a.nav-calendar-btn {
+  display: inline-flex; align-items: center; gap: .3rem;
+  background: #fde8ec; color: #a12457 !important; font-weight: 700;
+  padding: .4rem .85rem; border-radius: 999px; border: 1.5px solid #d6548a;
+}
+.main-nav a.nav-calendar-btn:hover { background: #d6548a; color: #fff !important; }
+.main-nav a.nav-calendar-btn.active { background: #a12457; color: #fff !important; }
 
 /* ---------- Weather module (weather.html) ---------- */
 .wx-status { font-size: .82rem; font-weight: 700; padding: .3rem .7rem; border-radius: 999px; }
@@ -603,6 +610,23 @@ textarea, input[type="tel"] { width: 100%; resize: vertical; }
 .scheme-section p { line-height: 1.5; font-size: .92rem; }
 .scheme-source-link { display: inline-block; margin-top: 1rem; font-size: .84rem; font-weight: 700; color: var(--green-700); text-decoration: none; }
 .scheme-source-link:hover { text-decoration: underline; }
+
+/* ---------- Farm Calendar (calendar.html) ---------- */
+.cal-add-form { display: flex; gap: .6rem; flex-wrap: wrap; align-items: center; padding: 1rem 1.2rem; margin-top: 1rem; }
+.cal-add-form input[type=text] { flex: 2; min-width: 180px; padding: .55rem .8rem; border: 1.5px solid var(--border); border-radius: 10px; font-family: inherit; }
+.cal-add-form input[type=date] { flex: 1; min-width: 140px; padding: .55rem .8rem; border: 1.5px solid var(--border); border-radius: 10px; font-family: inherit; }
+.cal-task-list { display: flex; flex-direction: column; gap: .6rem; margin-top: 1rem; }
+.cal-task-row { display: flex; align-items: center; gap: .8rem; background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: .8rem 1rem; }
+.cal-task-row.overdue { border-left: 4px solid #c0392b; }
+.cal-task-row.done { opacity: .55; }
+.cal-task-row.done .cal-task-title { text-decoration: line-through; }
+.cal-task-check { width: 20px; height: 20px; flex: none; cursor: pointer; }
+.cal-task-icon { font-size: 1.3rem; flex: none; }
+.cal-task-body { flex: 1; min-width: 0; }
+.cal-task-title { font-weight: 700; color: var(--green-900); }
+.cal-task-date { margin-top: .1rem; }
+.cal-task-delete { background: none; border: none; color: var(--muted); font-size: 1.1rem; cursor: pointer; flex: none; padding: .2rem .5rem; }
+.cal-task-delete:hover { color: #c0392b; }
 
 
 /* ---------- News ---------- */

@@ -25,6 +25,7 @@
     if (document.getElementById('wxDistrict') && typeof window.initWeather === 'function') window.initWeather();
     if (document.getElementById('farmProfileForm') && typeof window.initFarmProfile === 'function') window.initFarmProfile();
     if (document.getElementById('schemesList') && typeof window.initSchemes === 'function') window.initSchemes();
+    if (document.getElementById('calTaskList') && typeof window.initFarmCalendar === 'function') window.initFarmCalendar();
   });
 
   function t(key) { return I18N[currentLang()][key] || I18N.en[key] || key; }

@@ -11,6 +11,7 @@ const I18N = {
     nav_Fertilizer: '🧪 Fertilizer Details',
     nav_weather: '⛅ Weather',
     nav_farm: '🚜 My Farm',
+    nav_calendar: '🗓️ Farm Calendar',
     nav_schemes: '🏛️ Govt Schemes',
     climate_page_title: '🌦️ Climate News',
     climate_disclaimer: 'Compiled from IMD, USDA and agricultural press reports — not an official weather warning. Always confirm with mausam.imd.gov.in/chennai before acting on any alert.',
@@ -270,7 +271,26 @@ const I18N = {
     schemes_documents_t: 'Documents needed',
     schemes_how_t: 'How to apply',
     schemes_source_link: 'Official source',
-    schemes_disclaimer: 'Scheme rules, amounts and eligibility change with each budget cycle. This page shows what was verified against the official source as of the date shown on each card — always confirm current details on the official portal or with your local agriculture office before applying.'
+    schemes_disclaimer: 'Scheme rules, amounts and eligibility change with each budget cycle. This page shows what was verified against the official source as of the date shown on each card — always confirm current details on the official portal or with your local agriculture office before applying.',
+
+    /* ---------- Farm Calendar ---------- */
+    cal_page_title: '🗓️ Farm Calendar',
+    cal_page_sub: 'Track your farm tasks — sowing, irrigation, fertilizer, pest checks, harvest. Saved only on this device.',
+    cal_no_profile_note: 'Save a Farm Profile with crops and a sowing date to auto-generate a suggested task schedule.',
+    cal_go_to_farm: 'Go to My Farm →',
+    cal_generate_btn: '✨ Suggest tasks from my farm profile',
+    cal_filter_label: 'Show:',
+    cal_filter_upcoming: 'Upcoming', cal_filter_overdue: 'Overdue', cal_filter_done: 'Completed', cal_filter_all: 'All',
+    cal_add_placeholder: 'e.g. Inspect tomato leaves',
+    cal_add_btn: '+ Add task',
+    cal_empty: 'No tasks here yet.',
+    cal_overdue: 'Overdue',
+    cal_suggested: 'Suggested',
+    cal_disclaimer: 'Suggested task timing is a general guide based on common practice, not variety- or field-specific agronomy advice. Always adjust for your crop variety, weather and local Krishi Vigyan Kendra (KVK) guidance.',
+    cal_type_sowing: 'Sowing', cal_type_irrigation: 'Irrigation check', cal_type_fertilizer_basal: 'Basal fertilizer application',
+    cal_type_weed_control: 'Weed control', cal_type_inspection: 'Crop inspection', cal_type_fertilizer_top: 'Top-dressing fertilizer',
+    cal_type_pest_check: 'Pest & disease check', cal_type_irrigation2: 'Irrigation check', cal_type_pre_harvest_check: 'Pre-harvest inspection',
+    cal_type_harvest_window: 'Expected harvest window'
   },
 
   ta: {
@@ -284,6 +304,7 @@ const I18N = {
     nav_Fertilizer: '🧪 உரக் கடை விவரங்கள்',
     nav_weather: '⛅ வானிலை',
     nav_farm: '🚜 என் பண்ணை',
+    nav_calendar: '🗓️ பண்ணை நாள்காட்டி',
     nav_schemes: '🏛️ அரசு திட்டங்கள்',
     climate_page_title: '🌦️ காலநிலை செய்தி',
     climate_disclaimer: 'IMD, USDA மற்றும் வேளாண் ஊடக அறிக்கைகளிலிருந்து தொகுக்கப்பட்டது — இது அதிகாரப்பூர்வ வானிலை எச்சரிக்கை அல்ல. எந்த எச்சரிக்கையிலும் செயல்படுவதற்கு முன் mausam.imd.gov.in/chennai-இல் உறுதிப்படுத்தவும்.',
@@ -543,7 +564,26 @@ const I18N = {
     schemes_documents_t: 'தேவையான ஆவணங்கள்',
     schemes_how_t: 'விண்ணப்பிக்கும் முறை',
     schemes_source_link: 'அதிகாரப்பூர்வ மூலம்',
-    schemes_disclaimer: 'திட்ட விதிகள், தொகைகள் மற்றும் தகுதி ஒவ்வொரு பட்ஜெட் சுழற்சியிலும் மாறும். இந்தப் பக்கம் ஒவ்வொரு அட்டையிலும் காட்டப்பட்டுள்ள தேதி வரை அதிகாரப்பூர்வ மூலத்திற்கு எதிராக உறுதிப்படுத்தப்பட்டதைக் காட்டுகிறது — விண்ணப்பிக்கும் முன் எப்போதும் அதிகாரப்பூர்வ போர்ட்டல் அல்லது உங்கள் உள்ளூர் வேளாண் அலுவலகத்தில் தற்போதைய விவரங்களை உறுதிப்படுத்தவும்.'
+    schemes_disclaimer: 'திட்ட விதிகள், தொகைகள் மற்றும் தகுதி ஒவ்வொரு பட்ஜெட் சுழற்சியிலும் மாறும். இந்தப் பக்கம் ஒவ்வொரு அட்டையிலும் காட்டப்பட்டுள்ள தேதி வரை அதிகாரப்பூர்வ மூலத்திற்கு எதிராக உறுதிப்படுத்தப்பட்டதைக் காட்டுகிறது — விண்ணப்பிக்கும் முன் எப்போதும் அதிகாரப்பூர்வ போர்ட்டல் அல்லது உங்கள் உள்ளூர் வேளாண் அலுவலகத்தில் தற்போதைய விவரங்களை உறுதிப்படுத்தவும்.',
+
+    /* ---------- Farm Calendar ---------- */
+    cal_page_title: '🗓️ பண்ணை நாள்காட்டி',
+    cal_page_sub: 'உங்கள் பண்ணை பணிகளைக் கண்காணிக்கவும் — விதைப்பு, நீர்ப்பாசனம், உரம், பூச்சி சரிபார்ப்பு, அறுவடை. இந்தச் சாதனத்தில் மட்டுமே சேமிக்கப்படுகிறது.',
+    cal_no_profile_note: 'பரிந்துரைக்கப்பட்ட பணி அட்டவணையை தானாக உருவாக்க, பயிர்கள் மற்றும் விதைப்பு தேதியுடன் ஒரு பண்ணை சுயவிவரத்தை சேமிக்கவும்.',
+    cal_go_to_farm: 'என் பண்ணைக்குச் செல்லவும் →',
+    cal_generate_btn: '✨ என் பண்ணை சுயவிவரத்திலிருந்து பணிகளைப் பரிந்துரைக்கவும்',
+    cal_filter_label: 'காட்டு:',
+    cal_filter_upcoming: 'வரவிருக்கும்', cal_filter_overdue: 'தாமதமானது', cal_filter_done: 'முடிந்தது', cal_filter_all: 'அனைத்தும்',
+    cal_add_placeholder: 'எ.கா. தக்காளி இலைகளை ஆய்வு செய்யவும்',
+    cal_add_btn: '+ பணி சேர்',
+    cal_empty: 'இதுவரை பணிகள் எதுவும் இல்லை.',
+    cal_overdue: 'தாமதமானது',
+    cal_suggested: 'பரிந்துரைக்கப்பட்டது',
+    cal_disclaimer: 'பரிந்துரைக்கப்பட்ட பணி நேரம் பொதுவான நடைமுறையை அடிப்படையாகக் கொண்ட ஒரு பொதுவான வழிகாட்டி, இனம்- அல்லது வயல்-குறிப்பிட்ட வேளாண் ஆலோசனை அல்ல. உங்கள் பயிர் இனம், வானிலை மற்றும் உள்ளூர் KVK வழிகாட்டுதலுக்கு ஏற்ப எப்போதும் சரிசெய்யவும்.',
+    cal_type_sowing: 'விதைப்பு', cal_type_irrigation: 'நீர்ப்பாசன சரிபார்ப்பு', cal_type_fertilizer_basal: 'அடிப்படை உரம் இடுதல்',
+    cal_type_weed_control: 'களை கட்டுப்பாடு', cal_type_inspection: 'பயிர் ஆய்வு', cal_type_fertilizer_top: 'மேல் உரம் இடுதல்',
+    cal_type_pest_check: 'பூச்சி & நோய் சரிபார்ப்பு', cal_type_irrigation2: 'நீர்ப்பாசன சரிபார்ப்பு', cal_type_pre_harvest_check: 'அறுவடைக்கு முந்தைய ஆய்வு',
+    cal_type_harvest_window: 'எதிர்பார்க்கப்படும் அறுவடை காலம்'
   },
 
   hi: {
@@ -557,6 +597,7 @@ const I18N = {
     nav_Fertilizer: '🧪 उर्वरक दुकान विवरण',
     nav_weather: '⛅ मौसम',
     nav_farm: '🚜 मेरा खेत',
+    nav_calendar: '🗓️ खेत कैलेंडर',
     nav_schemes: '🏛️ सरकारी योजनाएं',
     climate_page_title: '🌦️ जलवायु समाचार',
     climate_disclaimer: 'IMD, USDA और कृषि प्रेस रिपोर्टों से संकलित — यह आधिकारिक मौसम चेतावनी नहीं है। किसी भी अलर्ट पर कार्रवाई से पहले mausam.imd.gov.in/chennai पर पुष्टि करें।',
@@ -815,7 +856,26 @@ const I18N = {
     schemes_documents_t: 'आवश्यक दस्तावेज़',
     schemes_how_t: 'आवेदन कैसे करें',
     schemes_source_link: 'आधिकारिक स्रोत',
-    schemes_disclaimer: 'योजना नियम, राशि और पात्रता हर बजट चक्र के साथ बदलती है। यह पृष्ठ प्रत्येक कार्ड पर दिखाई गई तारीख तक आधिकारिक स्रोत के अनुसार सत्यापित जानकारी दिखाता है — आवेदन करने से पहले हमेशा आधिकारिक पोर्टल या अपने स्थानीय कृषि कार्यालय से वर्तमान विवरण की पुष्टि करें।'
+    schemes_disclaimer: 'योजना नियम, राशि और पात्रता हर बजट चक्र के साथ बदलती है। यह पृष्ठ प्रत्येक कार्ड पर दिखाई गई तारीख तक आधिकारिक स्रोत के अनुसार सत्यापित जानकारी दिखाता है — आवेदन करने से पहले हमेशा आधिकारिक पोर्टल या अपने स्थानीय कृषि कार्यालय से वर्तमान विवरण की पुष्टि करें।',
+
+    /* ---------- Farm Calendar ---------- */
+    cal_page_title: '🗓️ खेत कैलेंडर',
+    cal_page_sub: 'अपने खेत के कार्यों को ट्रैक करें — बुवाई, सिंचाई, उर्वरक, कीट जांच, कटाई। केवल इस डिवाइस पर सहेजा गया।',
+    cal_no_profile_note: 'सुझाई गई कार्य अनुसूची स्वतः बनाने के लिए फसलों और बुवाई तिथि के साथ एक खेत प्रोफ़ाइल सहेजें।',
+    cal_go_to_farm: 'मेरे खेत पर जाएं →',
+    cal_generate_btn: '✨ मेरे खेत प्रोफ़ाइल से कार्य सुझाएं',
+    cal_filter_label: 'दिखाएं:',
+    cal_filter_upcoming: 'आगामी', cal_filter_overdue: 'विलंबित', cal_filter_done: 'पूर्ण', cal_filter_all: 'सभी',
+    cal_add_placeholder: 'जैसे टमाटर के पत्तों की जांच करें',
+    cal_add_btn: '+ कार्य जोड़ें',
+    cal_empty: 'अभी तक कोई कार्य नहीं है।',
+    cal_overdue: 'विलंबित',
+    cal_suggested: 'सुझाया गया',
+    cal_disclaimer: 'सुझाया गया कार्य समय सामान्य प्रथा पर आधारित एक सामान्य मार्गदर्शिका है, न कि किस्म- या खेत-विशिष्ट कृषि सलाह। हमेशा अपनी फसल किस्म, मौसम और स्थानीय कृषि विज्ञान केंद्र (KVK) मार्गदर्शन के अनुसार समायोजित करें।',
+    cal_type_sowing: 'बुवाई', cal_type_irrigation: 'सिंचाई जांच', cal_type_fertilizer_basal: 'आधार उर्वरक अनुप्रयोग',
+    cal_type_weed_control: 'खरपतवार नियंत्रण', cal_type_inspection: 'फसल निरीक्षण', cal_type_fertilizer_top: 'टॉप-ड्रेसिंग उर्वरक',
+    cal_type_pest_check: 'कीट और रोग जांच', cal_type_irrigation2: 'सिंचाई जांच', cal_type_pre_harvest_check: 'कटाई-पूर्व निरीक्षण',
+    cal_type_harvest_window: 'अपेक्षित कटाई अवधि'
   }
 };
 
