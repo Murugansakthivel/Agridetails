@@ -3,16 +3,14 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Tamil Nadu Dam Details — Agridetails</title>
-<meta name="description" content="Tamil Nadu dam &amp; reservoir details — full level, current level in feet, storage, district location, live inflow/outflow, in English, தமிழ் and हिंदी.">
+<title>Government Schemes — Agridetails</title>
+<meta name="description" content="Real, sourced government schemes for Tamil Nadu farmers — PM-KISAN, PMFBY crop insurance, Kisan Credit Card, Soil Health Card and more, with eligibility and how to apply.">
 <meta property="og:type" content="website">
-<meta property="og:title" content="Tamil Nadu Dam Details — Agridetails">
-<meta property="og:description" content="Tamil Nadu dam & reservoir details — full level, current level in feet, storage, district location, live inflow/outflow.">
+<meta property="og:title" content="Government Schemes — Agridetails">
+<meta property="og:description" content="Real, sourced government schemes for Tamil Nadu farmers, with eligibility and how to apply.">
 <meta property="og:image" content="https://murugansakthivel.github.io/Agridetails/icon-512.png">
-<meta property="og:url" content="https://murugansakthivel.github.io/Agridetails/dams.html">
+<meta property="og:url" content="https://murugansakthivel.github.io/Agridetails/schemes.html">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Tamil Nadu Dam Details — Agridetails">
-<meta name="twitter:description" content="Tamil Nadu dam & reservoir details — full level, current level in feet, storage, district location, live inflow/outflow.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700;800&family=Noto+Sans+Tamil:wght@400;500;600;700&family=Noto+Sans+Devanagari:wght@400;500;600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -35,11 +33,11 @@
       <a href="news.html" data-i18n="nav_news">News</a>
       <a href="weather.html" class="nav-weather-btn" data-i18n="nav_weather">⛅ Weather</a>
       <a href="farm.html" class="nav-farm-btn" data-i18n="nav_farm">🚜 My Farm</a>
-      <a href="schemes.html" class="nav-schemes-btn" data-i18n="nav_schemes">🏛️ Govt Schemes</a>
+      <a href="schemes.html" class="nav-schemes-btn active" data-i18n="nav_schemes">🏛️ Govt Schemes</a>
       <a href="climate.html" class="nav-climate-btn" data-i18n="nav_climate">🌦️ Climate News</a>
-      <a href="dams.html" class="nav-dam-btn active" data-i18n="nav_dam">🏞️ Tamil Nadu Dam Details</a>
+      <a href="dams.html" class="nav-dam-btn" data-i18n="nav_dam">🏞️ Tamil Nadu Dam Details</a>
       <a href="fertilizer.html" class="nav-fert-btn" data-i18n="nav_Fertilizer">🧪 Fertilizer Details</a>
-      <a href="stocks.html" class="nav-stocks-btn" data-i18n="nav_stocks">📈 Stocks</a>
+      <a href="stocks.html" class="nav-stocks-btn" data-i18n="nav_stocks">📈 Agri Stocks</a>
       <a href="advisory.html" class="nav-cta" data-i18n="nav_advisory">Crop Doctor</a>
     </nav>
     <div class="header-actions">
@@ -54,21 +52,24 @@
 <main>
 <section class="page-head">
   <div class="container">
-    <h1 data-i18n="dam_page_title">🏞️ Tamil Nadu Dam Details</h1>
-    <p class="muted" id="damAsOf"></p>
-    <p class="small muted" data-i18n="dam_disclaimer">Compiled from CWC's Reservoir Storage Bulletin and the Tamil Nadu Water Resources Department (TN Agrisnet). Reading dates vary by dam — always confirm with the live source link before acting.</p>
+    <h1 data-i18n="schemes_page_title">🏛️ Government Schemes</h1>
+    <p class="muted" data-i18n="schemes_page_sub">Real central and Tamil Nadu state government schemes for farmers — eligibility, benefits, documents and how to apply, each with an official source link.</p>
+    <p class="small muted" id="schemesAsOf"></p>
   </div>
 </section>
 
 <section class="section">
   <div class="container">
     <div class="controls-bar">
-      <label for="damDistrictFilter" data-i18n="dam_filter_district">District:</label>
-      <select id="damDistrictFilter"></select>
-      <button id="damResetFilters" class="cat-tab" type="button" data-i18n="filter_reset">Reset</button>
-      <span class="small muted source-note" id="damResultCount"></span>
+      <label for="schemeLevelFilter" data-i18n="schemes_filter_label">Show:</label>
+      <select id="schemeLevelFilter">
+        <option value="" data-i18n="schemes_filter_all">All schemes</option>
+        <option value="central" data-i18n="schemes_filter_central">Central Government</option>
+        <option value="state" data-i18n="schemes_filter_state">Tamil Nadu State</option>
+      </select>
     </div>
-    <div id="damList" class="dam-list"></div>
+    <p class="small muted" style="margin-top:.6rem" data-i18n="schemes_disclaimer">Scheme rules, amounts and eligibility change with each budget cycle. This page shows what was verified against the official source as of the date shown on each card — always confirm current details on the official portal or with your local agriculture office before applying.</p>
+    <div id="schemesList" class="schemes-list"></div>
   </div>
 </section>
 </main>
@@ -81,7 +82,8 @@
 
 <script src="js/config.js"></script>
 <script src="js/i18n.js"></script>
-<script src="js/dam-details.js"></script>
+<script src="js/govt-schemes.js"></script>
+<script src="js/schemes.js"></script>
 <script src="js/app.js"></script>
 </body>
 </html>

@@ -533,6 +533,13 @@ textarea, input[type="tel"] { width: 100%; resize: vertical; }
 }
 .main-nav a.nav-farm-btn:hover { background: var(--green-700); color: #fff !important; }
 .main-nav a.nav-farm-btn.active { background: var(--green-900); color: #fff !important; }
+.main-nav a.nav-schemes-btn {
+  display: inline-flex; align-items: center; gap: .3rem;
+  background: #eee8fb; color: #4b2e91 !important; font-weight: 700;
+  padding: .4rem .85rem; border-radius: 999px; border: 1.5px solid #7c5cd6;
+}
+.main-nav a.nav-schemes-btn:hover { background: #7c5cd6; color: #fff !important; }
+.main-nav a.nav-schemes-btn.active { background: #4b2e91; color: #fff !important; }
 
 /* ---------- Weather module (weather.html) ---------- */
 .wx-status { font-size: .82rem; font-weight: 700; padding: .3rem .7rem; border-radius: 999px; }
@@ -582,6 +589,20 @@ textarea, input[type="tel"] { width: 100%; resize: vertical; }
 .farm-summary-actions { display: flex; gap: .7rem; margin-top: 1rem; flex-wrap: wrap; }
 .btn-danger { border-color: #c0392b !important; color: #c0392b !important; }
 .btn-danger:hover { background: #c0392b !important; color: #fff !important; }
+
+/* ---------- Government Schemes (schemes.html) ---------- */
+.schemes-list { display: grid; gap: 1.1rem; margin-top: 1.2rem; }
+.scheme-card { padding: 1.3rem 1.4rem; }
+.scheme-card-top { display: flex; align-items: center; justify-content: space-between; gap: .6rem; flex-wrap: wrap; margin-bottom: .4rem; }
+.scheme-level-chip { font-size: .76rem; font-weight: 700; padding: .25rem .7rem; border-radius: 999px; }
+.scheme-level-chip.central { background: #eaf2fb; color: #14507a; }
+.scheme-level-chip.state { background: #eee8fb; color: #4b2e91; }
+.scheme-card h3 { color: var(--green-900); font-size: 1.15rem; margin-bottom: .6rem; }
+.scheme-section { margin-top: .7rem; }
+.scheme-section h4 { font-size: .84rem; color: var(--muted); text-transform: uppercase; letter-spacing: .02em; margin-bottom: .2rem; }
+.scheme-section p { line-height: 1.5; font-size: .92rem; }
+.scheme-source-link { display: inline-block; margin-top: 1rem; font-size: .84rem; font-weight: 700; color: var(--green-700); text-decoration: none; }
+.scheme-source-link:hover { text-decoration: underline; }
 
 
 /* ---------- News ---------- */

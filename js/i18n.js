@@ -11,6 +11,7 @@ const I18N = {
     nav_Fertilizer: '🧪 Fertilizer Details',
     nav_weather: '⛅ Weather',
     nav_farm: '🚜 My Farm',
+    nav_schemes: '🏛️ Govt Schemes',
     climate_page_title: '🌦️ Climate News',
     climate_disclaimer: 'Compiled from IMD, USDA and agricultural press reports — not an official weather warning. Always confirm with mausam.imd.gov.in/chennai before acting on any alert.',
     climate_as_of: 'Updated:',
@@ -251,7 +252,25 @@ const I18N = {
     farm_edit_btn: '✏️ Edit',
     farm_delete_btn: '🗑️ Delete farm profile',
     farm_delete_confirm: 'Delete your saved farm profile from this device? This cannot be undone.',
-    farm_untitled: 'My Farm'
+    farm_untitled: 'My Farm',
+
+    /* ---------- Government Schemes ---------- */
+    schemes_page_title: '🏛️ Government Schemes',
+    schemes_page_sub: 'Real central and Tamil Nadu state government schemes for farmers — eligibility, benefits, documents and how to apply, each with an official source link.',
+    schemes_reviewed_label: 'This list last reviewed:',
+    schemes_verified_label: 'Source verified:',
+    schemes_filter_label: 'Show:',
+    schemes_filter_all: 'All schemes',
+    schemes_filter_central: 'Central Government',
+    schemes_filter_state: 'Tamil Nadu State',
+    schemes_level_central: 'Central',
+    schemes_level_state: 'Tamil Nadu State',
+    schemes_benefit_t: 'Benefit',
+    schemes_eligibility_t: 'Eligibility',
+    schemes_documents_t: 'Documents needed',
+    schemes_how_t: 'How to apply',
+    schemes_source_link: 'Official source',
+    schemes_disclaimer: 'Scheme rules, amounts and eligibility change with each budget cycle. This page shows what was verified against the official source as of the date shown on each card — always confirm current details on the official portal or with your local agriculture office before applying.'
   },
 
   ta: {
@@ -265,6 +284,7 @@ const I18N = {
     nav_Fertilizer: '🧪 உரக் கடை விவரங்கள்',
     nav_weather: '⛅ வானிலை',
     nav_farm: '🚜 என் பண்ணை',
+    nav_schemes: '🏛️ அரசு திட்டங்கள்',
     climate_page_title: '🌦️ காலநிலை செய்தி',
     climate_disclaimer: 'IMD, USDA மற்றும் வேளாண் ஊடக அறிக்கைகளிலிருந்து தொகுக்கப்பட்டது — இது அதிகாரப்பூர்வ வானிலை எச்சரிக்கை அல்ல. எந்த எச்சரிக்கையிலும் செயல்படுவதற்கு முன் mausam.imd.gov.in/chennai-இல் உறுதிப்படுத்தவும்.',
     climate_as_of: 'புதுப்பிக்கப்பட்டது:',
@@ -505,7 +525,25 @@ const I18N = {
     farm_edit_btn: '✏️ திருத்து',
     farm_delete_btn: '🗑️ பண்ணை சுயவிவரத்தை நீக்கு',
     farm_delete_confirm: 'இந்தச் சாதனத்திலிருந்து உங்கள் சேமிக்கப்பட்ட பண்ணை சுயவிவரத்தை நீக்கவா? இதை மீட்டெடுக்க முடியாது.',
-    farm_untitled: 'என் பண்ணை'
+    farm_untitled: 'என் பண்ணை',
+
+    /* ---------- Government Schemes ---------- */
+    schemes_page_title: '🏛️ அரசு திட்டங்கள்',
+    schemes_page_sub: 'விவசாயிகளுக்கான உண்மையான மத்திய மற்றும் தமிழ்நாடு மாநில அரசு திட்டங்கள் — தகுதி, பலன்கள், ஆவணங்கள் மற்றும் விண்ணப்பிக்கும் முறை, ஒவ்வொன்றும் அதிகாரப்பூர்வ மூல இணைப்புடன்.',
+    schemes_reviewed_label: 'இந்த பட்டியல் கடைசியாக மதிப்பாய்வு செய்யப்பட்டது:',
+    schemes_verified_label: 'மூலம் உறுதிப்படுத்தப்பட்டது:',
+    schemes_filter_label: 'காட்டு:',
+    schemes_filter_all: 'அனைத்து திட்டங்களும்',
+    schemes_filter_central: 'மத்திய அரசு',
+    schemes_filter_state: 'தமிழ்நாடு மாநிலம்',
+    schemes_level_central: 'மத்திய',
+    schemes_level_state: 'தமிழ்நாடு மாநிலம்',
+    schemes_benefit_t: 'பலன்',
+    schemes_eligibility_t: 'தகுதி',
+    schemes_documents_t: 'தேவையான ஆவணங்கள்',
+    schemes_how_t: 'விண்ணப்பிக்கும் முறை',
+    schemes_source_link: 'அதிகாரப்பூர்வ மூலம்',
+    schemes_disclaimer: 'திட்ட விதிகள், தொகைகள் மற்றும் தகுதி ஒவ்வொரு பட்ஜெட் சுழற்சியிலும் மாறும். இந்தப் பக்கம் ஒவ்வொரு அட்டையிலும் காட்டப்பட்டுள்ள தேதி வரை அதிகாரப்பூர்வ மூலத்திற்கு எதிராக உறுதிப்படுத்தப்பட்டதைக் காட்டுகிறது — விண்ணப்பிக்கும் முன் எப்போதும் அதிகாரப்பூர்வ போர்ட்டல் அல்லது உங்கள் உள்ளூர் வேளாண் அலுவலகத்தில் தற்போதைய விவரங்களை உறுதிப்படுத்தவும்.'
   },
 
   hi: {
@@ -519,6 +557,7 @@ const I18N = {
     nav_Fertilizer: '🧪 उर्वरक दुकान विवरण',
     nav_weather: '⛅ मौसम',
     nav_farm: '🚜 मेरा खेत',
+    nav_schemes: '🏛️ सरकारी योजनाएं',
     climate_page_title: '🌦️ जलवायु समाचार',
     climate_disclaimer: 'IMD, USDA और कृषि प्रेस रिपोर्टों से संकलित — यह आधिकारिक मौसम चेतावनी नहीं है। किसी भी अलर्ट पर कार्रवाई से पहले mausam.imd.gov.in/chennai पर पुष्टि करें।',
     climate_as_of: 'अपडेटेड:',
@@ -758,7 +797,25 @@ const I18N = {
     farm_edit_btn: '✏️ संपादित करें',
     farm_delete_btn: '🗑️ खेत प्रोफ़ाइल हटाएं',
     farm_delete_confirm: 'इस डिवाइस से अपनी सहेजी गई खेत प्रोफ़ाइल हटाएं? इसे पूर्ववत नहीं किया जा सकता।',
-    farm_untitled: 'मेरा खेत'
+    farm_untitled: 'मेरा खेत',
+
+    /* ---------- Government Schemes ---------- */
+    schemes_page_title: '🏛️ सरकारी योजनाएं',
+    schemes_page_sub: 'किसानों के लिए वास्तविक केंद्र और तमिलनाडु राज्य सरकार की योजनाएं — पात्रता, लाभ, दस्तावेज़ और आवेदन कैसे करें, प्रत्येक के साथ आधिकारिक स्रोत लिंक।',
+    schemes_reviewed_label: 'यह सूची अंतिम बार समीक्षित:',
+    schemes_verified_label: 'स्रोत सत्यापित:',
+    schemes_filter_label: 'दिखाएं:',
+    schemes_filter_all: 'सभी योजनाएं',
+    schemes_filter_central: 'केंद्र सरकार',
+    schemes_filter_state: 'तमिलनाडु राज्य',
+    schemes_level_central: 'केंद्रीय',
+    schemes_level_state: 'तमिलनाडु राज्य',
+    schemes_benefit_t: 'लाभ',
+    schemes_eligibility_t: 'पात्रता',
+    schemes_documents_t: 'आवश्यक दस्तावेज़',
+    schemes_how_t: 'आवेदन कैसे करें',
+    schemes_source_link: 'आधिकारिक स्रोत',
+    schemes_disclaimer: 'योजना नियम, राशि और पात्रता हर बजट चक्र के साथ बदलती है। यह पृष्ठ प्रत्येक कार्ड पर दिखाई गई तारीख तक आधिकारिक स्रोत के अनुसार सत्यापित जानकारी दिखाता है — आवेदन करने से पहले हमेशा आधिकारिक पोर्टल या अपने स्थानीय कृषि कार्यालय से वर्तमान विवरण की पुष्टि करें।'
   }
 };
 
