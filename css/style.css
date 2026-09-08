@@ -518,6 +518,71 @@ textarea, input[type="tel"] { width: 100%; resize: vertical; }
 .adv-feedback-btns { display: flex; gap: .5rem; flex-wrap: wrap; margin-top: .5rem; }
 .adv-feedback-thanks { font-weight: 700; color: var(--green-900); margin: 0; }
 
+/* ---------- Nav buttons: Weather / My Farm ---------- */
+.main-nav a.nav-weather-btn {
+  display: inline-flex; align-items: center; gap: .3rem;
+  background: #fef3e0; color: #8a5200 !important; font-weight: 700;
+  padding: .4rem .85rem; border-radius: 999px; border: 1.5px solid var(--gold-600);
+}
+.main-nav a.nav-weather-btn:hover { background: var(--gold-600); color: #3d2e00 !important; }
+.main-nav a.nav-weather-btn.active { background: #8a5200; color: #fff !important; }
+.main-nav a.nav-farm-btn {
+  display: inline-flex; align-items: center; gap: .3rem;
+  background: var(--lime-soft); color: var(--green-900) !important; font-weight: 700;
+  padding: .4rem .85rem; border-radius: 999px; border: 1.5px solid var(--green-700);
+}
+.main-nav a.nav-farm-btn:hover { background: var(--green-700); color: #fff !important; }
+.main-nav a.nav-farm-btn.active { background: var(--green-900); color: #fff !important; }
+
+/* ---------- Weather module (weather.html) ---------- */
+.wx-status { font-size: .82rem; font-weight: 700; padding: .3rem .7rem; border-radius: 999px; }
+.wx-status.live { background: var(--green-100); color: var(--green-700); }
+.wx-status.stale { background: var(--gold-soft); color: #8a5200; }
+.wx-status.error { background: #fbeae7; color: #922b21; }
+.wx-current-card { margin-top: 1rem; padding: 1.4rem; }
+.wx-current-main { display: flex; align-items: center; gap: 1rem; }
+.wx-current-icon { font-size: 3rem; line-height: 1; }
+.wx-current-temp { font-size: 2.3rem; font-weight: 800; color: var(--green-900); line-height: 1; }
+.wx-current-desc { font-weight: 600; color: var(--muted); margin-top: .2rem; }
+.wx-current-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(110px, 1fr)); gap: .8rem; margin-top: 1.2rem; padding-top: 1rem; border-top: 1px solid var(--border); }
+.wx-stat { display: flex; flex-direction: column; gap: .15rem; }
+.wx-stat-label { font-size: .78rem; color: var(--muted); }
+.wx-stat-val { font-weight: 700; color: var(--green-900); font-size: 1.05rem; }
+.wx-forecast-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(90px, 1fr)); gap: .7rem; margin-top: .8rem; }
+.wx-day-card { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: .8rem .5rem; text-align: center; }
+.wx-day-label { font-weight: 700; font-size: .82rem; color: var(--green-900); }
+.wx-day-icon { font-size: 1.6rem; margin: .3rem 0; }
+.wx-day-temps { font-size: .86rem; }
+.wx-day-rain { font-size: .78rem; color: var(--muted); margin-top: .2rem; }
+.wx-alerts-list { display: flex; flex-direction: column; gap: .6rem; margin-top: .8rem; }
+.wx-alert { display: flex; gap: .6rem; align-items: center; padding: .8rem 1rem; border-radius: 12px; font-size: .9rem; }
+.wx-alert.ok { background: var(--green-100); color: var(--green-900); }
+.wx-alert.warn { background: var(--gold-soft); color: #8a5200; }
+.wx-alert.info { background: #eaf2fb; color: #14507a; }
+
+/* ---------- Farm Profile (farm.html) ---------- */
+.farm-form { display: flex; flex-direction: column; gap: .2rem; }
+.farm-form input, .farm-form select, .farm-form textarea {
+  width: 100%; padding: .6rem .8rem; border: 1.5px solid var(--border); border-radius: 10px;
+  font-family: inherit; font-size: .94rem; margin-bottom: .8rem; background: #fff;
+}
+.farm-area-row { display: flex; gap: .6rem; }
+.farm-area-row input { flex: 2; } .farm-area-row select { flex: 1; }
+.farm-crop-chips { display: flex; flex-wrap: wrap; gap: .5rem; margin-bottom: 1rem; max-height: 220px; overflow-y: auto; padding: .6rem; border: 1px solid var(--border); border-radius: 10px; }
+.farm-crop-chip { display: inline-flex; align-items: center; gap: .3rem; background: var(--bg); border: 1px solid var(--border); border-radius: 999px; padding: .3rem .7rem; font-size: .84rem; cursor: pointer; }
+.farm-crop-chip input { width: auto; margin: 0; }
+.farm-save-status { color: var(--green-700); font-weight: 700; margin-top: .6rem; }
+.farm-summary-card { padding: 1.4rem; }
+.farm-summary-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: .9rem; margin-top: 1rem; }
+.farm-summary-grid > div { display: flex; flex-direction: column; gap: .15rem; }
+.farm-summary-label { font-size: .78rem; color: var(--muted); }
+.farm-summary-crops { margin-top: 1rem; padding-top: 1rem; border-top: 1px solid var(--border); }
+.farm-crop-tags { display: flex; flex-wrap: wrap; gap: .4rem; margin-top: .5rem; }
+.farm-crop-tag { background: var(--green-100); color: var(--green-900); font-size: .82rem; font-weight: 600; padding: .3rem .7rem; border-radius: 999px; }
+.farm-summary-actions { display: flex; gap: .7rem; margin-top: 1rem; flex-wrap: wrap; }
+.btn-danger { border-color: #c0392b !important; color: #c0392b !important; }
+.btn-danger:hover { background: #c0392b !important; color: #fff !important; }
+
 
 /* ---------- News ---------- */
 .news-list { display: grid; gap: 1.1rem; }
@@ -555,4 +620,86 @@ textarea, input[type="tel"] { width: 100%; resize: vertical; }
   .nav-toggle-btn { display: block; }
   .footer-grid { grid-template-columns: 1fr; }
   .hero { padding: 3rem 0 4rem; }
+}
+
+/* ---------- Nav: Weather / My Farm pill buttons ---------- */
+.main-nav a.nav-weather-btn {
+  display: inline-flex; align-items: center; gap: .3rem;
+  background: #eaf2fb; color: #14507a !important; font-weight: 700;
+  padding: .4rem .85rem; border-radius: 999px; border: 1.5px solid #4a90c8;
+}
+.main-nav a.nav-weather-btn:hover { background: #4a90c8; color: #fff !important; }
+.main-nav a.nav-weather-btn.active { background: #14507a; color: #fff !important; }
+.main-nav a.nav-farm-btn {
+  display: inline-flex; align-items: center; gap: .3rem;
+  background: var(--green-100); color: var(--green-900) !important; font-weight: 700;
+  padding: .4rem .85rem; border-radius: 999px; border: 1.5px solid var(--green-600);
+}
+.main-nav a.nav-farm-btn:hover { background: var(--green-600); color: #fff !important; }
+.main-nav a.nav-farm-btn.active { background: var(--green-700); color: #fff !important; }
+
+/* ---------- Weather page ---------- */
+.wx-status { font-size: .85rem; font-weight: 700; padding: .3rem .7rem; border-radius: 999px; }
+.wx-status.live { background: #e2f6e9; color: #197a45; }
+.wx-status.stale { background: var(--gold-soft); color: #8a6600; }
+.wx-status.error { background: #fbe4e1; color: var(--red-700); }
+.wx-current-card { padding: 1.4rem; margin-top: 1rem; }
+.wx-current-main { display: flex; align-items: center; gap: 1rem; }
+.wx-current-icon { font-size: 3rem; line-height: 1; }
+.wx-current-temp { font-family: var(--font-display); font-size: 2.2rem; font-weight: 800; color: var(--green-900); }
+.wx-current-desc { font-weight: 700; color: var(--text); }
+.wx-current-grid {
+  display: grid; grid-template-columns: repeat(4, 1fr); gap: .8rem; margin-top: 1.2rem;
+  border-top: 1px solid var(--border); padding-top: 1rem;
+}
+.wx-stat { display: flex; flex-direction: column; gap: .2rem; }
+.wx-stat-label { font-size: .78rem; color: var(--muted); font-weight: 600; }
+.wx-stat-val { font-weight: 800; font-size: 1.05rem; color: var(--green-900); }
+.wx-forecast-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(90px, 1fr)); gap: .7rem; margin-top: .8rem; }
+.wx-day-card {
+  background: var(--card); border: 1px solid var(--border); border-radius: var(--radius);
+  padding: .9rem .5rem; text-align: center; box-shadow: var(--shadow);
+}
+.wx-day-label { font-weight: 700; font-size: .82rem; color: var(--muted); }
+.wx-day-icon { font-size: 1.6rem; margin: .3rem 0; }
+.wx-day-temps { font-weight: 700; font-size: .9rem; }
+.wx-day-rain { font-size: .78rem; color: #14507a; margin-top: .2rem; }
+.wx-alerts-list { display: flex; flex-direction: column; gap: .6rem; margin-top: .8rem; }
+.wx-alert {
+  display: flex; align-items: center; gap: .7rem; padding: .8rem 1rem; border-radius: 12px;
+  font-weight: 600; font-size: .92rem;
+}
+.wx-alert.ok { background: #e2f6e9; color: #197a45; }
+.wx-alert.warn { background: var(--gold-soft); color: #8a6600; }
+.wx-alert.info { background: #eaf2fb; color: #14507a; }
+
+/* ---------- Farm Profile page ---------- */
+.farm-form { padding: 1.4rem; display: flex; flex-direction: column; gap: .2rem; }
+.farm-form select, .farm-form input[type=text], .farm-form input[type=number], .farm-form input[type=date] {
+  width: 100%; padding: .65rem .8rem; border-radius: 10px; border: 1.5px solid var(--border);
+  font-family: inherit; font-size: .95rem; margin-bottom: .9rem; background: #fff; color: var(--text);
+}
+.farm-area-row { display: flex; gap: .6rem; }
+.farm-area-row input { flex: 2; } .farm-area-row select { flex: 1; }
+.farm-crop-chips { display: flex; flex-wrap: wrap; gap: .5rem; margin: .3rem 0 1.1rem; max-height: 220px; overflow-y: auto; padding: .3rem; }
+.farm-crop-chip {
+  display: inline-flex; align-items: center; gap: .35rem; background: var(--green-100);
+  border: 1.5px solid var(--lime-soft); border-radius: 999px; padding: .35rem .75rem;
+  font-size: .85rem; font-weight: 600; cursor: pointer; color: var(--green-900);
+}
+.farm-crop-chip input { margin: 0; }
+.farm-save-status { color: #197a45; font-weight: 700; margin-top: .6rem; }
+.farm-summary-card { padding: 1.4rem; }
+.farm-summary-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-top: 1rem; }
+.farm-summary-label { display: block; font-size: .78rem; color: var(--muted); font-weight: 600; }
+.farm-summary-crops { margin-top: 1.1rem; }
+.farm-crop-tags { display: flex; flex-wrap: wrap; gap: .4rem; margin-top: .4rem; }
+.farm-crop-tag { background: var(--gold-soft); color: #8a6600; font-size: .82rem; font-weight: 700; padding: .28rem .7rem; border-radius: 999px; }
+.farm-summary-actions { display: flex; gap: .7rem; margin-top: 1rem; }
+.btn-danger { border-color: var(--red-700); color: var(--red-700); }
+.btn-danger:hover { background: var(--red-700); color: #fff; }
+
+@media (max-width: 640px) {
+  .wx-current-grid { grid-template-columns: repeat(2, 1fr); }
+  .farm-summary-grid { grid-template-columns: 1fr; }
 }

@@ -22,6 +22,8 @@
     if (document.getElementById('climateList')) initClimate();
     if (document.getElementById('damList')) initDams();
     if (document.getElementById('fertList')) initFertilizer();
+    if (document.getElementById('wxDistrict') && typeof window.initWeather === 'function') window.initWeather();
+    if (document.getElementById('farmProfileForm') && typeof window.initFarmProfile === 'function') window.initFarmProfile();
   });
 
   function t(key) { return I18N[currentLang()][key] || I18N.en[key] || key; }
