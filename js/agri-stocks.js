@@ -5,17 +5,17 @@
    sites cannot legally re-stream that, so this is a periodically-refreshed
    snapshot (updated by a daily automation) sourced from Google Finance,
    Screener.in, Moneycontrol, LiveMint, Economic Times, INDmoney, Yahoo
-   Finance, Bajaj Finserv, 5Paisa, and other public financial data sources,
-   September 2026. For real-time quotes, always check nseindia.com. */
+   Finance, Bajaj Finserv, 5Paisa, ScanX, Groww, and other public financial
+   data sources, September 2026. For real-time quotes, always check nseindia.com. */
 const AGRI_STOCKS = {
-  asOf: '2026-09-01',
+  asOf: '2026-09-17',
   groups: [
     {
       key: 'food',
       en: 'Food & FMCG', ta: 'உணவு & FMCG', hi: 'खाद्य व FMCG',
       stocks: [
         {
-          symbol: 'ITC', name: 'ITC Ltd', price: 270.80, change: 1.40,
+          symbol: 'ITC', name: 'ITC Ltd', price: 267.30, change: 1.14,
           high52w: 427.00, low52w: 264.80, marketCap: '₹3,39,000 Cr', pe: '17.1',
           news: [
             { headline: 'Q4 FY26 results: revenue +17% YoY, ₹8/share dividend announced', detail: 'Profit rose 5% YoY to ₹5,469.74 crore; cigarettes and FMCG segments led revenue growth.', date: '21 May 2026', source: 'https://www.livemint.com/market/stock-market-news/itc-q4-results-2026-live-itc-q4-earnings-itc-share-price-itc-cigarette-fmcg-itc-profit-itc-dividend-21-may-2026-11779337323964.html' },
@@ -23,7 +23,7 @@ const AGRI_STOCKS = {
           ]
         },
         {
-          symbol: 'NESTLEIND', name: 'Nestle India', price: 1448.00, change: -0.45,
+          symbol: 'NESTLEIND', name: 'Nestle India', price: 1384.20, change: -0.02,
           high52w: 1553.00, low52w: 1145.00, marketCap: '₹2,79,000 Cr', pe: '73.2',
           news: [
             { headline: 'Q1 FY27: net profit surges 48% YoY to ₹975 crore, shares jump ~4%', detail: 'Revenue up 25% to ₹6,378 crore; all four product groups (Maggi, KitKat, Nescafe, Milk) posted double-digit growth.', date: '22 Jul 2026', source: 'https://www.livemint.com/market/market-stats/nestle-india-q1-results-s0003095' },
@@ -31,7 +31,7 @@ const AGRI_STOCKS = {
           ]
         },
         {
-          symbol: 'BRITANNIA', name: 'Britannia Industries', price: 5548.00, change: 1.74,
+          symbol: 'BRITANNIA', name: 'Britannia Industries', price: 5031.50, change: 0.64,
           high52w: 6337.00, low52w: 5035.00, marketCap: '₹1,33,600 Cr', pe: '51.3',
           news: [
             { headline: 'Q1 FY27 profit +14% YoY to ₹593 crore; shares jump ~5%, Nomura reiterates Buy', detail: 'Nomura maintained a "Buy" rating with a ₹6,500 target price following the strong quarterly results.', date: 'Aug 2026', source: 'https://www.moneycontrol.com/india/stockpricequote/food-processing/britanniaindustries/BI' },
@@ -39,7 +39,7 @@ const AGRI_STOCKS = {
           ]
         },
         {
-          symbol: 'DABUR', name: 'Dabur India', price: 385.55, change: 1.19,
+          symbol: 'DABUR', name: 'Dabur India', price: 382.00, change: -0.75,
           high52w: 577.00, low52w: 381.00, marketCap: '₹68,400 Cr', pe: '34.7',
           news: [
             { headline: 'Q1 FY27 profit +15% YoY to ₹591 crore — third straight quarter of double-digit growth', detail: 'Revenue up 10.6% to ₹3,764 crore; new launches Siens and Cheers cited as growth drivers.', date: '29 Jul 2026', source: 'https://www.dabur.com/press-releases/Dabur-Q1-2026-27-Net-Profit-Surges' },
@@ -47,7 +47,7 @@ const AGRI_STOCKS = {
           ]
         },
         {
-          symbol: 'MARICO', name: 'Marico Ltd', price: 840.95, change: 1.32,
+          symbol: 'MARICO', name: 'Marico Ltd', price: 818.50, change: 1.03,
           high52w: 889.10, low52w: 680.30, marketCap: '₹1,09,168 Cr', pe: '55.5',
           news: [
             { headline: 'Q1 FY27 PAT +25% YoY to ₹630 crore — highest in 28 quarters', detail: 'Revenue up 23% to ₹3,957 crore; acquired a 75% stake in Vietnamese skincare company Skinetiq.', date: '8 Aug 2026', source: 'https://www.thehindubusinessline.com' },
@@ -55,7 +55,7 @@ const AGRI_STOCKS = {
           ]
         },
         {
-          symbol: 'TATACONSUM', name: 'Tata Consumer Products', price: 1035.00, change: -0.24,
+          symbol: 'TATACONSUM', name: 'Tata Consumer Products', price: 1000.10, change: 0.00,
           high52w: 1282.70, low52w: 1007.20, marketCap: '₹1,02,500 Cr', pe: '62.1',
           news: [
             { headline: 'FY26 revenue crosses ₹20,000 crore milestone, profit +20% to ₹1,547 crore', detail: 'Revenue grew 15% YoY as the company targets over 20% long-term EBITDA margin.', date: '2026', source: 'https://economictimes.indiatimes.com' },
@@ -63,7 +63,7 @@ const AGRI_STOCKS = {
           ]
         },
         {
-          symbol: 'VBL', name: 'Varun Beverages', price: 412.00, change: -0.52,
+          symbol: 'VBL', name: 'Varun Beverages', price: 409.90, change: -1.58,
           high52w: 555.80, low52w: 381.00, marketCap: '₹1,39,300 Cr', pe: '41.2',
           news: [
             { headline: 'Q2 CY2026 revenue +20.4% YoY to ₹8,451 crore, declares 2nd interim dividend', detail: 'PAT rose 15% to ₹1,521 crore; board declared a second interim dividend of ₹0.50/share.', date: '28 Jul 2026', source: 'https://insights.dsij.in/dsijarticledetail/ravi-jaipuria-led-beverage-giant-reports-20-revenue-growth-board-declares-interim-dividend-and-extends-pepsico-pact-58634' },
@@ -71,7 +71,7 @@ const AGRI_STOCKS = {
           ]
         },
         {
-          symbol: 'KRBL', name: 'KRBL Ltd (Rice)', price: 422.00, change: -3.58,
+          symbol: 'KRBL', name: 'KRBL Ltd (Rice)', price: 438.25, change: 0.00,
           high52w: 495.00, low52w: 274.65, marketCap: '₹9,660 Cr', pe: '15.1',
           news: [
             { headline: 'Q1 FY27 net profit surges 73% YoY to ₹261 crore, EBITDA margin nearly doubles', detail: 'Margin expanded to 23.8% from 13.9% even as revenue dipped 5.6% on lower Middle East exports.', date: '13-17 Aug 2026', source: 'https://tradebrains.in/krbl-q1-fy27-results-net-profit-jumps-73-2-yoy-to-260-74-cr' },
@@ -86,7 +86,7 @@ const AGRI_STOCKS = {
       en: 'Agri Inputs & Seeds', ta: 'வேளாண் உள்ளீடு & விதைகள்', hi: 'कृषि इनपुट व बीज',
       stocks: [
         {
-          symbol: 'COROMANDEL', name: 'Coromandel International', price: 1922.20, change: 3.04,
+          symbol: 'COROMANDEL', name: 'Coromandel International', price: 1981.70, change: -1.31,
           high52w: 2499.00, low52w: 1706.50, marketCap: '₹56,700 Cr', pe: '31.0',
           news: [
             { headline: 'Commissioned major sulphuric + phosphoric acid plant at Kakinada', detail: 'New 2,000 TPD sulphuric acid and 650 TPD phosphoric acid plant (₹1,100 crore) came online in Q4 FY26; a 7.5 lakh TPA NPK granulation unit ("Train H") is targeted for Q4 FY27.', date: 'FY26', source: 'https://www.screener.in/company/COROMANDEL/' },
@@ -95,7 +95,7 @@ const AGRI_STOCKS = {
           ]
         },
         {
-          symbol: 'RALLIS', name: 'Rallis India', price: 265.91, change: 1.22,
+          symbol: 'RALLIS', name: 'Rallis India', price: 283.17, change: 0.00,
           high52w: 385.90, low52w: 215.50, marketCap: '₹5,200 Cr', pe: '24.7',
           news: [
             { headline: 'Q1 FY27 profit rises 32% YoY on margin improvement', detail: "Broad-based growth across the Tata Group agri-input company's crop protection and seeds businesses.", date: 'Jul 2026', source: 'https://www.cnbctv18.com/market/rallis-india-q1-profit-rises-32-pc' },
@@ -104,7 +104,7 @@ const AGRI_STOCKS = {
           ]
         },
         {
-          symbol: 'KSCL', name: 'Kaveri Seed Company', price: 772.30, change: -2.01,
+          symbol: 'KSCL', name: 'Kaveri Seed Company', price: 924.00, change: 0.82,
           high52w: 1526.90, low52w: 705.10, marketCap: '₹3,973 Cr', pe: '13.6',
           news: [
             { headline: 'Q1 FY27: revenue ₹815 crore, PAT ₹271.3 crore, exports up 4x YoY', detail: 'Strong quarter for the hybrid seed maker (maize, cotton, paddy, vegetables), driven by a sharp jump in export volumes.', date: '13 Aug 2026', source: 'https://www.screener.in/company/KSCL/consolidated/' },
@@ -120,7 +120,7 @@ const AGRI_STOCKS = {
           ]
         },
         {
-          symbol: 'IPL', name: 'India Pesticides', price: 137.00, change: -0.57,
+          symbol: 'IPL', name: 'India Pesticides', price: 137.77, change: 0.00,
           high52w: 245.84, low52w: 125.00, marketCap: '₹1,576 Cr', pe: '14.6',
           news: [
             { headline: 'Wins EU Technical Equivalence approval for a fungicide product', detail: 'Could add ₹30-40 crore in annual revenue once EU sales begin from November 2026 — a meaningful export market opening.', date: 'Aug 2026', source: 'https://scanx.trade/stock-market-news/companies/india-pesticides-q1-results-revenue-falls-9-2-yoy-256-crore' },
@@ -135,7 +135,7 @@ const AGRI_STOCKS = {
       en: 'Farm Equipment', ta: 'விவசாய இயந்திரங்கள்', hi: 'कृषि उपकरण',
       stocks: [
         {
-          symbol: 'ESCORTS', name: 'Escorts Kubota', price: 2944.80, change: 0.89,
+          symbol: 'ESCORTS', name: 'Escorts Kubota', price: 2830.20, change: 0.52,
           high52w: 4180.00, low52w: 2700.00, marketCap: '₹32,946 Cr', pe: '13.8',
           news: [
             { headline: '₹2,000 crore greenfield plant breaks ground in Uttar Pradesh', detail: "New 154-acre manufacturing campus in YEIDA (Jewar), part of a larger ₹5,000 crore multi-phase investment. Phase 1 adds capacity for 60,000 tractors/year and 15,000 construction equipment units/year — one of Kubota Group's largest global facilities.", date: '19 Aug 2026', source: 'https://economictimes.indiatimes.com/industry/auto/lcv-hcv/escorts-kubota-announces-rs-2000-cr-investment-on-new-plant-in-up' },
